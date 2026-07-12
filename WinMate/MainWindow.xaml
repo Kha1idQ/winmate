@@ -15,10 +15,18 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <ui:TitleBar Grid.Row="0" Title="WinMate">
+        <ui:TitleBar Grid.Row="0" Title="{DynamicResource App_Title}">
             <ui:TitleBar.Icon>
                 <ui:SymbolIcon Symbol="Wrench24" />
             </ui:TitleBar.Icon>
+            <ui:TitleBar.Header>
+                <ui:Button x:Name="LangButton"
+                           Content="{DynamicResource Lang_Toggle}"
+                           Icon="{ui:SymbolIcon LocalLanguage24}"
+                           Appearance="Secondary"
+                           Margin="0,0,6,0"
+                           Click="LangButton_Click" />
+            </ui:TitleBar.Header>
         </ui:TitleBar>
 
         <ui:NavigationView x:Name="RootNavigation"
@@ -28,22 +36,22 @@
                            IsBackButtonVisible="Collapsed"
                            IsPaneToggleVisible="False">
             <ui:NavigationView.MenuItems>
-                <ui:NavigationViewItem Content="Home" TargetPageType="{x:Type pages:HomePage}">
+                <ui:NavigationViewItem Content="{DynamicResource Nav_Home}" TargetPageType="{x:Type pages:HomePage}">
                     <ui:NavigationViewItem.Icon>
                         <ui:SymbolIcon Symbol="Home24" />
                     </ui:NavigationViewItem.Icon>
                 </ui:NavigationViewItem>
-                <ui:NavigationViewItem Content="Apps" TargetPageType="{x:Type pages:AppsPage}">
+                <ui:NavigationViewItem Content="{DynamicResource Nav_Apps}" TargetPageType="{x:Type pages:AppsPage}">
                     <ui:NavigationViewItem.Icon>
                         <ui:SymbolIcon Symbol="AppsAddIn24" />
                     </ui:NavigationViewItem.Icon>
                 </ui:NavigationViewItem>
-                <ui:NavigationViewItem Content="Tweaks" TargetPageType="{x:Type pages:TweaksPage}">
+                <ui:NavigationViewItem Content="{DynamicResource Nav_Tweaks}" TargetPageType="{x:Type pages:TweaksPage}">
                     <ui:NavigationViewItem.Icon>
                         <ui:SymbolIcon Symbol="Options24" />
                     </ui:NavigationViewItem.Icon>
                 </ui:NavigationViewItem>
-                <ui:NavigationViewItem Content="Gaming" TargetPageType="{x:Type pages:GamingPage}">
+                <ui:NavigationViewItem Content="{DynamicResource Nav_Gaming}" TargetPageType="{x:Type pages:GamingPage}">
                     <ui:NavigationViewItem.Icon>
                         <ui:SymbolIcon Symbol="XboxController24" />
                     </ui:NavigationViewItem.Icon>

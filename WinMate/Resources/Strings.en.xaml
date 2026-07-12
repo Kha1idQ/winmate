@@ -1,0 +1,25 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=System.Runtime">
+
+    <sys:String x:Key="App_Title">WinMate</sys:String>
+    <sys:String x:Key="Lang_Toggle">عربي</sys:String>
+
+    <sys:String x:Key="Nav_Home">Home</sys:String>
+    <sys:String x:Key="Nav_Apps">Apps</sys:String>
+    <sys:String x:Key="Nav_Tweaks">Tweaks</sys:String>
+    <sys:String x:Key="Nav_Gaming">Gaming</sys:String>
+
+    <sys:String x:Key="Home_Title">Home</sys:String>
+    <sys:String x:Key="Home_Subtitle">Welcome to WinMate — set up, clean up, and speed up Windows</sys:String>
+
+    <sys:String x:Key="Apps_Title">Apps</sys:String>
+    <sys:String x:Key="Apps_Subtitle">Install your favorite apps with one click</sys:String>
+
+    <sys:String x:Key="Tweaks_Title">Tweaks</sys:String>
+    <sys:String x:Key="Tweaks_Subtitle">Clean up and speed up Windows</sys:String>
+
+    <sys:String x:Key="Gaming_Title">Gaming</sys:String>
+    <sys:String x:Key="Gaming_Subtitle">Optimize Windows for gaming</sys:String>
+
+</ResourceDictionary>

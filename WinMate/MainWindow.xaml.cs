@@ -1,5 +1,6 @@
-using Wpf.Ui.Abstractions.Controls;
+using System.Windows;
 using Wpf.Ui.Controls;
+using WinMate.Services;
 using WinMate.Views.Pages;
 
 namespace WinMate;
@@ -11,7 +12,13 @@ public partial class MainWindow : FluentWindow
         InitializeComponent();
 
         RootNavigation.SetPageProviderService(new SimplePageProvider());
+        LocalizationService.Apply(SettingsService.Current.Language, this);
         Loaded += (_, _) => RootNavigation.Navigate(typeof(HomePage));
+    }
+
+    private void LangButton_Click(object sender, RoutedEventArgs e)
+    {
+        LocalizationService.Toggle(this);
     }
 }
 

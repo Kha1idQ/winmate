@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       Title="Tweaks">
     <StackPanel Margin="32">
-        <TextBlock Text="Tweaks" FontSize="28" FontWeight="SemiBold" />
-        <TextBlock Text="Clean up and speed up Windows" FontSize="14" Opacity="0.7" Margin="0,8,0,0" />
+        <TextBlock Text="{DynamicResource Tweaks_Title}" FontSize="28" FontWeight="SemiBold" />
+        <TextBlock Text="{DynamicResource Tweaks_Subtitle}" FontSize="14" Opacity="0.7" Margin="0,8,0,0" />
     </StackPanel>
 </Page>
