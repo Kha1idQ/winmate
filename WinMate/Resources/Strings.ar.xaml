@@ -29,7 +29,24 @@
     <sys:String x:Key="Cat_utils">أدوات مساعدة</sys:String>
 
     <sys:String x:Key="Tweaks_Title">التحسينات</sys:String>
-    <sys:String x:Key="Tweaks_Subtitle">نظّف وسرّع الويندوز</sys:String>
+    <sys:String x:Key="Tweaks_Subtitle">نظّف وسرّع الويندوز — كل مفتاح تقدر ترجّعه مثل ما كان</sys:String>
+    <sys:String x:Key="TweakCat_explorer">المستكشف وشريط المهام</sys:String>
+    <sys:String x:Key="TweakCat_privacy">الخصوصية</sys:String>
+    <sys:String x:Key="Tweaks_LogApplying">جاري تفعيل</sys:String>
+    <sys:String x:Key="Tweaks_LogUndoing">جاري التراجع عن</sys:String>
+    <sys:String x:Key="TweakCat_cleanup">التنظيف وإزالة البلوت</sys:String>
+    <sys:String x:Key="Tweaks_Run">تنفيذ</sys:String>
+    <sys:String x:Key="Tweaks_Confirm">نعم، نفّذ</sys:String>
+    <sys:String x:Key="Tweaks_Cancel">إلغاء</sys:String>
+    <sys:String x:Key="Tweaks_ConfirmIrreversible">⚠ هذا الإجراء لا يمكن التراجع عنه.</sys:String>
+    <sys:String x:Key="Home_RestoreButton">إنشاء نقطة استعادة</sys:String>
+    <sys:String x:Key="Restore_Title">إنشاء نقطة استعادة؟</sys:String>
+    <sys:String x:Key="Restore_Body">قبل تعديل إعدادات الويندوز، وين مايت يقدر ينشئ نقطة استعادة للنظام عشان ترجّع كل شي لو احتجت. ننصح فيها.</sys:String>
+    <sys:String x:Key="Restore_Yes">أنشئ نقطة استعادة</sys:String>
+    <sys:String x:Key="Restore_No">تخطّي</sys:String>
+    <sys:String x:Key="Restore_Creating">جاري إنشاء نقطة استعادة النظام (تاخذ ~30 ثانية)...</sys:String>
+    <sys:String x:Key="Restore_Done">✓ تم إنشاء نقطة الاستعادة</sys:String>
+    <sys:String x:Key="Restore_Skipped24h">ويندوز تخطّاها — فيه نقطة استعادة من آخر 24 ساعة موجودة أصلًا</sys:String>
 
     <sys:String x:Key="Gaming_Title">الألعاب</sys:String>
     <sys:String x:Key="Gaming_Subtitle">حسّن الويندوز للقيمنق</sys:String>

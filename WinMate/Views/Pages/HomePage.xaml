@@ -1,9 +1,16 @@
 <Page x:Class="WinMate.Views.Pages.HomePage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       Title="Home">
     <StackPanel Margin="32">
         <TextBlock Text="{DynamicResource Home_Title}" FontSize="28" FontWeight="SemiBold" />
         <TextBlock Text="{DynamicResource Home_Subtitle}" FontSize="14" Opacity="0.7" Margin="0,8,0,0" />
+
+        <ui:Button x:Name="RestoreButton"
+                   Margin="0,24,0,0"
+                   Content="{DynamicResource Home_RestoreButton}"
+                   Icon="{ui:SymbolIcon Shield24}"
+                   Click="RestoreButton_Click" />
     </StackPanel>
 </Page>

@@ -29,7 +29,24 @@
     <sys:String x:Key="Cat_utils">Utilities</sys:String>
 
     <sys:String x:Key="Tweaks_Title">Tweaks</sys:String>
-    <sys:String x:Key="Tweaks_Subtitle">Clean up and speed up Windows</sys:String>
+    <sys:String x:Key="Tweaks_Subtitle">Clean up and speed up Windows — every switch can be turned back off</sys:String>
+    <sys:String x:Key="TweakCat_explorer">Explorer &amp; taskbar</sys:String>
+    <sys:String x:Key="TweakCat_privacy">Privacy</sys:String>
+    <sys:String x:Key="Tweaks_LogApplying">Applying</sys:String>
+    <sys:String x:Key="Tweaks_LogUndoing">Undoing</sys:String>
+    <sys:String x:Key="TweakCat_cleanup">Cleanup &amp; debloat</sys:String>
+    <sys:String x:Key="Tweaks_Run">Run</sys:String>
+    <sys:String x:Key="Tweaks_Confirm">Yes, run it</sys:String>
+    <sys:String x:Key="Tweaks_Cancel">Cancel</sys:String>
+    <sys:String x:Key="Tweaks_ConfirmIrreversible">⚠ This action cannot be undone.</sys:String>
+    <sys:String x:Key="Home_RestoreButton">Create restore point</sys:String>
+    <sys:String x:Key="Restore_Title">Create a restore point?</sys:String>
+    <sys:String x:Key="Restore_Body">Before changing Windows settings, WinMate can create a system restore point so you can roll everything back if needed. Recommended.</sys:String>
+    <sys:String x:Key="Restore_Yes">Create restore point</sys:String>
+    <sys:String x:Key="Restore_No">Skip</sys:String>
+    <sys:String x:Key="Restore_Creating">Creating system restore point (takes ~30 seconds)...</sys:String>
+    <sys:String x:Key="Restore_Done">✓ Restore point created</sys:String>
+    <sys:String x:Key="Restore_Skipped24h">Windows skipped it — a restore point from the last 24 hours already exists</sys:String>
 
     <sys:String x:Key="Gaming_Title">Gaming</sys:String>
     <sys:String x:Key="Gaming_Subtitle">Optimize Windows for gaming</sys:String>

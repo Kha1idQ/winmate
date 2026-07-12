@@ -22,6 +22,10 @@ public record Tweak(
     // (e.g. active power plan checked via powercfg output).
     public Func<Task<bool>>? CustomCheck { get; init; }
 
+    // Shell tweaks (file extensions, classic context menu...) only take
+    // effect after Windows Explorer restarts.
+    public bool RestartExplorer { get; init; }
+
     // Irreversible tweaks (empty Undo) render as confirm-buttons, not toggles.
     public bool IsReversible => Undo.Count > 0;
 }
