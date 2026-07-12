@@ -1,0 +1,9 @@
+<Page x:Class="WinMate.Views.Pages.AppsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Apps">
+    <StackPanel Margin="32">
+        <TextBlock Text="Apps" FontSize="28" FontWeight="SemiBold" />
+        <TextBlock Text="Install your favorite apps with one click" FontSize="14" Opacity="0.7" Margin="0,8,0,0" />
+    </StackPanel>
+</Page>
