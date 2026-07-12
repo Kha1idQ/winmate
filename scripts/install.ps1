@@ -3,6 +3,10 @@
 
 $repo = "Kha1idQ/winmate"
 
+# Windows PowerShell 5.1: the progress bar slows Invoke-WebRequest downloads
+# dramatically (10-100x) — silence it for full download speed.
+$ProgressPreference = 'SilentlyContinue'
+
 Write-Host ""
 Write-Host "  WinMate installer" -ForegroundColor Yellow
 Write-Host "  -----------------" -ForegroundColor DarkYellow
