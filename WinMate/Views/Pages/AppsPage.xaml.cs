@@ -1,6 +1,7 @@
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using WinMate.Data;
 using WinMate.Models;
@@ -11,6 +12,9 @@ namespace WinMate.Views.Pages;
 public partial class AppsPage : Page
 {
     private readonly HashSet<AppItem> _selected = [];
+    private readonly HashSet<AppItem> _installed = [];
+    private readonly Dictionary<AppItem, CheckBox> _boxes = [];
+    private bool _installing;
 
     public AppsPage()
     {
@@ -18,11 +22,13 @@ public partial class AppsPage : Page
         UiHelpers.DisableHostScrolling(this);
         BuildCatalog();
         UpdateInstallButton();
+        _ = LoadInstalledAsync();
     }
 
     private void BuildCatalog()
     {
         CatalogPanel.Children.Clear();
+        _boxes.Clear();
 
         foreach (var category in AppCatalog.Categories)
         {
@@ -41,12 +47,13 @@ public partial class AppsPage : Page
             {
                 var box = new CheckBox
                 {
-                    Content = BuildAppLabel(app),
+                    Content = BuildAppLabel(app, installed: false),
                     Tag = app,
                     Margin = new Thickness(0, 4, 12, 4),
                 };
                 box.Checked += AppBox_Changed;
                 box.Unchecked += AppBox_Changed;
+                _boxes[app] = box;
                 wrap.Children.Add(box);
             }
             CatalogPanel.Children.Add(wrap);
@@ -55,21 +62,20 @@ public partial class AppsPage : Page
 
     // Icon + name side by side. Icons are embedded resources named after the
     // winget id with non-alphanumerics replaced by "_" (see Assets\AppIcons).
-    private object BuildAppLabel(AppItem app)
+    private object BuildAppLabel(AppItem app, bool installed)
     {
         var panel = new StackPanel { Orientation = Orientation.Horizontal };
 
         var iconFile = Regex.Replace(app.WingetId, "[^A-Za-z0-9]", "_") + ".png";
         try
         {
-            var image = new System.Windows.Controls.Image
+            panel.Children.Add(new Image
             {
                 Source = new BitmapImage(new Uri($"pack://application:,,,/Assets/AppIcons/{iconFile}")),
                 Width = 20,
                 Height = 20,
                 Margin = new Thickness(0, 0, 8, 0),
-            };
-            panel.Children.Add(image);
+            });
         }
         catch
         {
@@ -81,7 +87,48 @@ public partial class AppsPage : Page
             Text = LocalizationService.Pick(app.NameEn, app.NameAr),
             VerticalAlignment = VerticalAlignment.Center,
         });
+
+        if (installed)
+        {
+            var badge = new TextBlock
+            {
+                FontSize = 11,
+                Foreground = new SolidColorBrush(Color.FromRgb(0x6C, 0xCB, 0x5F)),
+                VerticalAlignment = VerticalAlignment.Center,
+                Margin = new Thickness(8, 0, 0, 0),
+            };
+            badge.SetResourceReference(TextBlock.TextProperty, "Apps_Installed");
+            panel.Children.Add(badge);
+        }
+
         return panel;
+    }
+
+    private async Task LoadInstalledAsync()
+    {
+        try
+        {
+            var installed = await WingetService.GetInstalledIdsAsync();
+            foreach (var (app, box) in _boxes)
+            {
+                if (installed.Contains(app.WingetId))
+                    MarkInstalled(app, box);
+            }
+        }
+        catch
+        {
+            // winget missing or listing failed — catalog still usable without badges.
+        }
+    }
+
+    private void MarkInstalled(AppItem app, CheckBox box)
+    {
+        _installed.Add(app);
+        box.IsChecked = false;
+        box.IsEnabled = false;
+        box.Content = BuildAppLabel(app, installed: true);
+        _selected.Remove(app);
+        UpdateInstallButton();
     }
 
     private void AppBox_Changed(object sender, RoutedEventArgs e)
@@ -100,11 +147,46 @@ public partial class AppsPage : Page
     private void UpdateInstallButton()
     {
         InstallButton.Content = $"{FindResource("Apps_InstallSelected")} ({_selected.Count})";
-        InstallButton.IsEnabled = _selected.Count > 0;
+        InstallButton.IsEnabled = _selected.Count > 0 && !_installing;
     }
 
-    private void InstallButton_Click(object sender, RoutedEventArgs e)
+    private async void InstallButton_Click(object sender, RoutedEventArgs e)
     {
-        // Real winget installs arrive in Phase 3.
+        if (_installing || _selected.Count == 0)
+            return;
+
+        _installing = true;
+        UpdateInstallButton();
+        foreach (var box in _boxes.Values)
+            box.IsEnabled = false;
+
+        var queue = _selected.ToList();
+        var failed = new List<AppItem>();
+
+        foreach (var app in queue)
+        {
+            LogService.Write($"=== {FindResource("Apps_LogInstalling")}: {app.NameEn} ({app.WingetId}) ===");
+            var ok = await WingetService.InstallAsync(app, LogService.WriteRaw);
+
+            if (ok)
+            {
+                LogService.Write($"✓ {app.NameEn} — {FindResource("Apps_LogDone")}");
+                MarkInstalled(app, _boxes[app]);
+            }
+            else
+            {
+                LogService.Write($"✗ {app.NameEn} — {FindResource("Apps_LogFailed")}");
+                failed.Add(app);
+            }
+        }
+
+        _installing = false;
+        // Re-enable every box except the ones now installed.
+        foreach (var (app, box) in _boxes)
+            box.IsEnabled = !_installed.Contains(app);
+        UpdateInstallButton();
+
+        if (failed.Count > 0)
+            LogService.Write($"{FindResource("Apps_LogFailedSummary")}: {string.Join(", ", failed.Select(a => a.NameEn))}");
     }
 }

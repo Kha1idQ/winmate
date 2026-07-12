@@ -14,6 +14,14 @@ public partial class MainWindow : FluentWindow
         RootNavigation.SetPageProviderService(new SimplePageProvider());
         LocalizationService.Apply(SettingsService.Current.Language, this);
         Loaded += (_, _) => RootNavigation.Navigate(typeof(HomePage));
+
+        // Log lines can arrive from background threads — marshal to UI thread.
+        LogService.LineWritten += line => Dispatcher.Invoke(() =>
+        {
+            LogBox.AppendText(line + Environment.NewLine);
+            LogBox.ScrollToEnd();
+            LogExpander.IsExpanded = true;
+        });
     }
 
     private void LangButton_Click(object sender, RoutedEventArgs e)
