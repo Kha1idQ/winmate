@@ -6,6 +6,22 @@
 
 ![.NET 9](https://img.shields.io/badge/.NET-9.0-gold) ![WPF](https://img.shields.io/badge/UI-WPF--UI%20Fluent-black)
 
+> 🚧 **Actively developed** — regular updates with improvements and new features are coming.
+>
+> 🚧 **تحت التطوير المستمر** — بتنزل تحديثات دورية فيها تحسينات ومزايا أكثر.
+
+---
+
+## Screenshots / لقطات
+
+| Apps — one-click installs | Tweaks — all reversible |
+|---|---|
+| ![Apps](docs/apps.png) | ![Tweaks](docs/tweaks.png) |
+
+| Gaming optimizations | Full Arabic (RTL) support |
+|---|---|
+| ![Gaming](docs/gaming.png) | ![Arabic](docs/arabic.png) |
+
 ---
 
 ## Install / التثبيت
