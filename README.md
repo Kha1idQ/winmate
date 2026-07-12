@@ -13,7 +13,7 @@
 Run this one line in PowerShell / شغّل هذا السطر في PowerShell:
 
 ```powershell
-irm https://raw.githubusercontent.com/OWNER/winmate/main/scripts/install.ps1 | iex
+irm https://raw.githubusercontent.com/kalmarri024-stack/winmate/main/scripts/install.ps1 | iex
 ```
 
 Or download `WinMate.exe` from [Releases](../../releases) — no installation needed, just run it.
@@ -49,7 +49,7 @@ Or download `WinMate.exe` from [Releases](../../releases) — no installation ne
 ## Build from source / البناء من المصدر
 
 ```powershell
-git clone https://github.com/OWNER/winmate.git
+git clone https://github.com/kalmarri024-stack/winmate.git
 cd winmate/WinMate
 dotnet run
 ```

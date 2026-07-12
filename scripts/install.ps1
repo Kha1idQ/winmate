@@ -1,7 +1,7 @@
 # WinMate bootstrap — downloads the latest release and launches it elevated.
-# Usage:  irm https://raw.githubusercontent.com/OWNER/winmate/main/scripts/install.ps1 | iex
+# Usage:  irm https://raw.githubusercontent.com/kalmarri024-stack/winmate/main/scripts/install.ps1 | iex
 
-$repo = "OWNER/winmate"
+$repo = "kalmarri024-stack/winmate"
 
 Write-Host ""
 Write-Host "  WinMate installer" -ForegroundColor Yellow
