@@ -12,5 +12,10 @@
                    Content="{DynamicResource Home_RestoreButton}"
                    Icon="{ui:SymbolIcon Shield24}"
                    Click="RestoreButton_Click" />
+
+        <TextBlock x:Name="VersionText"
+                   Margin="0,24,0,0"
+                   FontSize="12"
+                   Foreground="{DynamicResource GoldDimBrush}" />
     </StackPanel>
 </Page>

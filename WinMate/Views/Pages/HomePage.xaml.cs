@@ -9,6 +9,8 @@ public partial class HomePage : Page
     public HomePage()
     {
         InitializeComponent();
+        var version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+        VersionText.Text = $"WinMate v{version?.ToString(3)}";
     }
 
     private async void RestoreButton_Click(object sender, RoutedEventArgs e)

@@ -169,16 +169,25 @@ public partial class AppsPage : Page
         foreach (var app in queue)
         {
             LogService.Write($"=== {FindResource("Apps_LogInstalling")}: {app.NameEn} ({app.WingetId}) ===");
-            var ok = await WingetService.InstallAsync(app, LogService.WriteRaw);
+            try
+            {
+                var ok = await WingetService.InstallAsync(app, LogService.WriteRaw);
 
-            if (ok)
-            {
-                LogService.Write($"✓ {app.NameEn} — {FindResource("Apps_LogDone")}");
-                MarkInstalled(app, _boxes[app]);
+                if (ok)
+                {
+                    LogService.Write($"✓ {app.NameEn} — {FindResource("Apps_LogDone")}");
+                    MarkInstalled(app, _boxes[app]);
+                }
+                else
+                {
+                    LogService.Write($"✗ {app.NameEn} — {FindResource("Apps_LogFailed")}");
+                    failed.Add(app);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                LogService.Write($"✗ {app.NameEn} — {FindResource("Apps_LogFailed")}");
+                // winget missing or process failure — keep going with the rest.
+                LogService.Write($"✗ {app.NameEn} — {ex.Message}");
                 failed.Add(app);
             }
         }
