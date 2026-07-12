@@ -15,6 +15,12 @@
 
     <sys:String x:Key="Apps_Title">البرامج</sys:String>
     <sys:String x:Key="Apps_Subtitle">ثبّت برامجك المفضلة بضغطة واحدة</sys:String>
+    <sys:String x:Key="Apps_InstallSelected">ثبّت المحدد</sys:String>
+    <sys:String x:Key="Cat_browsers">المتصفحات</sys:String>
+    <sys:String x:Key="Cat_dev">أدوات المطور</sys:String>
+    <sys:String x:Key="Cat_gaming">الألعاب</sys:String>
+    <sys:String x:Key="Cat_media">الميديا</sys:String>
+    <sys:String x:Key="Cat_utils">أدوات مساعدة</sys:String>
 
     <sys:String x:Key="Tweaks_Title">التحسينات</sys:String>
     <sys:String x:Key="Tweaks_Subtitle">نظّف وسرّع الويندوز</sys:String>

@@ -15,6 +15,12 @@
 
     <sys:String x:Key="Apps_Title">Apps</sys:String>
     <sys:String x:Key="Apps_Subtitle">Install your favorite apps with one click</sys:String>
+    <sys:String x:Key="Apps_InstallSelected">Install selected</sys:String>
+    <sys:String x:Key="Cat_browsers">Browsers</sys:String>
+    <sys:String x:Key="Cat_dev">Developer tools</sys:String>
+    <sys:String x:Key="Cat_gaming">Gaming</sys:String>
+    <sys:String x:Key="Cat_media">Media</sys:String>
+    <sys:String x:Key="Cat_utils">Utilities</sys:String>
 
     <sys:String x:Key="Tweaks_Title">Tweaks</sys:String>
     <sys:String x:Key="Tweaks_Subtitle">Clean up and speed up Windows</sys:String>
