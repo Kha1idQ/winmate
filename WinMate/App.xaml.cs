@@ -1,13 +1,18 @@
-﻿using System.Configuration;
-using System.Data;
 using System.Windows;
+using System.Windows.Media;
+using Wpf.Ui.Appearance;
 
 namespace WinMate;
 
-/// <summary>
-/// Interaction logic for App.xaml
-/// </summary>
 public partial class App : Application
 {
-}
+    protected override void OnStartup(StartupEventArgs e)
+    {
+        base.OnStartup(e);
 
+        // Gold accent — toggles, primary buttons and highlights.
+        ApplicationAccentColorManager.Apply(
+            Color.FromRgb(0xD4, 0xAF, 0x37),
+            ApplicationTheme.Dark);
+    }
+}

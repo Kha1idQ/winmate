@@ -50,5 +50,7 @@
 
     <sys:String x:Key="Gaming_Title">Gaming</sys:String>
     <sys:String x:Key="Gaming_Subtitle">Optimize Windows for gaming</sys:String>
+    <sys:String x:Key="Gaming_EnableAll">Enable all gaming tweaks</sys:String>
+    <sys:String x:Key="Tweaks_RestartNeeded">⟳ Restart your PC for this change to take effect</sys:String>
 
 </ResourceDictionary>

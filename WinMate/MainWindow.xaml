@@ -5,7 +5,8 @@
         xmlns:pages="clr-namespace:WinMate.Views.Pages"
         Title="WinMate"
         Width="1050" Height="680"
-        WindowBackdropType="Mica"
+        WindowBackdropType="None"
+        Background="#1B1916"
         ExtendsContentIntoTitleBar="True"
         WindowCornerPreference="Round"
         WindowStartupLocation="CenterScreen">
@@ -16,15 +17,17 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <ui:TitleBar Grid.Row="0" Title="{DynamicResource App_Title}">
+        <ui:TitleBar Grid.Row="0" Title="{DynamicResource App_Title}"
+                     Foreground="{DynamicResource GoldBrush}">
             <ui:TitleBar.Icon>
-                <ui:SymbolIcon Symbol="Wrench24" />
+                <ui:SymbolIcon Symbol="Wrench24" Foreground="{DynamicResource GoldBrush}" />
             </ui:TitleBar.Icon>
             <ui:TitleBar.Header>
                 <ui:Button x:Name="LangButton"
                            Content="{DynamicResource Lang_Toggle}"
                            Icon="{ui:SymbolIcon LocalLanguage24}"
                            Appearance="Secondary"
+                           Foreground="{DynamicResource GoldBrush}"
                            Margin="0,0,6,0"
                            Click="LangButton_Click" />
             </ui:TitleBar.Header>
@@ -37,24 +40,28 @@
                            IsBackButtonVisible="Collapsed"
                            IsPaneToggleVisible="False">
             <ui:NavigationView.MenuItems>
-                <ui:NavigationViewItem Content="{DynamicResource Nav_Home}" TargetPageType="{x:Type pages:HomePage}">
+                <ui:NavigationViewItem Content="{DynamicResource Nav_Home}" TargetPageType="{x:Type pages:HomePage}"
+                                       Foreground="{DynamicResource GoldBrush}">
                     <ui:NavigationViewItem.Icon>
-                        <ui:SymbolIcon Symbol="Home24" />
+                        <ui:SymbolIcon Symbol="Home24" Foreground="{DynamicResource GoldBrush}" />
                     </ui:NavigationViewItem.Icon>
                 </ui:NavigationViewItem>
-                <ui:NavigationViewItem Content="{DynamicResource Nav_Apps}" TargetPageType="{x:Type pages:AppsPage}">
+                <ui:NavigationViewItem Content="{DynamicResource Nav_Apps}" TargetPageType="{x:Type pages:AppsPage}"
+                                       Foreground="{DynamicResource GoldBrush}">
                     <ui:NavigationViewItem.Icon>
-                        <ui:SymbolIcon Symbol="AppsAddIn24" />
+                        <ui:SymbolIcon Symbol="AppsAddIn24" Foreground="{DynamicResource GoldBrush}" />
                     </ui:NavigationViewItem.Icon>
                 </ui:NavigationViewItem>
-                <ui:NavigationViewItem Content="{DynamicResource Nav_Tweaks}" TargetPageType="{x:Type pages:TweaksPage}">
+                <ui:NavigationViewItem Content="{DynamicResource Nav_Tweaks}" TargetPageType="{x:Type pages:TweaksPage}"
+                                       Foreground="{DynamicResource GoldBrush}">
                     <ui:NavigationViewItem.Icon>
-                        <ui:SymbolIcon Symbol="Options24" />
+                        <ui:SymbolIcon Symbol="Options24" Foreground="{DynamicResource GoldBrush}" />
                     </ui:NavigationViewItem.Icon>
                 </ui:NavigationViewItem>
-                <ui:NavigationViewItem Content="{DynamicResource Nav_Gaming}" TargetPageType="{x:Type pages:GamingPage}">
+                <ui:NavigationViewItem Content="{DynamicResource Nav_Gaming}" TargetPageType="{x:Type pages:GamingPage}"
+                                       Foreground="{DynamicResource GoldBrush}">
                     <ui:NavigationViewItem.Icon>
-                        <ui:SymbolIcon Symbol="XboxController24" />
+                        <ui:SymbolIcon Symbol="XboxController24" Foreground="{DynamicResource GoldBrush}" />
                     </ui:NavigationViewItem.Icon>
                 </ui:NavigationViewItem>
             </ui:NavigationView.MenuItems>
@@ -64,6 +71,9 @@
                   Grid.Row="2"
                   Header="{DynamicResource Log_Title}"
                   IsExpanded="False"
+                  Background="#1B1916"
+                  BorderBrush="#463C1F"
+                  Foreground="{DynamicResource GoldBrush}"
                   Margin="12,0,12,8">
             <TextBox x:Name="LogBox"
                      Height="150"
@@ -71,6 +81,10 @@
                      IsReadOnly="True"
                      FontFamily="Consolas"
                      FontSize="12"
+                     Background="#1B1916"
+                     Foreground="{DynamicResource GoldBrush}"
+                     BorderBrush="#463C1F"
+                     CaretBrush="{DynamicResource GoldBrush}"
                      FlowDirection="LeftToRight"
                      TextWrapping="NoWrap"
                      VerticalScrollBarVisibility="Auto"

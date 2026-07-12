@@ -10,6 +10,36 @@
                 <ui:ControlsDictionary />
                 <ResourceDictionary Source="pack://application:,,,/Resources/Strings.en.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <!-- Black & gold theme -->
+            <SolidColorBrush x:Key="GoldBrush" Color="#E6C566" />
+            <SolidColorBrush x:Key="GoldDimBrush" Color="#B69A4E" />
+
+            <!-- Overrides for the WPF-UI dark theme brushes.
+                 One unified background everywhere: warm black #1B1916 -->
+            <SolidColorBrush x:Key="AppBackgroundBrush" Color="#1B1916" />
+            <SolidColorBrush x:Key="ApplicationBackgroundBrush" Color="#1B1916" />
+            <SolidColorBrush x:Key="NavigationViewContentBackground" Color="Transparent" />
+            <SolidColorBrush x:Key="NavigationViewContentGridBorderBrush" Color="Transparent" />
+            <SolidColorBrush x:Key="TextFillColorPrimaryBrush" Color="#E6C566" />
+            <SolidColorBrush x:Key="TextFillColorSecondaryBrush" Color="#B69A4E" />
+            <SolidColorBrush x:Key="TextFillColorTertiaryBrush" Color="#8A7538" />
+            <SolidColorBrush x:Key="TextFillColorDisabledBrush" Color="#5C4F28" />
+            <SolidColorBrush x:Key="ControlFillColorDefaultBrush" Color="#26221A" />
+            <SolidColorBrush x:Key="ControlStrokeColorDefaultBrush" Color="#463C1F" />
+
+            <!-- Per-control foregrounds that don't follow the text brushes above -->
+            <SolidColorBrush x:Key="NavigationViewItemForeground" Color="#E6C566" />
+            <SolidColorBrush x:Key="NavigationViewItemForegroundPointerOver" Color="#F5DB8A" />
+            <SolidColorBrush x:Key="NavigationViewItemForegroundSelected" Color="#F5DB8A" />
+            <SolidColorBrush x:Key="NavigationViewItemForegroundPressed" Color="#B69A4E" />
+            <SolidColorBrush x:Key="ButtonForeground" Color="#E6C566" />
+            <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="#F5DB8A" />
+            <SolidColorBrush x:Key="ButtonForegroundPressed" Color="#B69A4E" />
+            <SolidColorBrush x:Key="TextControlForeground" Color="#E6C566" />
+            <SolidColorBrush x:Key="TextControlForegroundPointerOver" Color="#E6C566" />
+            <SolidColorBrush x:Key="TextControlForegroundFocused" Color="#E6C566" />
+            <SolidColorBrush x:Key="ExpanderHeaderForeground" Color="#E6C566" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

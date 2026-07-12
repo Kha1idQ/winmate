@@ -40,6 +40,7 @@ public partial class AppsPage : Page
             };
             // SetResourceReference keeps the header live-updating on language switch.
             header.SetResourceReference(TextBlock.TextProperty, $"Cat_{category}");
+            header.SetResourceReference(TextBlock.ForegroundProperty, "GoldBrush");
             CatalogPanel.Children.Add(header);
 
             var wrap = new WrapPanel { ItemWidth = 230 };
@@ -82,18 +83,20 @@ public partial class AppsPage : Page
             // No icon bundled for this app — name only.
         }
 
-        panel.Children.Add(new TextBlock
+        var nameText = new TextBlock
         {
             Text = LocalizationService.Pick(app.NameEn, app.NameAr),
             VerticalAlignment = VerticalAlignment.Center,
-        });
+        };
+        nameText.SetResourceReference(TextBlock.ForegroundProperty, "GoldBrush");
+        panel.Children.Add(nameText);
 
         if (installed)
         {
             var badge = new TextBlock
             {
                 FontSize = 11,
-                Foreground = new SolidColorBrush(Color.FromRgb(0x6C, 0xCB, 0x5F)),
+                Foreground = new SolidColorBrush(Color.FromRgb(0xD4, 0xAF, 0x37)),
                 VerticalAlignment = VerticalAlignment.Center,
                 Margin = new Thickness(8, 0, 0, 0),
             };
