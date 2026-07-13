@@ -14,7 +14,14 @@
 
 ## Screenshots / لقطات
 
-| Apps — one-click installs | Tweaks — all reversible |
+**One-click profiles + two themes** — switch between the gold and neon-blue looks any time.
+**بروفايلات بضغطة واحدة + ثيمين** — بدّل بين الشكل الذهبي والأزرق النيون في أي وقت.
+
+| Gold theme | Neon-blue theme |
+|---|---|
+| ![Home gold](docs/home-gold.png) | ![Home blue](docs/home-blue.png) |
+
+| Apps — bundles + one-click installs | Tweaks — all reversible |
 |---|---|
 | ![Apps](docs/apps.png) | ![Tweaks](docs/tweaks.png) |
 
