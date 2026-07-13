@@ -32,6 +32,12 @@ public partial class MainWindow : FluentWindow
     {
         LocalizationService.Toggle(this);
     }
+
+    private void ThemeButton_Click(object sender, RoutedEventArgs e)
+    {
+        // All brushes mutate in place (DynamicResource), so this is instant and flicker-free.
+        ThemeService.Toggle();
+    }
 }
 
 // Creates page instances for the NavigationView (no dependency injection needed).

@@ -12,4 +12,9 @@ public partial class TweaksPage : Page
         UiHelpers.DisableHostScrolling(this);
         TweakList.Load(TweakCatalog.Categories, TweakCatalog.All);
     }
+
+    private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        TweakList.Filter(SearchBox.Text);
+    }
 }

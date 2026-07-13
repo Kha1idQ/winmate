@@ -33,7 +33,7 @@ public static class GamingCatalog
         new(
             Id: "gamedvr_off",
             NameEn: "Disable Xbox Game DVR",
-            NameAr: "إيقاف تسجيل Xbox DVR",
+            NameAr: "إيقاف تسجيل إكس بوكس للألعاب",
             DescEn: "Stop background game recording — one of the biggest hidden FPS killers",
             DescAr: "يوقف تسجيل اللعب بالخلفية — من أكبر أسباب نزول الفريمات المخفية",
             Category: "gaming",
@@ -54,9 +54,9 @@ public static class GamingCatalog
         new(
             Id: "gamebar_popups_off",
             NameEn: "Disable Game Bar popups",
-            NameAr: "إيقاف نوافذ Game Bar المنبثقة",
+            NameAr: "إيقاف نوافذ القيم بار المنبثقة",
             DescEn: "No more Game Bar startup panel and overlay popups",
-            DescAr: "يوقف لوحة Game Bar والنوافذ اللي تطلع فوق اللعبة",
+            DescAr: "يوقف لوحة القيم بار والنوافذ اللي تطلع فوق اللعبة",
             Category: "gaming",
             Apply:
             [
@@ -75,7 +75,7 @@ public static class GamingCatalog
             NameEn: "Max performance power plan",
             NameAr: "خطة الطاقة للأداء الأقصى",
             DescEn: "Activate Ultimate Performance if your Windows has it, otherwise High performance",
-            DescAr: "يفعّل Ultimate Performance إذا نسخة ويندوزك تدعمها، وإلا High performance",
+            DescAr: "يفعّل أقوى خطة طاقة تدعمها نسخة الويندوز حقتك تلقائيًا",
             Category: "gaming",
             Apply:
             [
@@ -105,7 +105,7 @@ public static class GamingCatalog
         new(
             Id: "hags_on",
             NameEn: "Hardware-accelerated GPU scheduling",
-            NameAr: "جدولة GPU المسرّعة عتاديًا",
+            NameAr: "جدولة كرت الشاشة المسرّعة عتاديًا",
             DescEn: "Let the GPU manage its own memory for lower latency (needs restart)",
             DescAr: "يخلي كرت الشاشة يدير ذاكرته بنفسه لتقليل التأخير (يحتاج ريستارت)",
             Category: "gaming",
@@ -119,7 +119,7 @@ public static class GamingCatalog
             NameEn: "Disable mouse acceleration",
             NameAr: "إيقاف تسارع الماوس",
             DescEn: "Raw 1:1 mouse movement — same distance moves the same pixels, every time",
-            DescAr: "حركة ماوس خام 1:1 — نفس المسافة تحرك نفس البكسلات كل مرة",
+            DescAr: "حركة ماوس خام بدون تدخل — نفس المسافة تحرك نفس البكسلات كل مرة",
             Category: "gaming",
             Apply:
             [

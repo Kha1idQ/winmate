@@ -11,6 +11,8 @@ namespace WinMate.Views.Controls;
 public partial class TweakListControl : UserControl
 {
     private readonly Dictionary<Tweak, Wpf.Ui.Controls.ToggleSwitch> _toggles = [];
+    private readonly List<(Tweak Tweak, FrameworkElement Card)> _cards = [];
+    private readonly List<(string Category, FrameworkElement Header)> _headers = [];
     private IReadOnlyList<Tweak> _tweaks = [];
 
     // True while WE set IsChecked from code — the Checked/Unchecked handlers
@@ -46,11 +48,17 @@ public partial class TweakListControl : UserControl
     {
         ListPanel.Children.Clear();
         _toggles.Clear();
+        _cards.Clear();
+        _headers.Clear();
 
         if (categories.Length == 0)
         {
             foreach (var tweak in _tweaks)
-                ListPanel.Children.Add(BuildCard(tweak));
+            {
+                var card = BuildCard(tweak);
+                _cards.Add((tweak, card));
+                ListPanel.Children.Add(card);
+            }
             return;
         }
 
@@ -64,14 +72,36 @@ public partial class TweakListControl : UserControl
             };
             header.SetResourceReference(TextBlock.TextProperty, $"TweakCat_{category}");
             header.SetResourceReference(TextBlock.ForegroundProperty, "GoldBrush");
+            _headers.Add((category, header));
             ListPanel.Children.Add(header);
 
             foreach (var tweak in _tweaks.Where(t => t.Category == category))
-                ListPanel.Children.Add(BuildCard(tweak));
+            {
+                var card = BuildCard(tweak);
+                _cards.Add((tweak, card));
+                ListPanel.Children.Add(card);
+            }
         }
     }
 
-    private UIElement BuildCard(Tweak tweak)
+    // Filters cards by tweak name/description (both languages). A category header
+    // hides when none of its cards match.
+    public void Filter(string query)
+    {
+        query = query?.Trim() ?? "";
+
+        foreach (var (tweak, card) in _cards)
+            card.Visibility = SearchMatch.Matches(query, tweak.NameEn, tweak.NameAr, tweak.DescEn, tweak.DescAr)
+                ? Visibility.Visible : Visibility.Collapsed;
+
+        foreach (var (category, header) in _headers)
+        {
+            var anyVisible = _cards.Any(c => c.Tweak.Category == category && c.Card.Visibility == Visibility.Visible);
+            header.Visibility = anyVisible ? Visibility.Visible : Visibility.Collapsed;
+        }
+    }
+
+    private Border BuildCard(Tweak tweak)
     {
         var title = new TextBlock
         {

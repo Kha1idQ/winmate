@@ -4,6 +4,7 @@
 
     <sys:String x:Key="App_Title">WinMate</sys:String>
     <sys:String x:Key="Lang_Toggle">عربي</sys:String>
+    <sys:String x:Key="Theme_Toggle">Switch theme (gold / neon blue)</sys:String>
 
     <sys:String x:Key="Nav_Home">Home</sys:String>
     <sys:String x:Key="Nav_Apps">Apps</sys:String>
@@ -12,16 +13,32 @@
 
     <sys:String x:Key="Home_Title">Home</sys:String>
     <sys:String x:Key="Home_Subtitle">Welcome to WinMate — set up, clean up, and speed up Windows</sys:String>
+    <sys:String x:Key="Home_ProfilesTitle">One-click profiles</sys:String>
+    <sys:String x:Key="Home_ProfilesSubtitle">Apply a whole set of tweaks at once — everything stays reversible from the Tweaks tab</sys:String>
+    <sys:String x:Key="Home_ProfileApply">Apply</sys:String>
+    <sys:String x:Key="Home_ProfileTweakCount">tweaks</sys:String>
+    <sys:String x:Key="Home_ProfileConfirmBody">This will apply the following tweaks (any already on will be skipped):</sys:String>
+    <sys:String x:Key="Home_ProfileConfirmYes">Apply profile</sys:String>
+    <sys:String x:Key="Home_ProfileApplied">applied</sys:String>
+    <sys:String x:Key="Home_ProfileAlreadyOn">already on</sys:String>
+    <sys:String x:Key="Home_ProfileFailed">failed</sys:String>
+    <sys:String x:Key="Home_ToolsTitle">Tools</sys:String>
+    <sys:String x:Key="Home_ResetButton">Reset all tweaks</sys:String>
+    <sys:String x:Key="Home_ResetConfirmBody">This undoes every tweak you've applied and returns those settings to Windows defaults. One-shot actions (debloat, temp clean) can't be undone. Continue?</sys:String>
+    <sys:String x:Key="Home_ResetConfirmYes">Reset everything</sys:String>
+    <sys:String x:Key="Home_ResetUndone">tweaks reverted</sys:String>
 
     <sys:String x:Key="Apps_Title">Apps</sys:String>
     <sys:String x:Key="Apps_Subtitle">Install your favorite apps with one click</sys:String>
     <sys:String x:Key="Apps_InstallSelected">Install selected</sys:String>
+    <sys:String x:Key="Apps_BundlesLabel">Quick bundles — click to select a set, then install</sys:String>
     <sys:String x:Key="Apps_Installed">✓ Installed</sys:String>
     <sys:String x:Key="Apps_LogInstalling">Installing</sys:String>
     <sys:String x:Key="Apps_LogDone">installed successfully</sys:String>
     <sys:String x:Key="Apps_LogFailed">failed</sys:String>
     <sys:String x:Key="Apps_LogFailedSummary">Failed apps</sys:String>
     <sys:String x:Key="Log_Title">Live log</sys:String>
+    <sys:String x:Key="Search_Placeholder">Search...</sys:String>
     <sys:String x:Key="Cat_browsers">Browsers</sys:String>
     <sys:String x:Key="Cat_dev">Developer tools</sys:String>
     <sys:String x:Key="Cat_gaming">Gaming</sys:String>
@@ -34,6 +51,7 @@
     <sys:String x:Key="TweakCat_privacy">Privacy</sys:String>
     <sys:String x:Key="Tweaks_LogApplying">Applying</sys:String>
     <sys:String x:Key="Tweaks_LogUndoing">Undoing</sys:String>
+    <sys:String x:Key="TweakCat_performance">Performance</sys:String>
     <sys:String x:Key="TweakCat_cleanup">Cleanup &amp; debloat</sys:String>
     <sys:String x:Key="Tweaks_Run">Run</sys:String>
     <sys:String x:Key="Tweaks_Confirm">Yes, run it</sys:String>

@@ -3,10 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         xmlns:pages="clr-namespace:WinMate.Views.Pages"
+        xmlns:controls="clr-namespace:WinMate.Views.Controls"
         Title="WinMate"
         Width="1050" Height="680"
         WindowBackdropType="None"
-        Background="#1B1916"
+        Background="{DynamicResource ApplicationBackgroundBrush}"
         ExtendsContentIntoTitleBar="True"
         WindowCornerPreference="Round"
         WindowStartupLocation="CenterScreen">
@@ -17,19 +18,31 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
+        <!-- Bottom layer: floating gold-dust animation behind all content -->
+        <controls:ParticleBackground Grid.Row="0" Grid.RowSpan="3" />
+
         <ui:TitleBar Grid.Row="0" Title="{DynamicResource App_Title}"
                      Foreground="{DynamicResource GoldBrush}">
             <ui:TitleBar.Icon>
                 <ui:SymbolIcon Symbol="Wrench24" Foreground="{DynamicResource GoldBrush}" />
             </ui:TitleBar.Icon>
             <ui:TitleBar.Header>
-                <ui:Button x:Name="LangButton"
-                           Content="{DynamicResource Lang_Toggle}"
-                           Icon="{ui:SymbolIcon LocalLanguage24}"
-                           Appearance="Secondary"
-                           Foreground="{DynamicResource GoldBrush}"
-                           Margin="0,0,6,0"
-                           Click="LangButton_Click" />
+                <StackPanel Orientation="Horizontal">
+                    <ui:Button x:Name="ThemeButton"
+                               Icon="{ui:SymbolIcon Color24}"
+                               Appearance="Secondary"
+                               Foreground="{DynamicResource GoldBrush}"
+                               ToolTip="{DynamicResource Theme_Toggle}"
+                               Margin="0,0,6,0"
+                               Click="ThemeButton_Click" />
+                    <ui:Button x:Name="LangButton"
+                               Content="{DynamicResource Lang_Toggle}"
+                               Icon="{ui:SymbolIcon LocalLanguage24}"
+                               Appearance="Secondary"
+                               Foreground="{DynamicResource GoldBrush}"
+                               Margin="0,0,6,0"
+                               Click="LangButton_Click" />
+                </StackPanel>
             </ui:TitleBar.Header>
         </ui:TitleBar>
 
@@ -71,8 +84,8 @@
                   Grid.Row="2"
                   Header="{DynamicResource Log_Title}"
                   IsExpanded="False"
-                  Background="#1B1916"
-                  BorderBrush="#463C1F"
+                  Background="{DynamicResource ApplicationBackgroundBrush}"
+                  BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
                   Foreground="{DynamicResource GoldBrush}"
                   Margin="12,0,12,8">
             <TextBox x:Name="LogBox"
@@ -81,9 +94,9 @@
                      IsReadOnly="True"
                      FontFamily="Consolas"
                      FontSize="12"
-                     Background="#1B1916"
+                     Background="{DynamicResource ApplicationBackgroundBrush}"
                      Foreground="{DynamicResource GoldBrush}"
-                     BorderBrush="#463C1F"
+                     BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
                      CaretBrush="{DynamicResource GoldBrush}"
                      FlowDirection="LeftToRight"
                      TextWrapping="NoWrap"

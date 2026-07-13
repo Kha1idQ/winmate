@@ -1,6 +1,5 @@
 using System.Windows;
-using System.Windows.Media;
-using Wpf.Ui.Appearance;
+using WinMate.Services;
 
 namespace WinMate;
 
@@ -10,9 +9,7 @@ public partial class App : Application
     {
         base.OnStartup(e);
 
-        // Gold accent — toggles, primary buttons and highlights.
-        ApplicationAccentColorManager.Apply(
-            Color.FromRgb(0xD4, 0xAF, 0x37),
-            ApplicationTheme.Dark);
+        // Apply the saved accent palette (gold or neon blue).
+        ThemeService.Apply(SettingsService.Current.Theme);
     }
 }

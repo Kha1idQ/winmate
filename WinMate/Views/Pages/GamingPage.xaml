@@ -22,7 +22,9 @@
             <ui:Button x:Name="EnableAllButton"
                        Grid.Column="1"
                        VerticalAlignment="Center"
-                       Appearance="Primary"
+                       Background="{DynamicResource GoldBrush}"
+                       BorderBrush="{DynamicResource GoldBrush}"
+                       Foreground="{DynamicResource ApplicationBackgroundBrush}"
                        Icon="{ui:SymbolIcon Rocket24}"
                        Content="{DynamicResource Gaming_EnableAll}"
                        Click="EnableAllButton_Click" />

@@ -14,6 +14,7 @@ public partial class AppsPage : Page
     private readonly HashSet<AppItem> _selected = [];
     private readonly HashSet<AppItem> _installed = [];
     private readonly Dictionary<AppItem, CheckBox> _boxes = [];
+    private readonly List<(string Category, TextBlock Header, WrapPanel Wrap)> _categoryUi = [];
     private bool _installing;
 
     public AppsPage()
@@ -21,14 +22,42 @@ public partial class AppsPage : Page
         InitializeComponent();
         UiHelpers.DisableHostScrolling(this);
         BuildCatalog();
+        BuildBundles();
         UpdateInstallButton();
         _ = LoadInstalledAsync();
+    }
+
+    private void BuildBundles()
+    {
+        foreach (var bundle in AppBundleCatalog.All)
+        {
+            var button = new Wpf.Ui.Controls.Button
+            {
+                Content = LocalizationService.Pick(bundle.NameEn, bundle.NameAr),
+                Icon = new Wpf.Ui.Controls.SymbolIcon(bundle.Icon),
+                Margin = new Thickness(0, 0, 8, 0),
+            };
+            button.Click += (_, _) => SelectBundle(bundle);
+            BundlesPanel.Children.Add(button);
+        }
+    }
+
+    // Ticks every app in the bundle that isn't already installed.
+    private void SelectBundle(Models.AppBundle bundle)
+    {
+        foreach (var id in bundle.WingetIds)
+        {
+            var app = AppCatalog.All.FirstOrDefault(a => a.WingetId == id);
+            if (app is not null && _boxes.TryGetValue(app, out var box) && box.IsEnabled)
+                box.IsChecked = true;
+        }
     }
 
     private void BuildCatalog()
     {
         CatalogPanel.Children.Clear();
         _boxes.Clear();
+        _categoryUi.Clear();
 
         foreach (var category in AppCatalog.Categories)
         {
@@ -58,6 +87,27 @@ public partial class AppsPage : Page
                 wrap.Children.Add(box);
             }
             CatalogPanel.Children.Add(wrap);
+            _categoryUi.Add((category, header, wrap));
+        }
+    }
+
+    // Filters apps by name (both languages) or winget id. A category header and
+    // its row hide when nothing in it matches.
+    public void Filter(string query)
+    {
+        query = query?.Trim() ?? "";
+
+        foreach (var (app, box) in _boxes)
+            box.Visibility = SearchMatch.Matches(query, app.NameEn, app.NameAr, app.WingetId)
+                ? Visibility.Visible : Visibility.Collapsed;
+
+        foreach (var (category, header, wrap) in _categoryUi)
+        {
+            var anyVisible = AppCatalog.All
+                .Where(a => a.Category == category)
+                .Any(a => _boxes[a].Visibility == Visibility.Visible);
+            header.Visibility = anyVisible ? Visibility.Visible : Visibility.Collapsed;
+            wrap.Visibility = anyVisible ? Visibility.Visible : Visibility.Collapsed;
         }
     }
 
@@ -96,10 +146,10 @@ public partial class AppsPage : Page
             var badge = new TextBlock
             {
                 FontSize = 11,
-                Foreground = new SolidColorBrush(Color.FromRgb(0xD4, 0xAF, 0x37)),
                 VerticalAlignment = VerticalAlignment.Center,
                 Margin = new Thickness(8, 0, 0, 0),
             };
+            badge.SetResourceReference(TextBlock.ForegroundProperty, "GoldBrush");
             badge.SetResourceReference(TextBlock.TextProperty, "Apps_Installed");
             panel.Children.Add(badge);
         }
@@ -132,6 +182,11 @@ public partial class AppsPage : Page
         box.Content = BuildAppLabel(app, installed: true);
         _selected.Remove(app);
         UpdateInstallButton();
+    }
+
+    private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        Filter(SearchBox.Text);
     }
 
     private void AppBox_Changed(object sender, RoutedEventArgs e)
