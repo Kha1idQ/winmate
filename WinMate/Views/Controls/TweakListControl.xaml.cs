@@ -2,12 +2,14 @@ using System.Windows;
 using System.Windows.Controls;
 using WinMate.Models;
 using WinMate.Services;
+using Wpf.Ui.Controls;
+using TextBlock = System.Windows.Controls.TextBlock;
 
 namespace WinMate.Views.Controls;
 
-// Renders any tweak catalog as cards: reversible tweaks get a ToggleSwitch
-// that reflects the REAL system state, one-shot actions get a confirm button.
-// Used by both the Tweaks page and the Gaming page.
+// Renders any tweak catalog as design-system cards: reversible tweaks get a
+// ToggleSwitch that reflects the REAL system state, one-shot actions get a
+// confirm button. Used by both the Tweaks page and the Gaming page.
 public partial class TweakListControl : UserControl
 {
     private readonly Dictionary<Tweak, Wpf.Ui.Controls.ToggleSwitch> _toggles = [];
@@ -66,12 +68,12 @@ public partial class TweakListControl : UserControl
         {
             var header = new TextBlock
             {
-                FontSize = 16,
+                FontSize = 22,
                 FontWeight = FontWeights.SemiBold,
-                Margin = new Thickness(0, 14, 0, 8),
+                Margin = new Thickness(0, 12, 0, 14),
             };
             header.SetResourceReference(TextBlock.TextProperty, $"TweakCat_{category}");
-            header.SetResourceReference(TextBlock.ForegroundProperty, "GoldBrush");
+            header.SetResourceReference(TextBlock.ForegroundProperty, "TextPrimaryBrush");
             _headers.Add((category, header));
             ListPanel.Children.Add(header);
 
@@ -103,46 +105,50 @@ public partial class TweakListControl : UserControl
 
     private Border BuildCard(Tweak tweak)
     {
-        var title = new TextBlock
-        {
-            Text = LocalizationService.Pick(tweak.NameEn, tweak.NameAr),
-            FontSize = 14,
-            FontWeight = FontWeights.SemiBold,
-        };
-        title.SetResourceReference(TextBlock.ForegroundProperty, "GoldBrush");
-        var desc = new TextBlock
-        {
-            Text = LocalizationService.Pick(tweak.DescEn, tweak.DescAr),
-            FontSize = 12,
-            TextWrapping = TextWrapping.Wrap,
-            Margin = new Thickness(0, 2, 0, 0),
-        };
-        desc.SetResourceReference(TextBlock.ForegroundProperty, "GoldDimBrush");
+        // Title row: name + any status chips.
+        var titleRow = new StackPanel { Orientation = Orientation.Horizontal };
+        titleRow.Children.Add(UiFactory.Title(LocalizationService.Pick(tweak.NameEn, tweak.NameAr), 17));
+
+        var desc = UiFactory.Description(LocalizationService.Pick(tweak.DescEn, tweak.DescAr));
+
         var textPanel = new StackPanel { VerticalAlignment = VerticalAlignment.Center };
-        textPanel.Children.Add(title);
+        textPanel.Children.Add(titleRow);
         textPanel.Children.Add(desc);
+
+        // Chips sit under the description so long names never collide with them.
+        var chipRow = new StackPanel { Orientation = Orientation.Horizontal, Margin = new Thickness(0, 8, 0, 0) };
+        if (tweak.RequiresRestart)
+            chipRow.Children.Add(UiFactory.Chip("Chip_RestartRequired"));
+        if (tweak.IsAdvanced)
+        {
+            var advanced = UiFactory.Chip("Chip_Advanced", "AccentAlt");
+            advanced.Margin = new Thickness(chipRow.Children.Count > 0 ? 8 : 0, 0, 0, 0);
+            chipRow.Children.Add(advanced);
+        }
+        if (chipRow.Children.Count > 0)
+            textPanel.Children.Add(chipRow);
 
         UIElement control = tweak.IsReversible ? BuildToggle(tweak) : BuildRunButton(tweak);
 
         var grid = new Grid();
+        grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
         grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
         grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
-        Grid.SetColumn(textPanel, 0);
-        Grid.SetColumn(control, 1);
+
+        if (tweak.Icon is { } symbol)
+        {
+            var tile = UiFactory.IconTile(symbol, "Accent", size: 44, iconSize: 18);
+            tile.Margin = new Thickness(0, 0, 16, 0);
+            Grid.SetColumn(tile, 0);
+            grid.Children.Add(tile);
+        }
+
+        Grid.SetColumn(textPanel, 1);
+        Grid.SetColumn(control, 2);
         grid.Children.Add(textPanel);
         grid.Children.Add(control);
 
-        var card = new Border
-        {
-            CornerRadius = new CornerRadius(8),
-            Padding = new Thickness(16, 12, 16, 12),
-            Margin = new Thickness(0, 0, 0, 8),
-            BorderThickness = new Thickness(1),
-            Child = grid,
-        };
-        card.SetResourceReference(Border.BackgroundProperty, "ControlFillColorDefaultBrush");
-        card.SetResourceReference(Border.BorderBrushProperty, "ControlStrokeColorDefaultBrush");
-        return card;
+        return UiFactory.Card(grid);
     }
 
     private Wpf.Ui.Controls.ToggleSwitch BuildToggle(Tweak tweak)
@@ -151,7 +157,7 @@ public partial class TweakListControl : UserControl
         {
             IsEnabled = false, // enabled once the real state is loaded
             VerticalAlignment = VerticalAlignment.Center,
-            Margin = new Thickness(12, 0, 0, 0),
+            Margin = new Thickness(16, 0, 0, 0),
         };
         toggle.Checked += (_, _) => OnToggle(tweak, toggle, apply: true);
         toggle.Unchecked += (_, _) => OnToggle(tweak, toggle, apply: false);
@@ -163,9 +169,10 @@ public partial class TweakListControl : UserControl
     {
         var button = new Wpf.Ui.Controls.Button
         {
-            Icon = new Wpf.Ui.Controls.SymbolIcon(Wpf.Ui.Controls.SymbolRegular.Warning24),
+            Icon = UiFactory.IconElement("warning", "TextPrimaryBrush"),
             VerticalAlignment = VerticalAlignment.Center,
-            Margin = new Thickness(12, 0, 0, 0),
+            Margin = new Thickness(16, 0, 0, 0),
+            Height = 40,
         };
         button.SetResourceReference(ContentControl.ContentProperty, "Tweaks_Run");
         button.Click += async (_, _) => await RunOneShotAsync(tweak, button);

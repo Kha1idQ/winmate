@@ -10,7 +10,8 @@ public partial class GamingPage : Page
     public GamingPage()
     {
         InitializeComponent();
-        UiHelpers.DisableHostScrolling(this);
+        UiHelpers.PreparePageHost(this);
+        EnableAllButton.Icon = UiFactory.IconElement("rocket", "OnPrimaryBrush");
         TweakList.Load([], GamingCatalog.All); // flat list, no category headers
     }
 

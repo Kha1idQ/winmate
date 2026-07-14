@@ -7,5 +7,6 @@ public record Profile(
     string NameAr,
     string DescEn,
     string DescAr,
-    Wpf.Ui.Controls.SymbolRegular Icon,
+    string Icon,
+    string Tile,
     IReadOnlyList<string> TweakIds);

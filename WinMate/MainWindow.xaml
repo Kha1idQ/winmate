@@ -3,9 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         xmlns:pages="clr-namespace:WinMate.Views.Pages"
-        xmlns:controls="clr-namespace:WinMate.Views.Controls"
         Title="WinMate"
-        Width="1050" Height="680"
+        Width="1180" Height="760"
+        MinWidth="900" MinHeight="600"
         WindowBackdropType="None"
         Background="{DynamicResource ApplicationBackgroundBrush}"
         ExtendsContentIntoTitleBar="True"
@@ -13,95 +13,110 @@
         WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="72" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <!-- Bottom layer: floating gold-dust animation behind all content -->
-        <controls:ParticleBackground Grid.Row="0" Grid.RowSpan="3" />
-
-        <ui:TitleBar Grid.Row="0" Title="{DynamicResource App_Title}"
-                     Foreground="{DynamicResource GoldBrush}">
-            <ui:TitleBar.Icon>
-                <ui:SymbolIcon Symbol="Wrench24" Foreground="{DynamicResource GoldBrush}" />
-            </ui:TitleBar.Icon>
+        <!-- Title bar: brand in the Header slot, controls in TrailingContent.
+             Both slots are excluded from the window-drag region, so their
+             buttons actually receive clicks. -->
+        <ui:TitleBar Grid.Row="0" Title="" VerticalAlignment="Stretch"
+                     Background="{DynamicResource SidebarBrush}">
             <ui:TitleBar.Header>
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="14,0,0,0">
+                    <Border Width="34" Height="34" CornerRadius="9"
+                            Background="{DynamicResource AccentTintBrush}"
+                            BorderBrush="{DynamicResource AccentBorderBrush}"
+                            BorderThickness="1">
+                        <ContentControl x:Name="LogoMark"
+                                        HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <TextBlock Text="WinMate" FontSize="17" FontWeight="SemiBold"
+                               Foreground="{DynamicResource TextPrimaryBrush}"
+                               VerticalAlignment="Center" Margin="12,0,0,0" />
+                </StackPanel>
+            </ui:TitleBar.Header>
+
+            <ui:TitleBar.TrailingContent>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,12,0">
                     <ui:Button x:Name="ThemeButton"
-                               Icon="{ui:SymbolIcon Color24}"
-                               Appearance="Secondary"
-                               Foreground="{DynamicResource GoldBrush}"
+                               Appearance="Transparent"
+                               Foreground="{DynamicResource TextSecondaryBrush}"
                                ToolTip="{DynamicResource Theme_Toggle}"
-                               Margin="0,0,6,0"
                                Click="ThemeButton_Click" />
                     <ui:Button x:Name="LangButton"
                                Content="{DynamicResource Lang_Toggle}"
-                               Icon="{ui:SymbolIcon LocalLanguage24}"
-                               Appearance="Secondary"
-                               Foreground="{DynamicResource GoldBrush}"
-                               Margin="0,0,6,0"
+                               Appearance="Transparent"
+                               Foreground="{DynamicResource TextSecondaryBrush}"
+                               Margin="4,0,0,0"
                                Click="LangButton_Click" />
                 </StackPanel>
-            </ui:TitleBar.Header>
+            </ui:TitleBar.TrailingContent>
         </ui:TitleBar>
 
-        <ui:NavigationView x:Name="RootNavigation"
-                           Grid.Row="1"
-                           PaneDisplayMode="Left"
-                           OpenPaneLength="200"
-                           IsBackButtonVisible="Collapsed"
-                           IsPaneToggleVisible="False">
-            <ui:NavigationView.MenuItems>
-                <ui:NavigationViewItem Content="{DynamicResource Nav_Home}" TargetPageType="{x:Type pages:HomePage}"
-                                       Foreground="{DynamicResource GoldBrush}">
-                    <ui:NavigationViewItem.Icon>
-                        <ui:SymbolIcon Symbol="Home24" Foreground="{DynamicResource GoldBrush}" />
-                    </ui:NavigationViewItem.Icon>
-                </ui:NavigationViewItem>
-                <ui:NavigationViewItem Content="{DynamicResource Nav_Apps}" TargetPageType="{x:Type pages:AppsPage}"
-                                       Foreground="{DynamicResource GoldBrush}">
-                    <ui:NavigationViewItem.Icon>
-                        <ui:SymbolIcon Symbol="AppsAddIn24" Foreground="{DynamicResource GoldBrush}" />
-                    </ui:NavigationViewItem.Icon>
-                </ui:NavigationViewItem>
-                <ui:NavigationViewItem Content="{DynamicResource Nav_Tweaks}" TargetPageType="{x:Type pages:TweaksPage}"
-                                       Foreground="{DynamicResource GoldBrush}">
-                    <ui:NavigationViewItem.Icon>
-                        <ui:SymbolIcon Symbol="Options24" Foreground="{DynamicResource GoldBrush}" />
-                    </ui:NavigationViewItem.Icon>
-                </ui:NavigationViewItem>
-                <ui:NavigationViewItem Content="{DynamicResource Nav_Gaming}" TargetPageType="{x:Type pages:GamingPage}"
-                                       Foreground="{DynamicResource GoldBrush}">
-                    <ui:NavigationViewItem.Icon>
-                        <ui:SymbolIcon Symbol="XboxController24" Foreground="{DynamicResource GoldBrush}" />
-                    </ui:NavigationViewItem.Icon>
-                </ui:NavigationViewItem>
-            </ui:NavigationView.MenuItems>
-        </ui:NavigationView>
+        <Grid Grid.Row="1">
+            <ui:NavigationView x:Name="RootNavigation"
+                               PaneDisplayMode="Left"
+                               OpenPaneLength="264"
+                               IsBackButtonVisible="Collapsed"
+                               IsPaneToggleVisible="False">
+                <ui:NavigationView.MenuItems>
+                    <ui:NavigationViewItem x:Name="NavHome" Margin="0,0,12,0" Height="52" TargetPageType="{x:Type pages:HomePage}" />
+                    <ui:NavigationViewItem x:Name="NavApps" Margin="0,0,12,0" Height="52" TargetPageType="{x:Type pages:AppsPage}" />
+                    <ui:NavigationViewItem x:Name="NavTweaks" Margin="0,0,12,0" Height="52" TargetPageType="{x:Type pages:TweaksPage}" />
+                    <ui:NavigationViewItem x:Name="NavGaming" Margin="0,0,12,0" Height="52" TargetPageType="{x:Type pages:GamingPage}" />
+                </ui:NavigationView.MenuItems>
 
-        <Expander x:Name="LogExpander"
-                  Grid.Row="2"
-                  Header="{DynamicResource Log_Title}"
-                  IsExpanded="False"
-                  Background="{DynamicResource ApplicationBackgroundBrush}"
-                  BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
-                  Foreground="{DynamicResource GoldBrush}"
-                  Margin="12,0,12,8">
-            <TextBox x:Name="LogBox"
-                     Height="150"
-                     Margin="0,6,0,0"
-                     IsReadOnly="True"
-                     FontFamily="Consolas"
-                     FontSize="12"
-                     Background="{DynamicResource ApplicationBackgroundBrush}"
-                     Foreground="{DynamicResource GoldBrush}"
-                     BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
-                     CaretBrush="{DynamicResource GoldBrush}"
-                     FlowDirection="LeftToRight"
-                     TextWrapping="NoWrap"
-                     VerticalScrollBarVisibility="Auto"
-                     HorizontalScrollBarVisibility="Auto" />
-        </Expander>
+                <ui:NavigationView.PaneFooter>
+                    <Border BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="0,1,0,0"
+                            Margin="16,8,16,4" Padding="4,14,4,10">
+                        <TextBlock x:Name="VersionText"
+                                   FontSize="13"
+                                   Foreground="{DynamicResource TextSecondaryBrush}" />
+                    </Border>
+                </ui:NavigationView.PaneFooter>
+            </ui:NavigationView>
+
+            <!-- Drawn after the pane so the selection highlight can't paint over it -->
+            <Rectangle Width="1" HorizontalAlignment="Left" Margin="264,0,0,0"
+                       Fill="{DynamicResource CardBorderBrush}"
+                       IsHitTestVisible="False" />
+        </Grid>
+
+        <!-- Live log -->
+        <Border Grid.Row="2" Margin="24,0,24,16"
+                CornerRadius="12" BorderThickness="1"
+                Background="{DynamicResource SurfaceBrush}"
+                BorderBrush="{DynamicResource CardBorderBrush}">
+            <Expander x:Name="LogExpander"
+                      IsExpanded="False"
+                      Background="Transparent"
+                      BorderThickness="0"
+                      Padding="8,2,8,2">
+                <Expander.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Ellipse Width="9" Height="9" Fill="{DynamicResource SuccessBrush}" VerticalAlignment="Center" />
+                        <TextBlock Text="{DynamicResource Log_Title}" FontSize="15" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextPrimaryBrush}"
+                                   VerticalAlignment="Center" Margin="10,0,0,0" />
+                    </StackPanel>
+                </Expander.Header>
+                <TextBox x:Name="LogBox"
+                         Height="170"
+                         Margin="0,10,0,6"
+                         IsReadOnly="True"
+                         FontFamily="Consolas"
+                         FontSize="12.5"
+                         Background="{DynamicResource AppBackgroundBrush}"
+                         Foreground="{DynamicResource TextSecondaryBrush}"
+                         BorderBrush="{DynamicResource CardBorderBrush}"
+                         CaretBrush="{DynamicResource AccentBrush}"
+                         FlowDirection="LeftToRight"
+                         TextWrapping="NoWrap"
+                         VerticalScrollBarVisibility="Auto"
+                         HorizontalScrollBarVisibility="Auto" />
+            </Expander>
+        </Border>
     </Grid>
 </ui:FluentWindow>

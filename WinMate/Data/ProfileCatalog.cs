@@ -1,5 +1,4 @@
 using WinMate.Models;
-using Wpf.Ui.Controls;
 
 namespace WinMate.Data;
 
@@ -17,7 +16,8 @@ public static class ProfileCatalog
             NameAr: "وضع القيمر الكامل",
             DescEn: "Every gaming optimization plus taskbar quality-of-life for players",
             DescAr: "كل تحسينات الألعاب مع تسهيلات شريط المهام للاعبين",
-            Icon: SymbolRegular.XboxController24,
+            Icon: "gamepad",
+            Tile: "profile-gamer",
             TweakIds:
             [
                 "game_mode_on", "gamedvr_off", "gamebar_popups_off", "ultimate_power",
@@ -30,7 +30,8 @@ public static class ProfileCatalog
             NameAr: "الخصوصية القصوى",
             DescEn: "Shut down telemetry, Copilot, Recall, location and ad tracking",
             DescAr: "يوقف التتبع وكوبايلوت وريكول والموقع وتتبع الإعلانات",
-            Icon: SymbolRegular.ShieldLock24,
+            Icon: "shield-lock",
+            Tile: "profile-privacy",
             TweakIds:
             [
                 "telemetry_off", "sched_tasks_off", "copilot_off", "recall_off",
@@ -43,7 +44,8 @@ public static class ProfileCatalog
             NameAr: "نظيف وسريع",
             DescEn: "Free up disk, speed up browsing, and cut background clutter",
             DescAr: "يفرّغ مساحة، يسرّع التصفح، ويقلّل الزحمة بالخلفية",
-            Icon: SymbolRegular.Rocket24,
+            Icon: "rocket",
+            Tile: "profile-clean-fast",
             TweakIds:
             [
                 "hibernate_off", "dns_cloudflare", "telemetry_off", "sched_tasks_off",

@@ -4,7 +4,7 @@
 
 **أداة ويندوز حديثة — ثبّت برامجك، نظّف النظام، وحسّنه للقيمنق. ثنائية اللغة (عربي / إنجليزي).**
 
-![.NET 9](https://img.shields.io/badge/.NET-9.0-gold) ![WPF](https://img.shields.io/badge/UI-WPF--UI%20Fluent-black)
+![.NET 9](https://img.shields.io/badge/.NET-9.0-25BDF5) ![WPF](https://img.shields.io/badge/UI-WPF-061321)
 
 > 🚧 **Actively developed** — regular updates with improvements and new features are coming.
 >
@@ -14,20 +14,27 @@
 
 ## Screenshots / لقطات
 
-**One-click profiles + two themes** — switch between the gold and neon-blue looks any time.
-**بروفايلات بضغطة واحدة + ثيمين** — بدّل بين الشكل الذهبي والأزرق النيون في أي وقت.
+### One-click profiles / بروفايلات بضغطة واحدة
 
-| Gold theme | Neon-blue theme |
-|---|---|
-| ![Home gold](docs/home-gold.png) | ![Home blue](docs/home-blue.png) |
+Apply a whole set of tweaks at once — and everything stays reversible.
 
-| Apps — bundles + one-click installs | Tweaks — all reversible |
+![Home](docs/home.png)
+
+| Apps — bundles + one-click installs | Tweaks — every switch is reversible |
 |---|---|
 | ![Apps](docs/apps.png) | ![Tweaks](docs/tweaks.png) |
 
-| Gaming optimizations | Full Arabic (RTL) support |
-|---|---|
-| ![Gaming](docs/gaming.png) | ![Arabic](docs/arabic.png) |
+### Gaming optimizations / تحسينات الألعاب
+
+![Gaming](docs/gaming.png)
+
+### Full Arabic (RTL) support / دعم عربي كامل
+
+The whole interface flips to Arabic with one click. Two themes are built in — a deep-blue default and a warm gold alternative — switchable from the title bar.
+
+كل الواجهة تتحول للعربي بضغطة واحدة. وفيه ثيمين جاهزين — الأزرق الداكن الافتراضي والذهبي الدافي — تبدّل بينهم من شريط العنوان.
+
+![Arabic](docs/home-arabic.png)
 
 ---
 

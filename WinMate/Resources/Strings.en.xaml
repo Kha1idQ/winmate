@@ -4,7 +4,7 @@
 
     <sys:String x:Key="App_Title">WinMate</sys:String>
     <sys:String x:Key="Lang_Toggle">عربي</sys:String>
-    <sys:String x:Key="Theme_Toggle">Switch theme (gold / neon blue)</sys:String>
+    <sys:String x:Key="Theme_Toggle">Switch theme (blue / gold)</sys:String>
 
     <sys:String x:Key="Nav_Home">Home</sys:String>
     <sys:String x:Key="Nav_Apps">Apps</sys:String>
@@ -32,13 +32,16 @@
     <sys:String x:Key="Apps_Subtitle">Install your favorite apps with one click</sys:String>
     <sys:String x:Key="Apps_InstallSelected">Install selected</sys:String>
     <sys:String x:Key="Apps_BundlesLabel">Quick bundles — click to select a set, then install</sys:String>
-    <sys:String x:Key="Apps_Installed">✓ Installed</sys:String>
+    <sys:String x:Key="Apps_Installed">Installed</sys:String>
     <sys:String x:Key="Apps_LogInstalling">Installing</sys:String>
     <sys:String x:Key="Apps_LogDone">installed successfully</sys:String>
     <sys:String x:Key="Apps_LogFailed">failed</sys:String>
     <sys:String x:Key="Apps_LogFailedSummary">Failed apps</sys:String>
     <sys:String x:Key="Log_Title">Live log</sys:String>
-    <sys:String x:Key="Search_Placeholder">Search...</sys:String>
+    <sys:String x:Key="Search_Apps">Search apps...</sys:String>
+    <sys:String x:Key="Search_Tweaks">Search tweaks...</sys:String>
+    <sys:String x:Key="Chip_RestartRequired">Restart required</sys:String>
+    <sys:String x:Key="Chip_Advanced">Advanced</sys:String>
     <sys:String x:Key="Cat_browsers">Browsers</sys:String>
     <sys:String x:Key="Cat_dev">Developer tools</sys:String>
     <sys:String x:Key="Cat_gaming">Gaming</sys:String>

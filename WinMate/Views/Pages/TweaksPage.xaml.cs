@@ -9,7 +9,8 @@ public partial class TweaksPage : Page
     public TweaksPage()
     {
         InitializeComponent();
-        UiHelpers.DisableHostScrolling(this);
+        UiHelpers.PreparePageHost(this);
+        SearchBox.Icon = UiFactory.IconElement("search", "TextSecondaryBrush", 18);
         TweakList.Load(TweakCatalog.Categories, TweakCatalog.All);
     }
 

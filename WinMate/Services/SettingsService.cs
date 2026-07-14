@@ -6,7 +6,7 @@ namespace WinMate.Services;
 public class AppSettings
 {
     public string Language { get; set; } = "en";
-    public string Theme { get; set; } = "gold";
+    public string Theme { get; set; } = "blue";
 }
 
 public static class SettingsService

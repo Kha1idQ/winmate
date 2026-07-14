@@ -22,6 +22,12 @@ public record Tweak(
     // (e.g. active power plan checked via powercfg output).
     public Func<Task<bool>>? CustomCheck { get; init; }
 
+    // Optional leading icon tile (icon-pack name, used on the Gaming page).
+    public string? Icon { get; init; }
+
+    // Shows an "Advanced" chip — power-user tweaks with wider side effects.
+    public bool IsAdvanced { get; init; }
+
     // Shell tweaks (file extensions, classic context menu...) only take
     // effect after Windows Explorer restarts.
     public bool RestartExplorer { get; init; }

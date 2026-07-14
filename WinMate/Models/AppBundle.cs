@@ -6,5 +6,5 @@ public record AppBundle(
     string Id,
     string NameEn,
     string NameAr,
-    Wpf.Ui.Controls.SymbolRegular Icon,
+    string Icon,
     IReadOnlyList<string> WingetIds);

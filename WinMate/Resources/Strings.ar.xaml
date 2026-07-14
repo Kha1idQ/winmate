@@ -4,7 +4,7 @@
 
     <sys:String x:Key="App_Title">وين مايت</sys:String>
     <sys:String x:Key="Lang_Toggle">English</sys:String>
-    <sys:String x:Key="Theme_Toggle">تبديل الثيم (ذهبي / أزرق نيون)</sys:String>
+    <sys:String x:Key="Theme_Toggle">تبديل الثيم (أزرق / ذهبي)</sys:String>
 
     <sys:String x:Key="Nav_Home">الرئيسية</sys:String>
     <sys:String x:Key="Nav_Apps">البرامج</sys:String>
@@ -32,13 +32,16 @@
     <sys:String x:Key="Apps_Subtitle">ثبّت برامجك المفضلة بضغطة واحدة</sys:String>
     <sys:String x:Key="Apps_InstallSelected">ثبّت المحدد</sys:String>
     <sys:String x:Key="Apps_BundlesLabel">حزم جاهزة — اضغط الحزمة عشان تختارها، بعدين ثبّت</sys:String>
-    <sys:String x:Key="Apps_Installed">✓ مثبّت</sys:String>
+    <sys:String x:Key="Apps_Installed">مثبّت</sys:String>
     <sys:String x:Key="Apps_LogInstalling">جاري تثبيت</sys:String>
     <sys:String x:Key="Apps_LogDone">تم التثبيت بنجاح</sys:String>
     <sys:String x:Key="Apps_LogFailed">فشل</sys:String>
     <sys:String x:Key="Apps_LogFailedSummary">برامج فشلت</sys:String>
     <sys:String x:Key="Log_Title">السجل المباشر</sys:String>
-    <sys:String x:Key="Search_Placeholder">بحث...</sys:String>
+    <sys:String x:Key="Search_Apps">ابحث عن برنامج...</sys:String>
+    <sys:String x:Key="Search_Tweaks">ابحث عن تحسين...</sys:String>
+    <sys:String x:Key="Chip_RestartRequired">يحتاج ريستارت</sys:String>
+    <sys:String x:Key="Chip_Advanced">متقدم</sys:String>
     <sys:String x:Key="Cat_browsers">المتصفحات</sys:String>
     <sys:String x:Key="Cat_dev">أدوات المطور</sys:String>
     <sys:String x:Key="Cat_gaming">الألعاب</sys:String>

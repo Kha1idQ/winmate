@@ -1,5 +1,4 @@
 using WinMate.Models;
-using Wpf.Ui.Controls;
 
 namespace WinMate.Data;
 
@@ -11,21 +10,21 @@ public static class AppBundleCatalog
             Id: "essentials",
             NameEn: "Essentials",
             NameAr: "الأساسيات",
-            Icon: SymbolRegular.Star24,
+            Icon: "star",
             WingetIds: ["Google.Chrome", "7zip.7zip", "VideoLAN.VLC", "Bitwarden.Bitwarden", "Microsoft.PowerToys"]),
 
         new(
             Id: "gamer",
             NameEn: "Gamer pack",
             NameAr: "حزمة القيمر",
-            Icon: SymbolRegular.XboxController24,
+            Icon: "gamepad",
             WingetIds: ["Valve.Steam", "Discord.Discord", "EpicGames.EpicGamesLauncher", "GOG.Galaxy", "OBSProject.OBSStudio"]),
 
         new(
             Id: "developer",
             NameEn: "Developer pack",
             NameAr: "حزمة المطور",
-            Icon: SymbolRegular.Code24,
+            Icon: "code",
             WingetIds: ["Microsoft.VisualStudioCode", "Git.Git", "OpenJS.NodeJS.LTS", "Python.Python.3.13", "Notepad++.Notepad++"]),
     ];
 }

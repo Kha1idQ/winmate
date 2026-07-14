@@ -28,7 +28,8 @@ public static class GamingCatalog
             Category: "gaming",
             Apply: [new RegistryAction(RegistryHive.CurrentUser, GameBar, "AutoGameModeEnabled", RegistryValueKind.DWord, 1)],
             Undo:  [new RegistryAction(RegistryHive.CurrentUser, GameBar, "AutoGameModeEnabled", RegistryValueKind.DWord, 0)],
-            StateCheck: new RegistryCheck(RegistryHive.CurrentUser, GameBar, "AutoGameModeEnabled", 1)),
+            StateCheck: new RegistryCheck(RegistryHive.CurrentUser, GameBar, "AutoGameModeEnabled", 1))
+        { Icon = "gamepad" },
 
         new(
             Id: "gamedvr_off",
@@ -49,7 +50,8 @@ public static class GamingCatalog
                 new RegistryAction(RegistryHive.CurrentUser, GameDvrUser, "AppCaptureEnabled", RegistryValueKind.DWord, 1),
                 new RegistryAction(RegistryHive.LocalMachine, GameDvrPolicy, "AllowGameDVR", RegistryValueKind.DWord, null),
             ],
-            StateCheck: new RegistryCheck(RegistryHive.CurrentUser, GameConfigStore, "GameDVR_Enabled", 0)),
+            StateCheck: new RegistryCheck(RegistryHive.CurrentUser, GameConfigStore, "GameDVR_Enabled", 0))
+        { Icon = "record-off" },
 
         new(
             Id: "gamebar_popups_off",
@@ -68,7 +70,8 @@ public static class GamingCatalog
                 new RegistryAction(RegistryHive.CurrentUser, GameBar, "UseNexusForGameBarEnabled", RegistryValueKind.DWord, 1),
                 new RegistryAction(RegistryHive.CurrentUser, GameBar, "ShowStartupPanel", RegistryValueKind.DWord, 1),
             ],
-            StateCheck: new RegistryCheck(RegistryHive.CurrentUser, GameBar, "UseNexusForGameBarEnabled", 0)),
+            StateCheck: new RegistryCheck(RegistryHive.CurrentUser, GameBar, "UseNexusForGameBarEnabled", 0))
+        { Icon = "message-off" },
 
         new(
             Id: "ultimate_power",
@@ -92,6 +95,7 @@ public static class GamingCatalog
             Undo: [new CommandAction("powercfg", "/setactive " + BalancedPlanGuid)],
             StateCheck: null)
         {
+            Icon = "bolt",
             // Power plan state lives in powercfg, not the registry. Matching the
             // High-performance GUID keeps the check locale-proof.
             CustomCheck = async () =>
@@ -112,7 +116,8 @@ public static class GamingCatalog
             Apply: [new RegistryAction(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "HwSchMode", RegistryValueKind.DWord, 2)],
             Undo:  [new RegistryAction(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "HwSchMode", RegistryValueKind.DWord, 1)],
             StateCheck: new RegistryCheck(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "HwSchMode", 2),
-            RequiresRestart: true),
+            RequiresRestart: true)
+        { Icon = "gpu" },
 
         new(
             Id: "mouse_accel_off",
@@ -134,7 +139,8 @@ public static class GamingCatalog
                 new RegistryAction(RegistryHive.CurrentUser, @"Control Panel\Mouse", "MouseThreshold1", RegistryValueKind.String, "6"),
                 new RegistryAction(RegistryHive.CurrentUser, @"Control Panel\Mouse", "MouseThreshold2", RegistryValueKind.String, "10"),
             ],
-            StateCheck: new RegistryCheck(RegistryHive.CurrentUser, @"Control Panel\Mouse", "MouseSpeed", "0")),
+            StateCheck: new RegistryCheck(RegistryHive.CurrentUser, @"Control Panel\Mouse", "MouseSpeed", "0"))
+        { Icon = "mouse-target" },
 
         new(
             Id: "network_latency",
@@ -157,6 +163,7 @@ public static class GamingCatalog
                 new RegistryAction(RegistryHive.LocalMachine, GamesTasks, "GPU Priority", RegistryValueKind.DWord, 8),
                 new RegistryAction(RegistryHive.LocalMachine, GamesTasks, "Priority", RegistryValueKind.DWord, 2),
             ],
-            StateCheck: new RegistryCheck(RegistryHive.LocalMachine, SystemProfile, "SystemResponsiveness", 0)),
+            StateCheck: new RegistryCheck(RegistryHive.LocalMachine, SystemProfile, "SystemResponsiveness", 0))
+        { Icon = "network", IsAdvanced = true },
     ];
 }
