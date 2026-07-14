@@ -55,6 +55,7 @@ Or download `WinMate.exe` from [Releases](../../releases) — no installation ne
 | | English | عربي |
 |---|---|---|
 | 📦 | **Apps** — install 22+ popular apps via winget with one click, with live progress log | **البرامج** — ثبّت أشهر البرامج بضغطة واحدة عبر winget مع سجل مباشر |
+| 🗂️ | **App manager** — list everything installed, update one or all, uninstall — with clear warnings on Windows components so you don't remove something critical | **مدير البرامج** — يعرض كل المثبَّت، حدّث واحد أو الكل، أزِل — مع تحذير واضح على مكوّنات ويندوز عشان ما تحذف شي حرج |
 | 🛠️ | **Tweaks** — disable telemetry, debloat preinstalled apps, classic context menu, privacy switches — **every switch is reversible** | **التحسينات** — إيقاف التتبع، حذف البلوت، القائمة الكلاسيكية، مفاتيح الخصوصية — **كل مفتاح قابل للتراجع** |
 | 🎮 | **Gaming** — Game Mode, disable Xbox DVR, max performance power plan, GPU scheduling, raw mouse | **الألعاب** — وضع الألعاب، إيقاف Xbox DVR، خطة الطاقة القصوى، جدولة GPU، ماوس خام |
 | 🛡️ | **Safety first** — offers a System Restore Point before your first change | **الأمان أولًا** — يعرض إنشاء نقطة استعادة قبل أول تعديل |

@@ -64,6 +64,7 @@
                 <ui:NavigationView.MenuItems>
                     <ui:NavigationViewItem x:Name="NavHome" Margin="0,0,12,0" Height="52" TargetPageType="{x:Type pages:HomePage}" />
                     <ui:NavigationViewItem x:Name="NavApps" Margin="0,0,12,0" Height="52" TargetPageType="{x:Type pages:AppsPage}" />
+                    <ui:NavigationViewItem x:Name="NavManager" Margin="0,0,12,0" Height="52" TargetPageType="{x:Type pages:ManagerPage}" />
                     <ui:NavigationViewItem x:Name="NavTweaks" Margin="0,0,12,0" Height="52" TargetPageType="{x:Type pages:TweaksPage}" />
                     <ui:NavigationViewItem x:Name="NavGaming" Margin="0,0,12,0" Height="52" TargetPageType="{x:Type pages:GamingPage}" />
                 </ui:NavigationView.MenuItems>

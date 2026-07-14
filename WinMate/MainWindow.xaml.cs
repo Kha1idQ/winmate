@@ -22,6 +22,7 @@ public partial class MainWindow : FluentWindow
 
         BuildNavItem(NavHome, "home", "Nav_Home");
         BuildNavItem(NavApps, "apps", "Nav_Apps");
+        BuildNavItem(NavManager, "download", "Nav_Manager");
         BuildNavItem(NavTweaks, "tweaks", "Nav_Tweaks");
         BuildNavItem(NavGaming, "gamepad", "Nav_Gaming");
 

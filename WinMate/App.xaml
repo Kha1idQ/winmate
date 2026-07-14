@@ -31,14 +31,17 @@
             <SolidColorBrush x:Key="AccentStrongBrush" Color="#117FEA" />
             <SolidColorBrush x:Key="AccentAltBrush" Color="#7A4FE8" />
             <SolidColorBrush x:Key="SuccessBrush" Color="#35D58A" />
+            <SolidColorBrush x:Key="WarningBrush" Color="#F5A524" />
             <SolidColorBrush x:Key="OnPrimaryBrush" Color="#FFFFFF" />
 
             <SolidColorBrush x:Key="AccentTintBrush" Color="#2625BDF5" />
             <SolidColorBrush x:Key="AccentAltTintBrush" Color="#267A4FE8" />
             <SolidColorBrush x:Key="SuccessTintBrush" Color="#2635D58A" />
+            <SolidColorBrush x:Key="WarningTintBrush" Color="#33F5A524" />
             <SolidColorBrush x:Key="AccentBorderBrush" Color="#6625BDF5" />
             <SolidColorBrush x:Key="AccentAltBorderBrush" Color="#667A4FE8" />
             <SolidColorBrush x:Key="SuccessBorderBrush" Color="#6635D58A" />
+            <SolidColorBrush x:Key="WarningBorderBrush" Color="#88F5A524" />
 
             <LinearGradientBrush x:Key="PrimaryButtonBrush" StartPoint="0,0" EndPoint="1,0">
                 <GradientStop Color="#138CEB" Offset="0" />

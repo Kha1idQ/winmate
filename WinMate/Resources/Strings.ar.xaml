@@ -74,4 +74,25 @@
     <sys:String x:Key="Gaming_EnableAll">فعّل كل تحسينات الألعاب</sys:String>
     <sys:String x:Key="Tweaks_RestartNeeded">⟳ يحتاج إعادة تشغيل الجهاز عشان يطبق</sys:String>
 
+    <sys:String x:Key="Nav_Manager">مدير البرامج</sys:String>
+    <sys:String x:Key="Manager_Title">مدير البرامج</sys:String>
+    <sys:String x:Key="Manager_Loading">جاري قراءة البرامج المثبتة...</sys:String>
+    <sys:String x:Key="Manager_Installed">برنامج مثبّت</sys:String>
+    <sys:String x:Key="Manager_UpdatesAvailable">لها تحديثات</sys:String>
+    <sys:String x:Key="Manager_UpdateAll">حدّث الكل</sys:String>
+    <sys:String x:Key="Manager_Refresh">تحديث القائمة</sys:String>
+    <sys:String x:Key="Manager_Update">تحديث</sys:String>
+    <sys:String x:Key="Manager_Uninstall">إزالة</sys:String>
+    <sys:String x:Key="Manager_UpdateChip">فيه تحديث</sys:String>
+    <sys:String x:Key="Manager_UninstallConfirm">راح ينحذف البرنامج من جهازك. تبي تكمل؟</sys:String>
+    <sys:String x:Key="Manager_LogUpdated">تحدّث</sys:String>
+    <sys:String x:Key="Manager_LogUpdatedAll">خلصت كل التحديثات</sys:String>
+    <sys:String x:Key="Manager_LogUninstalled">تمت إزالته</sys:String>
+    <sys:String x:Key="Search_Manager">ابحث في البرامج المثبتة...</sys:String>
+
+    <sys:String x:Key="Manager_SystemChip">مكوّن نظام</sys:String>
+    <sys:String x:Key="Manager_SystemWarning">⚠ هذا مكوّن من ويندوز أو مكتبة تعتمد عليها برامج ثانية (فيجوال سي++، دوت نت، التعريفات، المتجر). حذفه ممكن يكسر برامج عندك. لا تكمل إلا إذا كنت متأكد.</sys:String>
+    <sys:String x:Key="Manager_ProtectedChip">محمي من ويندوز</sys:String>
+    <sys:String x:Key="Manager_ProtectedTooltip">ويندوز نفسه يمنع حذف هذا المكوّن.</sys:String>
+    <sys:String x:Key="Manager_EdgeNote">مايكروسوفت تمنع حذف إيدج في نسخ ويندوز الحديثة. وين مايت راح يقفل إيدج، يفكّ قفل الحذف، ويشغّله — لكن لو نسخة ويندوزك مفعّلة المنع، ممكن ما ينحذف.</sys:String>
 </ResourceDictionary>

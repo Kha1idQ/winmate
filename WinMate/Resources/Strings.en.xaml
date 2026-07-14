@@ -74,4 +74,25 @@
     <sys:String x:Key="Gaming_EnableAll">Enable all gaming tweaks</sys:String>
     <sys:String x:Key="Tweaks_RestartNeeded">⟳ Restart your PC for this change to take effect</sys:String>
 
+    <sys:String x:Key="Nav_Manager">Manager</sys:String>
+    <sys:String x:Key="Manager_Title">App manager</sys:String>
+    <sys:String x:Key="Manager_Loading">Reading installed apps...</sys:String>
+    <sys:String x:Key="Manager_Installed">installed</sys:String>
+    <sys:String x:Key="Manager_UpdatesAvailable">updates available</sys:String>
+    <sys:String x:Key="Manager_UpdateAll">Update all</sys:String>
+    <sys:String x:Key="Manager_Refresh">Refresh</sys:String>
+    <sys:String x:Key="Manager_Update">Update</sys:String>
+    <sys:String x:Key="Manager_Uninstall">Uninstall</sys:String>
+    <sys:String x:Key="Manager_UpdateChip">Update available</sys:String>
+    <sys:String x:Key="Manager_UninstallConfirm">This removes the app from your PC. Continue?</sys:String>
+    <sys:String x:Key="Manager_LogUpdated">updated</sys:String>
+    <sys:String x:Key="Manager_LogUpdatedAll">all updates finished</sys:String>
+    <sys:String x:Key="Manager_LogUninstalled">uninstalled</sys:String>
+    <sys:String x:Key="Search_Manager">Search installed apps...</sys:String>
+
+    <sys:String x:Key="Manager_SystemChip">System component</sys:String>
+    <sys:String x:Key="Manager_SystemWarning">⚠ This is a Windows component or a runtime other programs depend on (Visual C++, .NET, drivers, the Store). Removing it can break other software. Only continue if you are sure.</sys:String>
+    <sys:String x:Key="Manager_ProtectedChip">Protected by Windows</sys:String>
+    <sys:String x:Key="Manager_ProtectedTooltip">Windows does not allow this component to be removed.</sys:String>
+    <sys:String x:Key="Manager_EdgeNote">Microsoft blocks removing Edge on recent Windows versions. WinMate will close Edge, unlock the uninstaller, and run it — but if your Windows enforces the block, it may not be removable.</sys:String>
 </ResourceDictionary>

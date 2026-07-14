@@ -16,7 +16,7 @@ public static class ThemeService
         Color NavActive, Color Border,
         Color TextPrimary, Color TextSecondary,
         Color Accent, Color AccentStrong, Color AccentAlt,
-        Color Success, Color Disabled,
+        Color Success, Color Warning, Color Disabled,
         Color GradientFrom, Color GradientTo, Color OnPrimary);
 
     // Design-spec tokens (WinMate Dark). Sidebar matches the app background: one
@@ -27,7 +27,7 @@ public static class ThemeService
         NavActive: C("#122A45"), Border: C("#29445B"),
         TextPrimary: C("#F4F7FB"), TextSecondary: C("#9EADC1"),
         Accent: C("#25BDF5"), AccentStrong: C("#117FEA"), AccentAlt: C("#7A4FE8"),
-        Success: C("#35D58A"), Disabled: C("#667386"),
+        Success: C("#35D58A"), Warning: C("#F5A524"), Disabled: C("#667386"),
         GradientFrom: C("#138CEB"), GradientTo: C("#086BDD"), OnPrimary: C("#FFFFFF"));
 
     // Same structure, warm palette.
@@ -37,7 +37,7 @@ public static class ThemeService
         NavActive: C("#2E2718"), Border: C("#4E4327"),
         TextPrimary: C("#F8F5EE"), TextSecondary: C("#BFB39C"),
         Accent: C("#E6C566"), AccentStrong: C("#C99A2E"), AccentAlt: C("#C97B4A"),
-        Success: C("#35D58A"), Disabled: C("#6E6553"),
+        Success: C("#35D58A"), Warning: C("#F5A524"), Disabled: C("#6E6553"),
         GradientFrom: C("#E0B84A"), GradientTo: C("#C2952A"), OnPrimary: C("#12100B"));
 
     public static Palette Current { get; private set; } = Blue;
@@ -68,15 +68,18 @@ public static class ThemeService
         SetBrush(r, "AccentStrongBrush", p.AccentStrong);
         SetBrush(r, "AccentAltBrush", p.AccentAlt);
         SetBrush(r, "SuccessBrush", p.Success);
+        SetBrush(r, "WarningBrush", p.Warning);
         SetBrush(r, "OnPrimaryBrush", p.OnPrimary);
 
         // Tints for icon tiles and chips (accent over a dark surface).
         SetBrush(r, "AccentTintBrush", WithAlpha(p.Accent, 0x33));
         SetBrush(r, "AccentAltTintBrush", WithAlpha(p.AccentAlt, 0x33));
         SetBrush(r, "SuccessTintBrush", WithAlpha(p.Success, 0x33));
+        SetBrush(r, "WarningTintBrush", WithAlpha(p.Warning, 0x33));
         SetBrush(r, "AccentBorderBrush", WithAlpha(p.Accent, 0x88));
         SetBrush(r, "AccentAltBorderBrush", WithAlpha(p.AccentAlt, 0x88));
         SetBrush(r, "SuccessBorderBrush", WithAlpha(p.Success, 0x88));
+        SetBrush(r, "WarningBorderBrush", WithAlpha(p.Warning, 0x88));
 
         // Primary action buttons use a restrained horizontal gradient.
         SetGradient(r, "PrimaryButtonBrush", p.GradientFrom, p.GradientTo);
