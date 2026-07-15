@@ -130,6 +130,12 @@ public partial class TweakListControl : UserControl
 
         UIElement control = tweak.IsReversible ? BuildToggle(tweak) : BuildRunButton(tweak);
 
+        // Right-side actions: an "Explain" info button (when we have one) + the toggle/run button.
+        var actions = new StackPanel { Orientation = Orientation.Horizontal, VerticalAlignment = VerticalAlignment.Center };
+        if (TweakExplainer.HasExplanation(tweak))
+            actions.Children.Add(BuildExplainButton(tweak));
+        actions.Children.Add(control);
+
         var grid = new Grid();
         grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
         grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
@@ -144,11 +150,76 @@ public partial class TweakListControl : UserControl
         }
 
         Grid.SetColumn(textPanel, 1);
-        Grid.SetColumn(control, 2);
+        Grid.SetColumn(actions, 2);
         grid.Children.Add(textPanel);
-        grid.Children.Add(control);
+        grid.Children.Add(actions);
 
         return UiFactory.Card(grid);
+    }
+
+    private Wpf.Ui.Controls.Button BuildExplainButton(Tweak tweak)
+    {
+        var button = new Wpf.Ui.Controls.Button
+        {
+            Icon = UiFactory.IconElement("info", "AccentBrush", 18),
+            VerticalAlignment = VerticalAlignment.Center,
+            Height = 40,
+            Margin = new Thickness(0, 0, 10, 0),
+            Padding = new Thickness(10, 0, 10, 0),
+        };
+        button.SetResourceReference(ToolTipProperty, "Explain_Tooltip");
+        button.Click += async (_, _) => await ShowExplanationAsync(tweak);
+        return button;
+    }
+
+    private async Task ShowExplanationAsync(Tweak tweak)
+    {
+        var box = new Wpf.Ui.Controls.MessageBox
+        {
+            Title = LocalizationService.Pick(tweak.NameEn, tweak.NameAr),
+            Content = BuildExplanationView(tweak),
+            CloseButtonText = (string)FindResource("Explain_Close"),
+            MaxWidth = 560,
+        };
+        await box.ShowDialogAsync();
+    }
+
+    // Renders the seven sections as styled blocks so the dialog looks like part of
+    // the app, not a plain text box.
+    private static UIElement BuildExplanationView(Tweak tweak)
+    {
+        var panel = new StackPanel { MaxWidth = 500 };
+
+        foreach (var section in TweakExplainer.Build(tweak))
+        {
+            var q = new TextBlock
+            {
+                Text = section.Question,
+                FontSize = 14,
+                FontWeight = FontWeights.SemiBold,
+                Margin = new Thickness(0, 14, 0, 2),
+            };
+            q.SetResourceReference(TextBlock.ForegroundProperty, "AccentBrush");
+
+            var a = new TextBlock
+            {
+                Text = section.Answer,
+                FontSize = 14,
+                TextWrapping = TextWrapping.Wrap,
+                LineHeight = 20,
+            };
+            a.SetResourceReference(TextBlock.ForegroundProperty, "TextPrimaryBrush");
+
+            panel.Children.Add(q);
+            panel.Children.Add(a);
+        }
+
+        return new ScrollViewer
+        {
+            Content = panel,
+            VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
+            MaxHeight = 460,
+        };
     }
 
     private Wpf.Ui.Controls.ToggleSwitch BuildToggle(Tweak tweak)

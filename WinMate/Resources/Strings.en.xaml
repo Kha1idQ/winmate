@@ -95,4 +95,6 @@
     <sys:String x:Key="Manager_ProtectedChip">Protected by Windows</sys:String>
     <sys:String x:Key="Manager_ProtectedTooltip">Windows does not allow this component to be removed.</sys:String>
     <sys:String x:Key="Manager_EdgeNote">Microsoft blocks removing Edge on recent Windows versions. WinMate will close Edge, unlock the uninstaller, and run it — but if your Windows enforces the block, it may not be removable.</sys:String>
+    <sys:String x:Key="Explain_Tooltip">Explain this — what it does and whether it helps</sys:String>
+    <sys:String x:Key="Explain_Close">Got it</sys:String>
 </ResourceDictionary>

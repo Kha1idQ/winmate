@@ -95,4 +95,6 @@
     <sys:String x:Key="Manager_ProtectedChip">محمي من ويندوز</sys:String>
     <sys:String x:Key="Manager_ProtectedTooltip">ويندوز نفسه يمنع حذف هذا المكوّن.</sys:String>
     <sys:String x:Key="Manager_EdgeNote">مايكروسوفت تمنع حذف إيدج في نسخ ويندوز الحديثة. وين مايت راح يقفل إيدج، يفكّ قفل الحذف، ويشغّله — لكن لو نسخة ويندوزك مفعّلة المنع، ممكن ما ينحذف.</sys:String>
+    <sys:String x:Key="Explain_Tooltip">اشرح لي — وش يسوي وهل يفيد</sys:String>
+    <sys:String x:Key="Explain_Close">فهمت</sys:String>
 </ResourceDictionary>
