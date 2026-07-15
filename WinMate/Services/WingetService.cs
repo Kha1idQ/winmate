@@ -25,8 +25,16 @@ public static class WingetService
         var (_, output) = await ProcessRunner.RunCapturedAsync(
             "winget", "list --disable-interactivity --accept-source-agreements");
 
+        // Match whole ids from the parsed Id column, not a substring of the raw
+        // text: a plain Contains("Microsoft.VisualStudioCode") would also fire on
+        // "Microsoft.VisualStudioCode.Insiders" (and Discord.Discord.Canary, etc.),
+        // wrongly marking the stable package installed.
+        var installedIds = WingetManager.ParseTable(output)
+            .Select(a => a.Id)
+            .ToHashSet(StringComparer.OrdinalIgnoreCase);
+
         return AppCatalog.All
-            .Where(a => output.Contains(a.WingetId, StringComparison.OrdinalIgnoreCase))
+            .Where(a => installedIds.Contains(a.WingetId))
             .Select(a => a.WingetId)
             .ToHashSet();
     }

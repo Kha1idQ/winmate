@@ -39,8 +39,14 @@ public partial class ManagerPage : Page
         }
         catch (Exception ex)
         {
+            // The scan failed — say so plainly instead of rendering an empty list
+            // that would look like "nothing installed / everything up to date".
             LogService.Write($"✗ {ex.Message}");
             _apps = [];
+            StatsText.SetResourceReference(TextBlock.TextProperty, "Manager_LoadFailed");
+            UpdateAllButton.Content = $"{FindResource("Manager_UpdateAll")} (0)";
+            SetBusy(false);
+            return;
         }
 
         // Anything with an update waiting goes to the top.
@@ -145,45 +151,73 @@ public partial class ManagerPage : Page
 
     private async Task UpdateOneAsync(InstalledApp app, Wpf.Ui.Controls.Button button)
     {
-        SetBusy(true);
-        LogService.Write($"=== {FindResource("Manager_Update")}: {app.Name} ({app.Id}) ===");
+        if (_busy)
+            return;
 
-        var ok = await WingetManager.UpgradeAsync(app, LogService.WriteRaw);
-        LogService.Write(ok
-            ? $"✓ {app.Name} — {FindResource("Manager_LogUpdated")}"
-            : $"✗ {app.Name} — {FindResource("Apps_LogFailed")}");
+        SetBusy(true);
+        try
+        {
+            LogService.Write($"=== {FindResource("Manager_Update")}: {app.Name} ({app.Id}) ===");
+
+            var ok = await WingetManager.UpgradeAsync(app, LogService.WriteRaw);
+            LogService.Write(ok
+                ? $"✓ {app.Name} — {FindResource("Manager_LogUpdated")}"
+                : $"✗ {app.Name} — {FindResource("Apps_LogFailed")}");
+        }
+        catch (Exception ex)
+        {
+            // An elevated crash mid-update would be far worse than a logged error.
+            LogService.Write($"✗ {app.Name} — {ex.Message}");
+        }
 
         await LoadAsync();
     }
 
     private async Task UninstallAsync(InstalledApp app, PackageClass kind)
     {
-        var body = $"{app.Name}\n{app.Id}\n\n{FindResource("Manager_UninstallConfirm")}";
-        if (kind == PackageClass.System)
-            body = $"{FindResource("Manager_SystemWarning")}\n\n" + body;
-
-        var box = new Wpf.Ui.Controls.MessageBox
-        {
-            Title = (string)FindResource("Manager_Uninstall"),
-            Content = body,
-            PrimaryButtonText = (string)FindResource("Manager_Uninstall"),
-            CloseButtonText = (string)FindResource("Tweaks_Cancel"),
-        };
-        if (await box.ShowDialogAsync() != Wpf.Ui.Controls.MessageBoxResult.Primary)
+        if (_busy)
             return;
 
+        // Lock the page BEFORE the dialog opens. WPF-UI's MessageBox is non-modal,
+        // so otherwise the user could start a refresh or a second action underneath
+        // it, and two overlapping LoadAsync runs corrupt the card list.
         SetBusy(true);
-        LogService.Write($"=== {FindResource("Manager_Uninstall")}: {app.Name} ({app.Id}) ===");
+        try
+        {
+            var body = $"{app.Name}\n{app.Id}\n\n{FindResource("Manager_UninstallConfirm")}";
+            if (kind == PackageClass.System)
+                body = $"{FindResource("Manager_SystemWarning")}\n\n" + body;
 
-        // Edge blocks the normal uninstall — desktop install needs force removal,
-        // the Store package needs Remove-AppxPackage. UninstallEdgeAsync routes both.
-        var ok = SystemPackageIndex.IsEdge(app)
-            ? await WingetManager.UninstallEdgeAsync(app, LogService.WriteRaw)
-            : await WingetManager.UninstallAsync(app, LogService.WriteRaw);
+            var box = new Wpf.Ui.Controls.MessageBox
+            {
+                Title = (string)FindResource("Manager_Uninstall"),
+                Content = body,
+                PrimaryButtonText = (string)FindResource("Manager_Uninstall"),
+                CloseButtonText = (string)FindResource("Tweaks_Cancel"),
+            };
+            if (await box.ShowDialogAsync() != Wpf.Ui.Controls.MessageBoxResult.Primary)
+            {
+                SetBusy(false);
+                return;
+            }
 
-        LogService.Write(ok
-            ? $"✓ {app.Name} — {FindResource("Manager_LogUninstalled")}"
-            : $"✗ {app.Name} — {FindResource("Apps_LogFailed")}");
+            LogService.Write($"=== {FindResource("Manager_Uninstall")}: {app.Name} ({app.Id}) ===");
+
+            // Edge blocks the normal uninstall — desktop install needs force removal,
+            // the Store package needs Remove-AppxPackage. UninstallEdgeAsync routes both.
+            var ok = SystemPackageIndex.IsEdge(app)
+                ? await WingetManager.UninstallEdgeAsync(app, LogService.WriteRaw)
+                : await WingetManager.UninstallAsync(app, LogService.WriteRaw);
+
+            LogService.Write(ok
+                ? $"✓ {app.Name} — {FindResource("Manager_LogUninstalled")}"
+                : $"✗ {app.Name} — {FindResource("Apps_LogFailed")}");
+        }
+        catch (Exception ex)
+        {
+            // Never let a removal failure take the whole elevated app down with it.
+            LogService.Write($"✗ {app.Name} — {ex.Message}");
+        }
 
         await LoadAsync();
     }
@@ -194,10 +228,22 @@ public partial class ManagerPage : Page
             return;
 
         SetBusy(true);
-        LogService.Write($"=== {FindResource("Manager_UpdateAll")} ===");
+        try
+        {
+            LogService.Write($"=== {FindResource("Manager_UpdateAll")} ===");
 
-        await WingetManager.UpgradeAllAsync(LogService.WriteRaw);
-        LogService.Write($"✓ {FindResource("Manager_LogUpdatedAll")}");
+            // "winget upgrade --all" returns non-zero when any single package fails,
+            // so don't claim everything updated — tell the truth and let the refreshed
+            // list show what's still pending.
+            var ok = await WingetManager.UpgradeAllAsync(LogService.WriteRaw);
+            LogService.Write(ok
+                ? $"✓ {FindResource("Manager_LogUpdatedAll")}"
+                : $"⚠ {FindResource("Manager_LogUpdateAllPartial")}");
+        }
+        catch (Exception ex)
+        {
+            LogService.Write($"✗ {ex.Message}");
+        }
 
         await LoadAsync();
     }

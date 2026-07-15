@@ -23,13 +23,31 @@ public static class WingetManager
         // version it can't determine, which invents updates that don't exist.
         // "winget upgrade" is the authoritative list of genuine upgrades, so we
         // take the inventory from one and the update flags from the other.
-        var (_, listOutput) = await ProcessRunner.RunCapturedAsync("winget", $"list {CommonFlags}");
+        //
+        // winget returns 0 on success and a non-zero HRESULT on failure (verified
+        // on this machine). If a scan fails and leaves us nothing, we must not
+        // return an empty list — that reads as "up to date" when the truth is the
+        // check never ran. Throw so the UI shows a real error instead.
+        var (listCode, listOutput) = await ProcessRunner.RunCapturedAsync("winget", $"list {CommonFlags}");
         var installed = ParseTable(listOutput);
+        if (listCode != 0 && installed.Count == 0)
+            throw new WingetException(listCode, listOutput);
 
-        var (_, upgradeOutput) = await ProcessRunner.RunCapturedAsync("winget", $"upgrade {CommonFlags}");
-        var realUpgrades = ParseTable(upgradeOutput)
+        var (upgradeCode, upgradeOutput) = await ProcessRunner.RunCapturedAsync("winget", $"upgrade {CommonFlags}");
+        // The same Id can appear twice (a package offered by both the winget and
+        // msstore sources, or installed at user + machine scope), so group by Id
+        // before keying — a plain ToDictionary would throw on the duplicate.
+        var upgrades = ParseTable(upgradeOutput)
             .Where(u => !string.IsNullOrWhiteSpace(u.Available))
-            .ToDictionary(u => u.Id, u => u.Available, StringComparer.OrdinalIgnoreCase);
+            .ToList();
+        // A non-zero upgrade scan that produced nothing means we can't tell what's
+        // updatable — don't imply everything is current; surface the failure.
+        if (upgradeCode != 0 && upgrades.Count == 0)
+            throw new WingetException(upgradeCode, upgradeOutput);
+
+        var realUpgrades = upgrades
+            .GroupBy(u => u.Id, StringComparer.OrdinalIgnoreCase)
+            .ToDictionary(g => g.Key, g => g.First().Available, StringComparer.OrdinalIgnoreCase);
 
         return installed
             .Select(a => a with
@@ -172,66 +190,80 @@ public static class WingetManager
     {
         var pf86 = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
         var pf = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
+        // Deliberately NOT touching "Microsoft\EdgeWebView": that is the shared
+        // WebView2 Runtime, a separate machine-wide component that new Outlook,
+        // Teams, Widgets and many third-party apps depend on. Deleting it to remove
+        // the Edge *browser* would silently break those apps, so we leave it.
         var folders = new[]
         {
             Path.Combine(pf86, "Microsoft", "Edge"),
             Path.Combine(pf86, "Microsoft", "EdgeCore"),
             Path.Combine(pf86, "Microsoft", "EdgeUpdate"),
-            Path.Combine(pf86, "Microsoft", "EdgeWebView"),
             Path.Combine(pf, "Microsoft", "Edge"),
             Path.Combine(pf, "Microsoft", "EdgeCore"),
         };
 
-        var removedAny = false;
         var scheduledForReboot = 0;
         foreach (var folder in folders.Where(Directory.Exists))
         {
-            // Take ownership from TrustedInstaller and grant admins full control
-            // over the whole tree, so the file deletes below can succeed.
-            await ProcessRunner.RunAsync("cmd.exe", $"/c takeown /f \"{folder}\" /r /d y >nul 2>&1");
-            await ProcessRunner.RunAsync("cmd.exe", $"/c icacls \"{folder}\" /grant *S-1-5-32-544:F /t /c >nul 2>&1");
-
-            // First pass: try deleting every file, collecting the ones still locked.
-            var locked = new List<string>();
-            foreach (var file in Directory.EnumerateFiles(folder, "*", SearchOption.AllDirectories))
-            {
-                if (!TryDeleteFile(file))
-                    locked.Add(file);
-            }
-
-            // Ask Restart Manager who's holding the locked files and shut them down
-            // (SearchHost, Widgets, WebView hosts) — then retry those files.
-            if (locked.Count > 0)
-            {
-                RestartManager.FreeFiles(locked, onLine);
-                await Task.Delay(600);
-
-                foreach (var file in locked.ToList())
-                {
-                    if (TryDeleteFile(file))
-                        locked.Remove(file);
-                }
-            }
-
-            // Anything still locked is queued for deletion on the next reboot.
-            foreach (var file in locked)
-            {
-                if (MoveFileEx(file, null, MoveFileDelayUntilReboot))
-                    scheduledForReboot++;
-            }
-
+            // A single stubborn folder (a deny-ACE subdir, a reparse point, a
+            // >MAX_PATH path) must not abort the whole removal or bubble an
+            // exception up to the caller — enumeration itself can throw. Isolate
+            // each folder so we always move on to the next and finish cleanup.
             try
             {
-                Directory.Delete(folder, recursive: true);
-                onLine($"✓ Removed {folder}");
-                removedAny = true;
+                // Take ownership from TrustedInstaller and grant admins full control
+                // over the whole tree, so the file deletes below can succeed.
+                await ProcessRunner.RunAsync("cmd.exe", $"/c takeown /f \"{folder}\" /r /d y >nul 2>&1");
+                await ProcessRunner.RunAsync("cmd.exe", $"/c icacls \"{folder}\" /grant *S-1-5-32-544:F /t /c >nul 2>&1");
+
+                // First pass: try deleting every file, collecting the ones still locked.
+                // IgnoreInaccessible so a subfolder we still can't read is skipped
+                // rather than throwing out of the enumeration.
+                var options = new EnumerationOptions { RecurseSubdirectories = true, IgnoreInaccessible = true };
+                var locked = new List<string>();
+                foreach (var file in Directory.EnumerateFiles(folder, "*", options))
+                {
+                    if (!TryDeleteFile(file))
+                        locked.Add(file);
+                }
+
+                // Ask Restart Manager who's holding the locked files and shut them down
+                // (SearchHost, Widgets, WebView hosts) — then retry those files.
+                if (locked.Count > 0)
+                {
+                    RestartManager.FreeFiles(locked, onLine);
+                    await Task.Delay(600);
+
+                    foreach (var file in locked.ToList())
+                    {
+                        if (TryDeleteFile(file))
+                            locked.Remove(file);
+                    }
+                }
+
+                // Anything still locked is queued for deletion on the next reboot.
+                foreach (var file in locked)
+                {
+                    if (MoveFileEx(file, null, MoveFileDelayUntilReboot))
+                        scheduledForReboot++;
+                }
+
+                try
+                {
+                    Directory.Delete(folder, recursive: true);
+                    onLine($"✓ Removed {folder}");
+                }
+                catch
+                {
+                    // Directory still has queued-for-reboot files; remove it on reboot too.
+                    MoveFileEx(folder, null, MoveFileDelayUntilReboot);
+                    onLine($"✓ {folder} — emptied; folder removed on restart");
+                }
             }
-            catch
+            catch (Exception ex)
             {
-                // Directory still has queued-for-reboot files; remove it on reboot too.
-                MoveFileEx(folder, null, MoveFileDelayUntilReboot);
-                onLine($"✓ {folder} — emptied; folder removed on restart");
-                removedAny = true;
+                onLine($"⚠ {folder} — {ex.Message}; continuing.");
             }
         }
 

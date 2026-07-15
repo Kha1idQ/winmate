@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.IO;
 using System.Text;
 
 namespace WinMate.Services;
@@ -11,7 +12,7 @@ public static class ProcessRunner
     {
         var psi = new ProcessStartInfo
         {
-            FileName = exe,
+            FileName = ResolveExe(exe),
             Arguments = args,
             RedirectStandardOutput = true,
             RedirectStandardError = true,
@@ -19,6 +20,11 @@ public static class ProcessRunner
             CreateNoWindow = true,
             StandardOutputEncoding = Encoding.UTF8,
             StandardErrorEncoding = Encoding.UTF8,
+            // WinMate runs elevated, and CreateProcess searches the current
+            // directory before System32. Pinning the working directory to
+            // System32 stops a winget.exe/cmd.exe planted next to a portable copy
+            // of the app (e.g. in Downloads) from being run with admin rights.
+            WorkingDirectory = Environment.SystemDirectory,
         };
 
         using var process = new Process { StartInfo = psi };
@@ -33,6 +39,28 @@ public static class ProcessRunner
         process.BeginErrorReadLine();
         await process.WaitForExitAsync();
         return process.ExitCode;
+    }
+
+    // Known Windows tools are launched by absolute System32 path so a same-named
+    // binary planted in the app directory or CWD can't be run instead. Anything
+    // already rooted is passed through; a bare name we don't recognise (e.g.
+    // "winget", whose real location is an execution alias) keeps its name and is
+    // protected by the fixed WorkingDirectory set above.
+    private static string ResolveExe(string exe)
+    {
+        if (Path.IsPathRooted(exe))
+            return exe;
+
+        var sys = Environment.SystemDirectory;
+        return exe.ToLowerInvariant() switch
+        {
+            "cmd" or "cmd.exe" => Path.Combine(sys, "cmd.exe"),
+            "sc" or "sc.exe" => Path.Combine(sys, "sc.exe"),
+            "schtasks" or "schtasks.exe" => Path.Combine(sys, "schtasks.exe"),
+            "reg" or "reg.exe" => Path.Combine(sys, "reg.exe"),
+            "powershell" or "powershell.exe" => Path.Combine(sys, "WindowsPowerShell", "v1.0", "powershell.exe"),
+            _ => exe,
+        };
     }
 
     // Convenience overload that captures all output as one string.
