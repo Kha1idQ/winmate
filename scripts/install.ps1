@@ -1,10 +1,10 @@
-# WinMate bootstrap — downloads the latest release and launches it elevated.
+# WinMate bootstrap: downloads the latest release and launches it elevated.
 # Usage:  irm https://raw.githubusercontent.com/Kha1idQ/winmate/main/scripts/install.ps1 | iex
 
 $repo = "Kha1idQ/winmate"
 
 # Windows PowerShell 5.1: the progress bar slows Invoke-WebRequest downloads
-# dramatically (10-100x) — silence it for full download speed.
+# dramatically (10-100x), so silence it for full download speed.
 $ProgressPreference = 'SilentlyContinue'
 
 Write-Host ""
