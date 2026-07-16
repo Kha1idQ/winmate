@@ -8,45 +8,9 @@
             <ResourceDictionary.MergedDictionaries>
                 <ui:ThemesDictionary Theme="Dark" />
                 <ui:ControlsDictionary />
-                <ResourceDictionary Source="pack://application:,,,/Resources/Strings.en.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/WinMate;component/Themes/OverdriveTheme.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/WinMate;component/Resources/Strings.en.xaml" />
             </ResourceDictionary.MergedDictionaries>
-
-            <!-- Seed values only. ThemeService overwrites every brush at startup
-                 and on each theme switch (see Services/ThemeService.cs). -->
-            <SolidColorBrush x:Key="AppBackgroundBrush" Color="#061321" />
-            <SolidColorBrush x:Key="ApplicationBackgroundBrush" Color="#061321" />
-            <SolidColorBrush x:Key="SidebarBrush" Color="#071827" />
-            <SolidColorBrush x:Key="SurfaceBrush" Color="#0A1C2B" />
-            <SolidColorBrush x:Key="SurfaceRaisedBrush" Color="#0D2234" />
-            <SolidColorBrush x:Key="NavActiveBrush" Color="#122A45" />
-            <SolidColorBrush x:Key="CardBorderBrush" Color="#29445B" />
-            <SolidColorBrush x:Key="NavigationViewContentBackground" Color="Transparent" />
-            <SolidColorBrush x:Key="NavigationViewContentGridBorderBrush" Color="Transparent" />
-
-            <SolidColorBrush x:Key="TextPrimaryBrush" Color="#F4F7FB" />
-            <SolidColorBrush x:Key="TextSecondaryBrush" Color="#9EADC1" />
-            <SolidColorBrush x:Key="DisabledBrush" Color="#667386" />
-
-            <SolidColorBrush x:Key="AccentBrush" Color="#25BDF5" />
-            <SolidColorBrush x:Key="AccentStrongBrush" Color="#117FEA" />
-            <SolidColorBrush x:Key="AccentAltBrush" Color="#7A4FE8" />
-            <SolidColorBrush x:Key="SuccessBrush" Color="#35D58A" />
-            <SolidColorBrush x:Key="WarningBrush" Color="#F5A524" />
-            <SolidColorBrush x:Key="OnPrimaryBrush" Color="#FFFFFF" />
-
-            <SolidColorBrush x:Key="AccentTintBrush" Color="#2625BDF5" />
-            <SolidColorBrush x:Key="AccentAltTintBrush" Color="#267A4FE8" />
-            <SolidColorBrush x:Key="SuccessTintBrush" Color="#2635D58A" />
-            <SolidColorBrush x:Key="WarningTintBrush" Color="#33F5A524" />
-            <SolidColorBrush x:Key="AccentBorderBrush" Color="#6625BDF5" />
-            <SolidColorBrush x:Key="AccentAltBorderBrush" Color="#667A4FE8" />
-            <SolidColorBrush x:Key="SuccessBorderBrush" Color="#6635D58A" />
-            <SolidColorBrush x:Key="WarningBorderBrush" Color="#88F5A524" />
-
-            <LinearGradientBrush x:Key="PrimaryButtonBrush" StartPoint="0,0" EndPoint="1,0">
-                <GradientStop Color="#138CEB" Offset="0" />
-                <GradientStop Color="#086BDD" Offset="1" />
-            </LinearGradientBrush>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

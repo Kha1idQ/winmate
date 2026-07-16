@@ -482,3 +482,7 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+
+# Local design reference files (not part of the built app)
+design.md
+tokens.css

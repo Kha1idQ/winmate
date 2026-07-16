@@ -4,7 +4,7 @@ namespace WinMate.Data;
 
 public static class ProfileCatalog
 {
-    // Every tweak, across both catalogs — profiles resolve their ids against this.
+    // Every tweak, across both catalogs. Profiles resolve their ids against this.
     public static readonly IReadOnlyList<Tweak> AllTweaks =
         TweakCatalog.All.Concat(GamingCatalog.All).ToList();
 
@@ -14,8 +14,8 @@ public static class ProfileCatalog
             Id: "gamer",
             NameEn: "Full Gamer Mode",
             NameAr: "وضع القيمر الكامل",
-            DescEn: "Every gaming optimization plus taskbar quality-of-life for players",
-            DescAr: "كل تحسينات الألعاب مع تسهيلات شريط المهام للاعبين",
+            DescEn: "Turns on every gaming tweak and tidies up the taskbar for playing",
+            DescAr: "يشغّل كل تحسينات الألعاب ويرتّب شريط المهام عشان اللعب",
             Icon: "gamepad",
             Tile: "profile-gamer",
             TweakIds:
@@ -28,8 +28,8 @@ public static class ProfileCatalog
             Id: "privacy",
             NameEn: "Max Privacy",
             NameAr: "الخصوصية القصوى",
-            DescEn: "Shut down telemetry, Copilot, Recall, location and ad tracking",
-            DescAr: "يوقف التتبع وكوبايلوت وريكول والموقع وتتبع الإعلانات",
+            DescEn: "Turns off telemetry, Copilot, Recall, location, and ad tracking",
+            DescAr: "يطفّي التتبع وكوبايلوت وريكول والموقع وتتبّع الإعلانات",
             Icon: "shield-lock",
             Tile: "profile-privacy",
             TweakIds:
@@ -42,8 +42,8 @@ public static class ProfileCatalog
             Id: "clean_fast",
             NameEn: "Clean & Fast",
             NameAr: "نظيف وسريع",
-            DescEn: "Free up disk, speed up browsing, and cut background clutter",
-            DescAr: "يفرّغ مساحة، يسرّع التصفح، ويقلّل الزحمة بالخلفية",
+            DescEn: "Clears disk space, speeds up browsing, and cuts background junk",
+            DescAr: "يفضّي مساحة، يسرّع التصفح، ويقلّل شغل الخلفية",
             Icon: "rocket",
             Tile: "profile-clean-fast",
             TweakIds:

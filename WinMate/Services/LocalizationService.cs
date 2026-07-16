@@ -15,7 +15,7 @@ public static class LocalizationService
 
         var newDict = new ResourceDictionary
         {
-            Source = new Uri($"pack://application:,,,/Resources/Strings.{lang}.xaml")
+            Source = new Uri($"pack://application:,,,/WinMate;component/Resources/Strings.{lang}.xaml")
         };
 
         var dicts = Application.Current.Resources.MergedDictionaries;

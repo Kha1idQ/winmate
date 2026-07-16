@@ -9,7 +9,7 @@ public partial class App : Application
     {
         base.OnStartup(e);
 
-        // Apply the saved accent palette (gold or neon blue).
+        // Apply the saved Overdrive low-light calibration.
         ThemeService.Apply(SettingsService.Current.Theme);
     }
 }

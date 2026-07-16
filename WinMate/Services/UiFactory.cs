@@ -8,9 +8,8 @@ using Wpf.Ui.Controls;
 
 namespace WinMate.Services;
 
-// Small builders for the repeating pieces of the design system: status chips
-// and the rounded, tinted icon tiles. Every brush comes from a DynamicResource
-// so both themes work without rebuilding anything.
+// Small builders for the repeating pieces of the Overdrive design system.
+// Every brush comes from a DynamicResource so both low-light palettes update live.
 public static class UiFactory
 {
     // Builds an icon from the WinMate icon pack. Colour comes from a theme brush
@@ -69,10 +68,11 @@ public static class UiFactory
     {
         var text = new System.Windows.Controls.TextBlock
         {
-            FontSize = 12,
+            FontSize = 10.5,
             FontWeight = FontWeights.SemiBold,
             VerticalAlignment = VerticalAlignment.Center,
         };
+        text.SetResourceReference(System.Windows.Controls.TextBlock.FontFamilyProperty, "DisplayFont");
         if (literalText is not null)
             text.Text = literalText;
         else
@@ -81,8 +81,8 @@ public static class UiFactory
 
         var chip = new Border
         {
-            CornerRadius = new CornerRadius(6),
-            Padding = new Thickness(8, 3, 8, 3),
+            CornerRadius = new CornerRadius(0),
+            Padding = new Thickness(8, 4, 8, 4),
             BorderThickness = new Thickness(1),
             VerticalAlignment = VerticalAlignment.Center,
             Child = text,
@@ -92,49 +92,17 @@ public static class UiFactory
         return chip;
     }
 
-    // The pack's ready-made gradient tiles (96x96), used for the profile cards.
+    // Legacy profile-tile entry point retained for callers, rebuilt from the
+    // single WinMate line-icon language rather than a separate gradient system.
     public static FrameworkElement ProfileTile(string tileName, double size = 64)
     {
-        var tile = TileData.All[tileName];
-        const double pad = 2; // room for the 2px outer stroke and 4px glyph strokes
-        var canvas = new Canvas { Width = 96 + pad * 2, Height = 96 + pad * 2 };
-
-        var gradient = new LinearGradientBrush(
-            [new GradientStop(ParseColor(tile.From), 0), new GradientStop(ParseColor(tile.To), 1)],
-            new Point(8.0 / 96.0, 6.0 / 96.0),
-            new Point(86.0 / 96.0, 92.0 / 96.0));
-
-        foreach (var shape in tile.Shapes)
+        var icon = tileName switch
         {
-            var path = new System.Windows.Shapes.Path
-            {
-                Data = Geometry.Parse(shape.Data),
-                StrokeThickness = shape.StrokeWidth,
-                StrokeStartLineCap = PenLineCap.Round,
-                StrokeEndLineCap = PenLineCap.Round,
-                StrokeLineJoin = PenLineJoin.Round,
-                Fill = shape.Fill switch
-                {
-                    null => null,
-                    "GRAD" => gradient,
-                    var hex => new SolidColorBrush(ParseColor(hex)),
-                },
-                Stroke = shape.Stroke is null ? null : new SolidColorBrush(ParseColor(shape.Stroke)),
-            };
-            Canvas.SetLeft(path, pad);
-            Canvas.SetTop(path, pad);
-            canvas.Children.Add(path);
-        }
-
-        return new Viewbox
-        {
-            Width = size,
-            Height = size,
-            Child = canvas,
-            Stretch = Stretch.Uniform,
-            VerticalAlignment = VerticalAlignment.Center,
-            FlowDirection = FlowDirection.LeftToRight,
+            "profile-gamer" => "gamepad",
+            "profile-privacy" => "shield-lock",
+            _ => "rocket",
         };
+        return IconTile(icon, "Accent", size, size * 0.42);
     }
 
     // Pack icon wrapped as a WPF-UI IconElement, so it can be handed to controls
@@ -182,9 +150,7 @@ public static class UiFactory
         };
     }
 
-    private static Color ParseColor(string hex) => (Color)ColorConverter.ConvertFromString(hex);
-
-    // Rounded tinted square holding an icon from the pack.
+    // Square signal cell holding an icon from the pack.
     public static Border IconTile(string iconName, string accent = "Accent", double size = 56, double iconSize = 26)
     {
         var icon = Icon(iconName, iconSize, $"{accent}Brush");
@@ -195,7 +161,7 @@ public static class UiFactory
         {
             Width = size,
             Height = size,
-            CornerRadius = new CornerRadius(12),
+            CornerRadius = new CornerRadius(0),
             BorderThickness = new Thickness(1),
             VerticalAlignment = VerticalAlignment.Center,
             Child = icon,
@@ -205,16 +171,19 @@ public static class UiFactory
         return tile;
     }
 
-    // Standard content card: surface fill, 1px cool border, 12px radius.
+    // Standard workbench row: one surface and one hairline boundary.
     public static Border Card(UIElement content, double minHeight = 72)
     {
+        if (content is FrameworkElement fe)
+            fe.Margin = new Thickness(20, 16, 20, 16);
+
         var card = new Border
         {
-            CornerRadius = new CornerRadius(12),
+            CornerRadius = new CornerRadius(0),
             BorderThickness = new Thickness(1),
-            Padding = new Thickness(20, 16, 20, 16),
             Margin = new Thickness(0, 0, 0, 12),
             MinHeight = minHeight,
+            SnapsToDevicePixels = true,
             Child = content,
         };
         card.SetResourceReference(Border.BackgroundProperty, "SurfaceBrush");
@@ -228,8 +197,9 @@ public static class UiFactory
         {
             Text = text,
             FontSize = size,
-            FontWeight = FontWeights.SemiBold,
+            FontWeight = FontWeights.Bold,
         };
+        t.SetResourceReference(System.Windows.Controls.TextBlock.FontFamilyProperty, "DisplayFont");
         t.SetResourceReference(System.Windows.Controls.TextBlock.ForegroundProperty, "TextPrimaryBrush");
         return t;
     }
@@ -241,25 +211,26 @@ public static class UiFactory
             Text = text,
             FontSize = size,
             TextWrapping = TextWrapping.Wrap,
-            Margin = new Thickness(0, 3, 0, 0),
+            Margin = new Thickness(0, 4, 0, 0),
+            LineHeight = size * 1.5,
         };
+        t.SetResourceReference(System.Windows.Controls.TextBlock.FontFamilyProperty, "BodyFont");
         t.SetResourceReference(System.Windows.Controls.TextBlock.ForegroundProperty, "TextSecondaryBrush");
         return t;
     }
 
-    // Filled primary action button (gradient fill, high-contrast label).
+    // Amber signal action: outlined at rest, filled only for the pressed state.
     public static Wpf.Ui.Controls.Button PrimaryButton(string iconName, string? accentBrushKey = null)
     {
+        var brushKey = accentBrushKey ?? "AccentBrush";
         var button = new Wpf.Ui.Controls.Button
         {
-            Icon = IconElement(iconName, "OnPrimaryBrush"),
-            Height = 44,
-            Padding = new Thickness(18, 0, 18, 0),
+            Icon = IconElement(iconName, brushKey),
             VerticalAlignment = VerticalAlignment.Center,
-            BorderThickness = new Thickness(0),
         };
-        button.SetResourceReference(Control.BackgroundProperty, accentBrushKey ?? "PrimaryButtonBrush");
-        button.SetResourceReference(Control.ForegroundProperty, "OnPrimaryBrush");
+        button.SetResourceReference(FrameworkElement.StyleProperty, "OverdrivePrimaryButtonStyle");
+        button.SetResourceReference(Control.BorderBrushProperty, brushKey);
+        button.SetResourceReference(Control.ForegroundProperty, brushKey);
         return button;
     }
 }

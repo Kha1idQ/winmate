@@ -15,14 +15,14 @@ public static class AppBundleCatalog
 
         new(
             Id: "gamer",
-            NameEn: "Gamer pack",
+            NameEn: "Gamer Pack",
             NameAr: "حزمة القيمر",
             Icon: "gamepad",
             WingetIds: ["Valve.Steam", "Discord.Discord", "EpicGames.EpicGamesLauncher", "GOG.Galaxy", "OBSProject.OBSStudio"]),
 
         new(
             Id: "developer",
-            NameEn: "Developer pack",
+            NameEn: "Developer Pack",
             NameAr: "حزمة المطور",
             Icon: "code",
             WingetIds: ["Microsoft.VisualStudioCode", "Git.Git", "OpenJS.NodeJS.LTS", "Python.Python.3.13", "Notepad++.Notepad++"]),

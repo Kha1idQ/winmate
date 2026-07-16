@@ -11,7 +11,7 @@ public partial class GamingPage : Page
     {
         InitializeComponent();
         UiHelpers.PreparePageHost(this);
-        EnableAllButton.Icon = UiFactory.IconElement("rocket", "OnPrimaryBrush");
+        EnableAllButton.Icon = UiFactory.IconElement("rocket", "AccentBrush");
         TweakList.Load([], GamingCatalog.All); // flat list, no category headers
     }
 

@@ -3,43 +3,67 @@
                     xmlns:sys="clr-namespace:System;assembly=System.Runtime">
 
     <sys:String x:Key="App_Title">WinMate</sys:String>
-    <sys:String x:Key="Lang_Toggle">عربي</sys:String>
-    <sys:String x:Key="Theme_Toggle">Switch theme (blue / gold)</sys:String>
+    <sys:String x:Key="Lang_Toggle">EN / العربية</sys:String>
+    <sys:String x:Key="Theme_Toggle">Switch low-light calibration</sys:String>
+    <sys:String x:Key="Shell_SystemStable">SYSTEM LINK STABLE</sys:String>
+    <sys:String x:Key="Shell_RestorePointTooltip">Create a restore point</sys:String>
+    <sys:String x:Key="Shell_NoPending">NO PENDING OPERATIONS</sys:String>
+
+    <sys:String x:Key="Context_Home">CONTROL SURFACE / LOCAL MACHINE</sys:String>
+    <sys:String x:Key="Context_MissionQueue">MISSION QUEUE</sys:String>
+    <sys:String x:Key="Context_Apps">PACKAGE CATALOG / WINGET</sys:String>
+    <sys:String x:Key="Context_Manager">INSTALLED INVENTORY / THIS PC</sys:String>
+    <sys:String x:Key="Context_Tweaks">CONTROL BANKS / ACTUAL STATE</sys:String>
+    <sys:String x:Key="Context_Gaming">GAME LAYER / LOW LATENCY</sys:String>
 
     <sys:String x:Key="Nav_Home">Home</sys:String>
     <sys:String x:Key="Nav_Apps">Apps</sys:String>
     <sys:String x:Key="Nav_Tweaks">Tweaks</sys:String>
     <sys:String x:Key="Nav_Gaming">Gaming</sys:String>
 
-    <sys:String x:Key="Home_Title">Home</sys:String>
-    <sys:String x:Key="Home_Subtitle">Welcome to WinMate — set up, clean up, and speed up Windows</sys:String>
+    <sys:String x:Key="Home_Title">SYSTEM READY</sys:String>
+    <sys:String x:Key="Home_Subtitle">Set Windows up the way you like it and clear out whatever’s slowing it down.</sys:String>
     <sys:String x:Key="Home_ProfilesTitle">One-click profiles</sys:String>
-    <sys:String x:Key="Home_ProfilesSubtitle">Apply a whole set of tweaks at once — everything stays reversible from the Tweaks tab</sys:String>
+    <sys:String x:Key="Home_ProfilesSubtitle">Turn on a whole group of tweaks in one go. Changed your mind? Undo any of them over in the Tweaks tab.</sys:String>
+    <sys:String x:Key="Home_SafetyLabel">SAFE</sys:String>
+    <sys:String x:Key="Home_StateLink">WINDOWS STATE LINK</sys:String>
+    <sys:String x:Key="Home_Live">LIVE</sys:String>
+    <sys:String x:Key="Home_ActualState">ACTUAL STATE RE-READ</sys:String>
+    <sys:String x:Key="Home_NodeApps">Applications</sys:String>
+    <sys:String x:Key="Home_NodeAppsStatus">22 PACKAGES READY</sys:String>
+    <sys:String x:Key="Home_NodeTweaks">System tweaks</sys:String>
+    <sys:String x:Key="Home_NodeTweaksStatus">21 CONTROLS MAPPED</sys:String>
+    <sys:String x:Key="Home_NodeGaming">Gaming layer</sys:String>
+    <sys:String x:Key="Home_NodeGamingStatus">07 CONTROLS READY</sys:String>
+    <sys:String x:Key="Home_NodeManager">App manager</sys:String>
+    <sys:String x:Key="Home_NodeManagerStatus">UPDATES MONITORED</sys:String>
     <sys:String x:Key="Home_ProfileApply">Apply</sys:String>
+    <sys:String x:Key="Home_ProfileActionCount">ACTIONS</sys:String>
     <sys:String x:Key="Home_ProfileTweakCount">tweaks</sys:String>
-    <sys:String x:Key="Home_ProfileConfirmBody">This will apply the following tweaks (any already on will be skipped):</sys:String>
+    <sys:String x:Key="Home_ProfileConfirmBody">These tweaks are about to turn on. Anything already on stays as it is:</sys:String>
     <sys:String x:Key="Home_ProfileConfirmYes">Apply profile</sys:String>
     <sys:String x:Key="Home_ProfileApplied">applied</sys:String>
     <sys:String x:Key="Home_ProfileAlreadyOn">already on</sys:String>
     <sys:String x:Key="Home_ProfileFailed">failed</sys:String>
     <sys:String x:Key="Home_ToolsTitle">Tools</sys:String>
     <sys:String x:Key="Home_ResetButton">Reset all tweaks</sys:String>
-    <sys:String x:Key="Home_ResetConfirmBody">This undoes every tweak you've applied and returns those settings to Windows defaults. One-shot actions (debloat, temp clean) can't be undone. Continue?</sys:String>
+    <sys:String x:Key="Home_ResetConfirmBody">This flips every tweak you’ve turned on back to the Windows default. Keep in mind that one-time actions like debloat and temp cleanup can’t be reversed. Continue?</sys:String>
     <sys:String x:Key="Home_ResetConfirmYes">Reset everything</sys:String>
     <sys:String x:Key="Home_ResetUndone">tweaks reverted</sys:String>
 
     <sys:String x:Key="Apps_Title">Apps</sys:String>
-    <sys:String x:Key="Apps_Subtitle">Install your favorite apps with one click</sys:String>
+    <sys:String x:Key="Apps_Subtitle">Pick the apps you want and install them together</sys:String>
+    <sys:String x:Key="Apps_CatalogStatus">22 PACKAGES / 3 BUNDLES</sys:String>
     <sys:String x:Key="Apps_InstallSelected">Install selected</sys:String>
-    <sys:String x:Key="Apps_BundlesLabel">Quick bundles — click to select a set, then install</sys:String>
+    <sys:String x:Key="Apps_BundlesLabel">Bundles: click a set to select everything in it, then install.</sys:String>
     <sys:String x:Key="Apps_Installed">Installed</sys:String>
     <sys:String x:Key="Apps_LogInstalling">Installing</sys:String>
     <sys:String x:Key="Apps_LogDone">installed successfully</sys:String>
     <sys:String x:Key="Apps_LogFailed">failed</sys:String>
     <sys:String x:Key="Apps_LogFailedSummary">Failed apps</sys:String>
     <sys:String x:Key="Log_Title">Live log</sys:String>
-    <sys:String x:Key="Search_Apps">Search apps...</sys:String>
-    <sys:String x:Key="Search_Tweaks">Search tweaks...</sys:String>
+    <sys:String x:Key="Search_Apps">Find an app…</sys:String>
+    <sys:String x:Key="Search_Tweaks">Find a tweak…</sys:String>
     <sys:String x:Key="Chip_RestartRequired">Restart required</sys:String>
     <sys:String x:Key="Chip_Advanced">Advanced</sys:String>
     <sys:String x:Key="Cat_browsers">Browsers</sys:String>
@@ -49,7 +73,8 @@
     <sys:String x:Key="Cat_utils">Utilities</sys:String>
 
     <sys:String x:Key="Tweaks_Title">Tweaks</sys:String>
-    <sys:String x:Key="Tweaks_Subtitle">Clean up and speed up Windows — every switch can be turned back off</sys:String>
+    <sys:String x:Key="Tweaks_Subtitle">Trim the clutter and make Windows quicker. Every switch here flips back off whenever you want.</sys:String>
+    <sys:String x:Key="Tweaks_StateStatus">28 CONTROLS / ACTUAL STATE</sys:String>
     <sys:String x:Key="TweakCat_explorer">Explorer &amp; taskbar</sys:String>
     <sys:String x:Key="TweakCat_privacy">Privacy</sys:String>
     <sys:String x:Key="Tweaks_LogApplying">Applying</sys:String>
@@ -62,22 +87,23 @@
     <sys:String x:Key="Tweaks_ConfirmIrreversible">⚠ This action cannot be undone.</sys:String>
     <sys:String x:Key="Home_RestoreButton">Create restore point</sys:String>
     <sys:String x:Key="Restore_Title">Create a restore point?</sys:String>
-    <sys:String x:Key="Restore_Body">Before changing Windows settings, WinMate can create a system restore point so you can roll everything back if needed. Recommended.</sys:String>
+    <sys:String x:Key="Restore_Body">WinMate can save a system restore point first, so if something goes wrong you can roll Windows back to how it is right now. Worth doing.</sys:String>
     <sys:String x:Key="Restore_Yes">Create restore point</sys:String>
     <sys:String x:Key="Restore_No">Skip</sys:String>
-    <sys:String x:Key="Restore_Creating">Creating system restore point (takes ~30 seconds)...</sys:String>
+    <sys:String x:Key="Restore_Creating">Creating system restore point (takes ~30 seconds)…</sys:String>
     <sys:String x:Key="Restore_Done">✓ Restore point created</sys:String>
-    <sys:String x:Key="Restore_Skipped24h">Windows skipped it — a restore point from the last 24 hours already exists</sys:String>
+    <sys:String x:Key="Restore_Skipped24h">Windows skipped this one. There’s already a restore point from the past 24 hours.</sys:String>
 
     <sys:String x:Key="Gaming_Title">Gaming</sys:String>
-    <sys:String x:Key="Gaming_Subtitle">Optimize Windows for gaming</sys:String>
+    <sys:String x:Key="Gaming_Subtitle">Tune Windows so games run smoother</sys:String>
     <sys:String x:Key="Gaming_EnableAll">Enable all gaming tweaks</sys:String>
+    <sys:String x:Key="Gaming_MissionStatus">07 CONTROLS / REVERSIBLE</sys:String>
     <sys:String x:Key="Tweaks_RestartNeeded">⟳ Restart your PC for this change to take effect</sys:String>
 
     <sys:String x:Key="Nav_Manager">Manager</sys:String>
     <sys:String x:Key="Manager_Title">App manager</sys:String>
-    <sys:String x:Key="Manager_Loading">Reading installed apps...</sys:String>
-    <sys:String x:Key="Manager_LoadFailed">Couldn't reach winget — check your connection and press refresh.</sys:String>
+    <sys:String x:Key="Manager_Loading">Reading installed apps…</sys:String>
+    <sys:String x:Key="Manager_LoadFailed">Couldn’t reach winget. Check your connection and hit refresh.</sys:String>
     <sys:String x:Key="Manager_Installed">installed</sys:String>
     <sys:String x:Key="Manager_UpdatesAvailable">updates available</sys:String>
     <sys:String x:Key="Manager_UpdateAll">Update all</sys:String>
@@ -85,18 +111,18 @@
     <sys:String x:Key="Manager_Update">Update</sys:String>
     <sys:String x:Key="Manager_Uninstall">Uninstall</sys:String>
     <sys:String x:Key="Manager_UpdateChip">Update available</sys:String>
-    <sys:String x:Key="Manager_UninstallConfirm">This removes the app from your PC. Continue?</sys:String>
+    <sys:String x:Key="Manager_UninstallConfirm">The app gets removed from your PC. Continue?</sys:String>
     <sys:String x:Key="Manager_LogUpdated">updated</sys:String>
     <sys:String x:Key="Manager_LogUpdatedAll">all updates finished</sys:String>
-    <sys:String x:Key="Manager_LogUpdateAllPartial">update finished — some packages didn't update, check the list</sys:String>
+    <sys:String x:Key="Manager_LogUpdateAllPartial">updates done. A few packages didn’t go through, check the list</sys:String>
     <sys:String x:Key="Manager_LogUninstalled">uninstalled</sys:String>
-    <sys:String x:Key="Search_Manager">Search installed apps...</sys:String>
+    <sys:String x:Key="Search_Manager">Find an installed app…</sys:String>
 
     <sys:String x:Key="Manager_SystemChip">System component</sys:String>
-    <sys:String x:Key="Manager_SystemWarning">⚠ This is a Windows component or a runtime other programs depend on (Visual C++, .NET, drivers, the Store). Removing it can break other software. Only continue if you are sure.</sys:String>
+    <sys:String x:Key="Manager_SystemWarning">⚠ This is a Windows component or a runtime that other programs rely on (Visual C++, .NET, drivers, the Store). Remove it and you can break other software. Only continue if you’re sure you need to.</sys:String>
     <sys:String x:Key="Manager_ProtectedChip">Protected by Windows</sys:String>
-    <sys:String x:Key="Manager_ProtectedTooltip">Windows does not allow this component to be removed.</sys:String>
-    <sys:String x:Key="Manager_EdgeNote">Microsoft blocks removing Edge on recent Windows versions. WinMate will close Edge, unlock the uninstaller, and run it — but if your Windows enforces the block, it may not be removable.</sys:String>
-    <sys:String x:Key="Explain_Tooltip">Explain this — what it does and whether it helps</sys:String>
+    <sys:String x:Key="Manager_ProtectedTooltip">Windows won’t let this component be removed.</sys:String>
+    <sys:String x:Key="Manager_EdgeNote">Microsoft blocks Edge removal on recent Windows versions. WinMate will close Edge, unlock the uninstaller, and run it. If your copy of Windows enforces the block, Edge might stay put.</sys:String>
+    <sys:String x:Key="Explain_Tooltip">Explain what this does and whether it’s worth turning on</sys:String>
     <sys:String x:Key="Explain_Close">Got it</sys:String>
 </ResourceDictionary>

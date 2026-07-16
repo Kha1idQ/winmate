@@ -4,7 +4,7 @@
       xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       Background="{DynamicResource AppBackgroundBrush}"
       Title="Apps">
-    <Grid Margin="48,32,48,24">
+        <Grid Margin="40,28,40,20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -13,24 +13,55 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0">
-            <TextBlock Text="{DynamicResource Apps_Title}" FontSize="36" FontWeight="Bold"
-                       Foreground="{DynamicResource TextPrimaryBrush}" />
-            <TextBlock Text="{DynamicResource Apps_Subtitle}" FontSize="15"
-                       Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,8,0,0" />
-        </StackPanel>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="{DynamicResource Context_Apps}"
+                           Style="{StaticResource OverdriveContextLabelStyle}" />
+                <TextBlock Text="{DynamicResource Apps_Title}"
+                           Style="{StaticResource OverdrivePageTitleStyle}"
+                                       Margin="0,8,0,0" />
+                <TextBlock Text="{DynamicResource Apps_Subtitle}"
+                           Style="{StaticResource OverdriveBodyStyle}"
+                                       Margin="0,4,0,0" />
+            </StackPanel>
+            <Border Grid.Column="1"
+                    BorderBrush="{DynamicResource CardBorderBrush}"
+                    BorderThickness="1"
+                    Background="{DynamicResource SurfaceBrush}"
+                            Padding="16,12"
+                    VerticalAlignment="Center">
+                <TextBlock Text="{DynamicResource Apps_CatalogStatus}"
+                           Style="{StaticResource OverdriveMonoStyle}"
+                           FontSize="10.5"
+                           FlowDirection="LeftToRight" />
+            </Border>
+        </Grid>
 
-        <StackPanel Grid.Row="1" Margin="0,20,12,0">
-            <TextBlock Text="{DynamicResource Apps_BundlesLabel}" FontSize="14"
-                       Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,0,0,10" />
-            <WrapPanel x:Name="BundlesPanel" />
-        </StackPanel>
+                    <Grid Grid.Row="1" Margin="0,24,12,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="{DynamicResource Apps_BundlesLabel}"
+                           Style="{StaticResource OverdriveMonoStyle}"
+                           FontSize="11" />
+                        <WrapPanel x:Name="BundlesPanel" Margin="0,12,0,0" />
+            </StackPanel>
+            <Rectangle Grid.Column="1" Height="1"
+                       Fill="{DynamicResource CardBorderBrush}"
+                       VerticalAlignment="Bottom"
+                                Margin="24,0,0,20" />
+        </Grid>
 
         <ui:TextBox x:Name="SearchBox"
                     Grid.Row="2"
-                    Height="48"
-                    Margin="0,18,12,16"
-                    FontSize="14"
+                    Style="{StaticResource OverdriveTextBoxStyle}"
+                    Margin="0,16,12,16"
                     PlaceholderText="{DynamicResource Search_Apps}"
                     TextChanged="SearchBox_TextChanged" />
 
@@ -40,13 +71,10 @@
 
         <ui:Button x:Name="InstallButton"
                    Grid.Row="4"
+                   Style="{StaticResource OverdrivePrimaryButtonStyle}"
                    Height="50"
-                   Margin="0,16,12,0"
+                               Margin="0,16,12,0"
                    HorizontalAlignment="Stretch"
-                   FontSize="15"
-                   BorderThickness="0"
-                   Background="{DynamicResource PrimaryButtonBrush}"
-                   Foreground="{DynamicResource OnPrimaryBrush}"
                    IsEnabled="False"
                    Click="InstallButton_Click" />
     </Grid>

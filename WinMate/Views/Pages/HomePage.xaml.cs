@@ -4,24 +4,17 @@ using WinMate.Data;
 using WinMate.Models;
 using WinMate.Services;
 using Wpf.Ui.Controls;
+using TextBlock = System.Windows.Controls.TextBlock;
 
 namespace WinMate.Views.Pages;
 
 public partial class HomePage : Page
 {
-    // Each profile gets its own accent so the three cards read apart at a glance.
-    private static readonly Dictionary<string, string> ProfileAccents = new()
-    {
-        ["gamer"] = "Accent",
-        ["privacy"] = "AccentAlt",
-        ["clean_fast"] = "Success",
-    };
-
     public HomePage()
     {
         InitializeComponent();
         UiHelpers.PreparePageHost(this);
-        RestoreButton.Icon = UiFactory.IconElement("shield", "TextPrimaryBrush");
+        RestoreButton.Icon = UiFactory.IconElement("shield", "AccentBrush");
         ResetButton.Icon = UiFactory.IconElement("undo", "TextPrimaryBrush");
         BuildProfiles();
     }
@@ -34,41 +27,46 @@ public partial class HomePage : Page
 
     private UIElement BuildProfileCard(Profile profile)
     {
-        var accent = ProfileAccents.GetValueOrDefault(profile.Id, "Accent");
+        var count = new TextBlock
+        {
+            Text = $"{profile.TweakIds.Count:00} {FindResource("Home_ProfileActionCount")}",
+            FontFamily = (System.Windows.Media.FontFamily)FindResource("MonoFont"),
+            FontSize = 10.5,
+            FontWeight = FontWeights.SemiBold,
+        };
+        count.SetResourceReference(TextBlock.ForegroundProperty, "AccentBrush");
 
-        var tile = UiFactory.ProfileTile(profile.Tile, size: 64);
-        tile.Margin = new Thickness(0, 0, 20, 0);
-
-        var title = UiFactory.Title(LocalizationService.Pick(profile.NameEn, profile.NameAr), 19);
-        var desc = UiFactory.Description(LocalizationService.Pick(profile.DescEn, profile.DescAr), 15);
-
-        var countChip = UiFactory.Chip("", accent,
-            literalText: $"{profile.TweakIds.Count} {FindResource("Home_ProfileTweakCount")}");
-        countChip.HorizontalAlignment = HorizontalAlignment.Left;
-        countChip.Margin = new Thickness(0, 10, 0, 0);
+        var title = UiFactory.Title(LocalizationService.Pick(profile.NameEn, profile.NameAr), 21);
+        title.Margin = new Thickness(0, 8, 0, 0);
+        var desc = UiFactory.Description(LocalizationService.Pick(profile.DescEn, profile.DescAr), 13);
 
         var textPanel = new StackPanel { VerticalAlignment = VerticalAlignment.Center };
+        textPanel.Children.Add(count);
         textPanel.Children.Add(title);
         textPanel.Children.Add(desc);
-        textPanel.Children.Add(countChip);
 
-        var applyButton = UiFactory.PrimaryButton("play", $"{accent}Brush");
-        applyButton.Margin = new Thickness(20, 0, 0, 0);
+        var applyButton = UiFactory.PrimaryButton("play");
+        applyButton.Margin = new Thickness(16, 0, 0, 0);
         applyButton.SetResourceReference(ContentControl.ContentProperty, "Home_ProfileApply");
         applyButton.Click += async (_, _) => await ApplyProfileAsync(profile, applyButton);
 
         var grid = new Grid();
-        grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
         grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
         grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
-        Grid.SetColumn(tile, 0);
-        Grid.SetColumn(textPanel, 1);
-        Grid.SetColumn(applyButton, 2);
-        grid.Children.Add(tile);
+        Grid.SetColumn(textPanel, 0);
+        Grid.SetColumn(applyButton, 1);
         grid.Children.Add(textPanel);
         grid.Children.Add(applyButton);
 
-        return UiFactory.Card(grid, minHeight: 112);
+        var row = new Border
+        {
+            BorderThickness = new Thickness(0, 1, 0, 0),
+            Padding = new Thickness(0, 20, 0, 20),
+            MinHeight = 126,
+            Child = grid,
+        };
+        row.SetResourceReference(Border.BorderBrushProperty, "CardBorderBrush");
+        return row;
     }
 
     private async Task ApplyProfileAsync(Profile profile, Wpf.Ui.Controls.Button button)

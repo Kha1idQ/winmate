@@ -21,10 +21,10 @@ public static class GamingCatalog
     [
         new(
             Id: "game_mode_on",
-            NameEn: "Enable Game Mode",
-            NameAr: "تفعيل وضع الألعاب",
-            DescEn: "Windows prioritizes your game and pauses background noise while playing",
-            DescAr: "الويندوز يعطي لعبتك الأولوية ويوقف الإزعاج بالخلفية وأنت تلعب",
+            NameEn: "Turn on Game Mode",
+            NameAr: "تشغيل وضع الألعاب",
+            DescEn: "Windows puts your game first and quiets background tasks while you play",
+            DescAr: "ويندوز يخلي لعبتك بالأول ويهدّي المهام اللي تشتغل بالخلفية وانت تلعب",
             Category: "gaming",
             Apply: [new RegistryAction(RegistryHive.CurrentUser, GameBar, "AutoGameModeEnabled", RegistryValueKind.DWord, 1)],
             Undo:  [new RegistryAction(RegistryHive.CurrentUser, GameBar, "AutoGameModeEnabled", RegistryValueKind.DWord, 0)],
@@ -33,10 +33,10 @@ public static class GamingCatalog
 
         new(
             Id: "gamedvr_off",
-            NameEn: "Disable Xbox Game DVR",
-            NameAr: "إيقاف تسجيل إكس بوكس للألعاب",
-            DescEn: "Stop background game recording — one of the biggest hidden FPS killers",
-            DescAr: "يوقف تسجيل اللعب بالخلفية — من أكبر أسباب نزول الفريمات المخفية",
+            NameEn: "Turn off Xbox Game DVR",
+            NameAr: "إيقاف تسجيل الألعاب من إكس بوكس",
+            DescEn: "Stops the background recording that quietly eats into your FPS",
+            DescAr: "يوقف تسجيل اللعب بالخلفية، وهو من أكثر الأشياء اللي تنزّل الفريمات وانت ما تدري",
             Category: "gaming",
             Apply:
             [
@@ -55,10 +55,10 @@ public static class GamingCatalog
 
         new(
             Id: "gamebar_popups_off",
-            NameEn: "Disable Game Bar popups",
+            NameEn: "Turn off Game Bar popups",
             NameAr: "إيقاف نوافذ القيم بار المنبثقة",
-            DescEn: "No more Game Bar startup panel and overlay popups",
-            DescAr: "يوقف لوحة القيم بار والنوافذ اللي تطلع فوق اللعبة",
+            DescEn: "Stops the Game Bar panel and its overlay from popping up",
+            DescAr: "يمنع لوحة القيم بار والنوافذ اللي تطلع فوق اللعبة",
             Category: "gaming",
             Apply:
             [
@@ -75,10 +75,10 @@ public static class GamingCatalog
 
         new(
             Id: "ultimate_power",
-            NameEn: "Max performance power plan",
-            NameAr: "خطة الطاقة للأداء الأقصى",
-            DescEn: "Activate Ultimate Performance if your Windows has it, otherwise High performance",
-            DescAr: "يفعّل أقوى خطة طاقة تدعمها نسخة الويندوز حقتك تلقائيًا",
+            NameEn: "Top performance power plan",
+            NameAr: "خطة طاقة بأعلى أداء",
+            DescEn: "Switches to Ultimate Performance if your Windows has it, or High performance if not",
+            DescAr: "يشغّل أقوى خطة طاقة تدعمها نسختك، وإذا ما فيها يرجع للأداء العالي",
             Category: "gaming",
             Apply:
             [
@@ -109,9 +109,9 @@ public static class GamingCatalog
         new(
             Id: "hags_on",
             NameEn: "Hardware-accelerated GPU scheduling",
-            NameAr: "جدولة كرت الشاشة المسرّعة عتاديًا",
-            DescEn: "Let the GPU manage its own memory for lower latency (needs restart)",
-            DescAr: "يخلي كرت الشاشة يدير ذاكرته بنفسه لتقليل التأخير (يحتاج ريستارت)",
+            NameAr: "جدولة كرت الشاشة بتسريع عتادي",
+            DescEn: "Lets the GPU handle its own memory to trim latency (needs a restart)",
+            DescAr: "يخلي كرت الشاشة يدير ذاكرته بنفسه عشان يقل التأخير (يبي ريستارت)",
             Category: "gaming",
             Apply: [new RegistryAction(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "HwSchMode", RegistryValueKind.DWord, 2)],
             Undo:  [new RegistryAction(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "HwSchMode", RegistryValueKind.DWord, 1)],
@@ -121,10 +121,10 @@ public static class GamingCatalog
 
         new(
             Id: "mouse_accel_off",
-            NameEn: "Disable mouse acceleration",
+            NameEn: "Turn off mouse acceleration",
             NameAr: "إيقاف تسارع الماوس",
-            DescEn: "Raw 1:1 mouse movement — same distance moves the same pixels, every time",
-            DescAr: "حركة ماوس خام بدون تدخل — نفس المسافة تحرك نفس البكسلات كل مرة",
+            DescEn: "Straight 1:1 aim: move the mouse the same distance, get the same pixels every time",
+            DescAr: "تصويب 1:1 بدون تدخل: نفس مسافة الحركة تعطيك نفس البكسلات كل مرة",
             Category: "gaming",
             Apply:
             [
@@ -145,9 +145,9 @@ public static class GamingCatalog
         new(
             Id: "network_latency",
             NameEn: "Network & multimedia latency tweaks",
-            NameAr: "تحسينات تأخير الشبكة والوسائط",
-            DescEn: "Stop Windows throttling network/multimedia while gaming (advanced)",
-            DescAr: "يمنع الويندوز من تحديد سرعة الشبكة والوسائط وأنت تلعب (متقدم)",
+            NameAr: "تعديلات تأخير الشبكة والوسائط",
+            DescEn: "Keeps Windows from throttling network and media while you play (advanced, small effect)",
+            DescAr: "يمنع ويندوز من تحديد سرعة الشبكة والوسائط وانت تلعب (متقدم، فرقه بسيط)",
             Category: "gaming",
             Apply:
             [

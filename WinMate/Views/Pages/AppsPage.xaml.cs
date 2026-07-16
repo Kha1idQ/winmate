@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 using WinMate.Data;
 using WinMate.Models;
 using WinMate.Services;
@@ -26,7 +27,7 @@ public partial class AppsPage : Page
         InitializeComponent();
         UiHelpers.PreparePageHost(this);
         SearchBox.Icon = UiFactory.IconElement("search", "TextSecondaryBrush", 18);
-        InstallButton.Icon = UiFactory.IconElement("download", "OnPrimaryBrush");
+        InstallButton.Icon = UiFactory.IconElement("download", "AccentBrush");
         BuildCatalog();
         BuildBundles();
         UpdateInstallButton();
@@ -41,11 +42,9 @@ public partial class AppsPage : Page
             {
                 Content = LocalizationService.Pick(bundle.NameEn, bundle.NameAr),
                 Icon = UiFactory.IconElement(bundle.Icon, "AccentBrush"),
-                Height = 42,
-                Padding = new Thickness(16, 0, 16, 0),
-                Margin = new Thickness(0, 0, 10, 0),
+                Margin = new Thickness(0, 0, 12, 0),
             };
-            button.SetResourceReference(Control.ForegroundProperty, "TextPrimaryBrush");
+            button.SetResourceReference(FrameworkElement.StyleProperty, "OverdriveSecondaryButtonStyle");
             button.Click += (_, _) => SelectBundle(bundle);
             BundlesPanel.Children.Add(button);
         }
@@ -73,9 +72,10 @@ public partial class AppsPage : Page
         {
             var header = new TextBlock
             {
-                FontSize = 18,
-                FontWeight = FontWeights.SemiBold,
-                Margin = new Thickness(0, 0, 0, 14),
+                FontSize = 21,
+                FontWeight = FontWeights.Bold,
+                FontFamily = (System.Windows.Media.FontFamily)FindResource("DisplayFont"),
+                VerticalAlignment = VerticalAlignment.Center,
             };
             header.SetResourceReference(TextBlock.TextProperty, $"Cat_{category}");
             header.SetResourceReference(TextBlock.ForegroundProperty, "TextPrimaryBrush");
@@ -84,20 +84,29 @@ public partial class AppsPage : Page
             foreach (var app in AppCatalog.All.Where(a => a.Category == category))
                 grid.Children.Add(BuildAppCell(app));
 
+            var headerRow = new Grid { Margin = new Thickness(0, 0, 0, 16) };
+            headerRow.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+            headerRow.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            var rule = new Rectangle { Height = 1, Margin = new Thickness(16, 0, 0, 0), VerticalAlignment = VerticalAlignment.Center };
+            rule.SetResourceReference(Shape.FillProperty, "CardBorderBrush");
+            Grid.SetColumn(header, 0);
+            Grid.SetColumn(rule, 1);
+            headerRow.Children.Add(header);
+            headerRow.Children.Add(rule);
+
             var inner = new StackPanel();
-            inner.Children.Add(header);
+            inner.Children.Add(headerRow);
             inner.Children.Add(grid);
 
-            // Each category lives in its own rounded panel (design spec).
+            // One containment layer: app cells carry the interaction boundary;
+            // the category is only a ruled bank, not a card around cards.
             var panel = new Border
             {
-                CornerRadius = new CornerRadius(14),
-                BorderThickness = new Thickness(1),
-                Padding = new Thickness(20, 18, 20, 14),
-                Margin = new Thickness(0, 0, 0, 14),
+                BorderThickness = new Thickness(0, 0, 0, 1),
+                Padding = new Thickness(0, 0, 0, 16),
+                Margin = new Thickness(0, 0, 0, 20),
                 Child = inner,
             };
-            panel.SetResourceReference(Border.BackgroundProperty, "SurfaceBrush");
             panel.SetResourceReference(Border.BorderBrushProperty, "CardBorderBrush");
 
             CatalogPanel.Children.Add(panel);
@@ -112,6 +121,7 @@ public partial class AppsPage : Page
         {
             Content = BuildAppLabel(app, installed: false),
             Tag = app,
+            MinHeight = 44,
             VerticalAlignment = VerticalAlignment.Center,
         };
         box.Checked += AppBox_Changed;
@@ -120,10 +130,11 @@ public partial class AppsPage : Page
 
         var cell = new Border
         {
-            CornerRadius = new CornerRadius(8),
+            CornerRadius = new CornerRadius(0),
             BorderThickness = new Thickness(1),
-            Padding = new Thickness(12, 9, 12, 9),
-            Margin = new Thickness(0, 0, 10, 10),
+            Padding = new Thickness(12, 5, 12, 5),
+            Margin = new Thickness(0, 0, 12, 12),
+            MinHeight = 56,
             Child = box,
         };
         cell.SetResourceReference(Border.BackgroundProperty, "SurfaceRaisedBrush");
@@ -143,10 +154,10 @@ public partial class AppsPage : Page
         {
             panel.Children.Add(new Image
             {
-                Source = new BitmapImage(new Uri($"pack://application:,,,/Assets/AppIcons/{iconFile}")),
+                Source = new BitmapImage(new Uri($"pack://application:,,,/WinMate;component/Assets/AppIcons/{iconFile}")),
                 Width = 22,
                 Height = 22,
-                Margin = new Thickness(0, 0, 10, 0),
+                Margin = new Thickness(0, 0, 12, 0),
             });
         }
         catch
@@ -166,7 +177,7 @@ public partial class AppsPage : Page
         if (installed)
         {
             var chip = UiFactory.Chip("Apps_Installed", "Success");
-            chip.Margin = new Thickness(10, 0, 0, 0);
+            chip.Margin = new Thickness(12, 0, 0, 0);
             panel.Children.Add(chip);
         }
 

@@ -50,29 +50,29 @@ public static class TweakExplainer
         });
 
         return elevated
-            ? L("Yes — it changes system-wide settings, so it runs with administrator rights (WinMate already has them).",
-                "نعم — يغيّر إعدادات على مستوى النظام، فيشتغل بصلاحيات مدير (وين مايت عنده الصلاحية أصلًا).")
-            : L("No — it only changes your own user settings.",
-                "لا — يغيّر بس إعداداتك الشخصية.");
+            ? L("Yes. It changes system-wide settings, so it runs with administrator rights (WinMate already has them).",
+                "نعم. يغيّر إعدادات على مستوى النظام، فيشتغل بصلاحيات مدير (وين مايت عنده الصلاحية أصلًا).")
+            : L("No. It only changes your own user settings.",
+                "لا. يغيّر بس إعداداتك الشخصية.");
     }
 
     private static string NeedsRestart(Tweak tweak)
     {
         if (tweak.RequiresRestart)
-            return L("Yes — restart your PC for this change to fully take effect.",
-                     "نعم — أعد تشغيل الجهاز عشان يطبّق التغيير بالكامل.");
+            return L("Yes. Restart your PC for this change to fully take effect.",
+                     "نعم. أعد تشغيل الجهاز عشان يطبّق التغيير بالكامل.");
         if (tweak.RestartExplorer)
-            return L("No full restart — WinMate briefly restarts File Explorer for you, so the screen flickers once.",
-                     "ما يحتاج إعادة تشغيل كاملة — وين مايت يعيد تشغيل المستكشف لك، فالشاشة ترمش مرة.");
-        return L("No — it takes effect right away.",
-                 "لا — يطبّق فورًا.");
+            return L("No full restart. WinMate briefly restarts File Explorer for you, so the screen flickers once.",
+                     "ما يحتاج إعادة تشغيل كاملة. وين مايت يعيد تشغيل المستكشف لك، فالشاشة ترمش مرة.");
+        return L("No. It takes effect right away.",
+                 "لا. يطبّق فورًا.");
     }
 
     private static string UndoInfo(Tweak tweak)
     {
         if (tweak.IsReversible)
-            return L("Just switch the toggle back off — WinMate restores the exact previous setting.",
-                     "بس رجّع المفتاح للإيقاف — وين مايت يرجّع الإعداد السابق بالضبط.");
+            return L("Just switch the toggle back off. WinMate restores the exact previous setting.",
+                     "بس رجّع المفتاح للإيقاف. وين مايت يرجّع الإعداد السابق بالضبط.");
         return L("This is a one-time action and can't be undone from WinMate. You'll be asked to confirm before it runs.",
                  "هذا إجراء لمرة واحدة وما يتراجع من وين مايت. بيُطلب منك تأكيد قبل ما يشتغل.");
     }

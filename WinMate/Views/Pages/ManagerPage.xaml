@@ -4,7 +4,7 @@
       xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       Background="{DynamicResource AppBackgroundBrush}"
       Title="Manager">
-    <Grid Margin="48,32,48,24">
+        <Grid Margin="40,28,40,20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -18,24 +18,31 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0">
-                <TextBlock Text="{DynamicResource Manager_Title}" FontSize="36" FontWeight="Bold"
-                           Foreground="{DynamicResource TextPrimaryBrush}" />
-                <TextBlock x:Name="StatsText" FontSize="15" Margin="0,8,0,0"
-                           Foreground="{DynamicResource TextSecondaryBrush}" />
+                <TextBlock Text="{DynamicResource Context_Manager}"
+                           Style="{StaticResource OverdriveContextLabelStyle}" />
+                <TextBlock Text="{DynamicResource Manager_Title}"
+                           Style="{StaticResource OverdrivePageTitleStyle}"
+                                       Margin="0,8,0,0" />
+                            <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                    <Ellipse Width="8" Height="8"
+                             Fill="{DynamicResource SuccessBrush}"
+                             VerticalAlignment="Center" />
+                    <TextBlock x:Name="StatsText"
+                               Style="{StaticResource OverdriveMonoStyle}"
+                                           Margin="8,0,0,0"
+                               VerticalAlignment="Center" />
+                </StackPanel>
             </StackPanel>
 
-            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Bottom">
                 <ui:Button x:Name="RefreshButton"
-                           Height="48" Padding="16,0,16,0" FontSize="15"
+                           Style="{StaticResource OverdriveSecondaryButtonStyle}"
                            Content="{DynamicResource Manager_Refresh}"
-                           Foreground="{DynamicResource TextPrimaryBrush}"
                            Click="RefreshButton_Click" />
                 <ui:Button x:Name="UpdateAllButton"
-                           Height="48" Padding="20,0,20,0" FontSize="15"
-                           Margin="12,0,0,0"
-                           BorderThickness="0"
-                           Background="{DynamicResource PrimaryButtonBrush}"
-                           Foreground="{DynamicResource OnPrimaryBrush}"
+                           Style="{StaticResource OverdrivePrimaryButtonStyle}"
+                                    Margin="12,0,0,0"
+                           Content="{DynamicResource Manager_UpdateAll}"
                            IsEnabled="False"
                            Click="UpdateAllButton_Click" />
             </StackPanel>
@@ -43,9 +50,8 @@
 
         <ui:TextBox x:Name="SearchBox"
                     Grid.Row="1"
-                    Height="48"
-                    Margin="0,20,12,10"
-                    FontSize="14"
+                    Style="{StaticResource OverdriveTextBoxStyle}"
+                                 Margin="0,24,12,12"
                     PlaceholderText="{DynamicResource Search_Manager}"
                     TextChanged="SearchBox_TextChanged" />
 

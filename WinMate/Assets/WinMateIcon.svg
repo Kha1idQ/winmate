@@ -1,0 +1,20 @@
+<!-- Hallmark component: WinMate application icon; atmospheric technical utility; Overdrive theme.
+     Pre-emit critique: P5 H5 E5 S5 R5 V4; custom brand mark; contrast and small-size legibility pass. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">WinMate Overdrive icon</title>
+  <desc id="desc">An amber diamond enclosing a geometric W on a warm-black field.</desc>
+  <style>
+    :root {
+      --color-paper: #0B0907;
+      --color-accent: #F2A514;
+      --color-rule: #5A3D12;
+      --color-ink: #F2EEE5;
+    }
+  </style>
+  <path fill="var(--color-accent)" d="M128 8 248 128 128 248 8 128Z" />
+  <path fill="var(--color-paper)" d="m128 22 106 106-106 106L22 128Z" />
+  <path fill="none" stroke="var(--color-rule)" stroke-width="2"
+        d="m128 34 94 94-94 94-94-94Z" />
+  <path fill="var(--color-ink)"
+        d="M64 76h26l21 77 17-49 17 49 21-77h26l-32 108h-23l-9-34-9 34H96Z" />
+</svg>

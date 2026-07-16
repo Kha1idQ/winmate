@@ -3,43 +3,67 @@
                     xmlns:sys="clr-namespace:System;assembly=System.Runtime">
 
     <sys:String x:Key="App_Title">وين مايت</sys:String>
-    <sys:String x:Key="Lang_Toggle">English</sys:String>
-    <sys:String x:Key="Theme_Toggle">تبديل الثيم (أزرق / ذهبي)</sys:String>
+    <sys:String x:Key="Lang_Toggle">EN / العربية</sys:String>
+    <sys:String x:Key="Theme_Toggle">بدّل معايرة الإضاءة الخافتة</sys:String>
+    <sys:String x:Key="Shell_SystemStable">اتصال النظام مستقر</sys:String>
+    <sys:String x:Key="Shell_RestorePointTooltip">أنشئ نقطة استعادة</sys:String>
+    <sys:String x:Key="Shell_NoPending">ما فيه عمليات معلّقة</sys:String>
+
+    <sys:String x:Key="Context_Home">سطح التحكم / الجهاز المحلي</sys:String>
+    <sys:String x:Key="Context_MissionQueue">قائمة المهام</sys:String>
+    <sys:String x:Key="Context_Apps">كتالوج البرامج / WINGET</sys:String>
+    <sys:String x:Key="Context_Manager">البرامج المثبتة / هذا الجهاز</sys:String>
+    <sys:String x:Key="Context_Tweaks">بنوك التحكم / الحالة الفعلية</sys:String>
+    <sys:String x:Key="Context_Gaming">طبقة الألعاب / تأخير منخفض</sys:String>
 
     <sys:String x:Key="Nav_Home">الرئيسية</sys:String>
     <sys:String x:Key="Nav_Apps">البرامج</sys:String>
     <sys:String x:Key="Nav_Tweaks">التحسينات</sys:String>
     <sys:String x:Key="Nav_Gaming">الألعاب</sys:String>
 
-    <sys:String x:Key="Home_Title">الرئيسية</sys:String>
-    <sys:String x:Key="Home_Subtitle">حياك الله في وين مايت — جهّز ونظّف وسرّع الويندوز</sys:String>
+    <sys:String x:Key="Home_Title">النظام جاهز</sys:String>
+    <sys:String x:Key="Home_Subtitle">رتّب الويندوز على كيفك وشيل اللي يثقّله.</sys:String>
     <sys:String x:Key="Home_ProfilesTitle">بروفايلات بضغطة واحدة</sys:String>
-    <sys:String x:Key="Home_ProfilesSubtitle">فعّل مجموعة تحسينات دفعة وحدة — وكلها تقدر ترجّعها من تبويب التحسينات</sys:String>
+    <sys:String x:Key="Home_ProfilesSubtitle">شغّل مجموعة تحسينات دفعة وحدة. غيّرت رأيك؟ ترجّع أي وحدة منها من تبويب التحسينات.</sys:String>
+    <sys:String x:Key="Home_SafetyLabel">آمن</sys:String>
+    <sys:String x:Key="Home_StateLink">اتصال حالة ويندوز</sys:String>
+    <sys:String x:Key="Home_Live">مباشر</sys:String>
+    <sys:String x:Key="Home_ActualState">إعادة فحص الحالة</sys:String>
+    <sys:String x:Key="Home_NodeApps">البرامج</sys:String>
+    <sys:String x:Key="Home_NodeAppsStatus">22 برنامج جاهز</sys:String>
+    <sys:String x:Key="Home_NodeTweaks">تحسينات النظام</sys:String>
+    <sys:String x:Key="Home_NodeTweaksStatus">21 تحكم مربوط</sys:String>
+    <sys:String x:Key="Home_NodeGaming">طبقة الألعاب</sys:String>
+    <sys:String x:Key="Home_NodeGamingStatus">07 تحكم جاهز</sys:String>
+    <sys:String x:Key="Home_NodeManager">مدير البرامج</sys:String>
+    <sys:String x:Key="Home_NodeManagerStatus">التحديثات تحت المراقبة</sys:String>
     <sys:String x:Key="Home_ProfileApply">تفعيل</sys:String>
+    <sys:String x:Key="Home_ProfileActionCount">إجراءات</sys:String>
     <sys:String x:Key="Home_ProfileTweakCount">تحسين</sys:String>
-    <sys:String x:Key="Home_ProfileConfirmBody">بيفعّل التحسينات التالية (واللي مفعّل أصلًا يتخطّاه):</sys:String>
+    <sys:String x:Key="Home_ProfileConfirmBody">هذي التحسينات بتشتغل الحين، واللي مشغّل أصلًا يظل مثل ما هو:</sys:String>
     <sys:String x:Key="Home_ProfileConfirmYes">فعّل البروفايل</sys:String>
     <sys:String x:Key="Home_ProfileApplied">تفعّل</sys:String>
     <sys:String x:Key="Home_ProfileAlreadyOn">مفعّل أصلًا</sys:String>
     <sys:String x:Key="Home_ProfileFailed">فشل</sys:String>
     <sys:String x:Key="Home_ToolsTitle">أدوات</sys:String>
     <sys:String x:Key="Home_ResetButton">رجّع كل شي</sys:String>
-    <sys:String x:Key="Home_ResetConfirmBody">هذا يتراجع عن كل التحسينات اللي فعّلتها ويرجّع الإعدادات لوضع الويندوز الافتراضي. الإجراءات النهائية (حذف البلوت، تنظيف المؤقتات) ما تنرجع. تبي تكمل؟</sys:String>
+    <sys:String x:Key="Home_ResetConfirmBody">هذا يرجّع كل تحسين شغّلته لوضع الويندوز الافتراضي. بس خذ بالك، الإجراءات اللي مرة وحدة زي حذف البلوت وتنظيف المؤقتات ما تنرجع. تبي تكمل؟</sys:String>
     <sys:String x:Key="Home_ResetConfirmYes">رجّع كل شي</sys:String>
     <sys:String x:Key="Home_ResetUndone">تحسين رجع</sys:String>
 
     <sys:String x:Key="Apps_Title">البرامج</sys:String>
-    <sys:String x:Key="Apps_Subtitle">ثبّت برامجك المفضلة بضغطة واحدة</sys:String>
+    <sys:String x:Key="Apps_Subtitle">اختر البرامج اللي تبيها وثبّتها كلها مرة وحدة</sys:String>
+    <sys:String x:Key="Apps_CatalogStatus">22 برنامج / 3 حزم</sys:String>
     <sys:String x:Key="Apps_InstallSelected">ثبّت المحدد</sys:String>
-    <sys:String x:Key="Apps_BundlesLabel">حزم جاهزة — اضغط الحزمة عشان تختارها، بعدين ثبّت</sys:String>
+    <sys:String x:Key="Apps_BundlesLabel">حزم: اضغط الحزمة عشان تختار كل اللي فيها، بعدين ثبّت.</sys:String>
     <sys:String x:Key="Apps_Installed">مثبّت</sys:String>
     <sys:String x:Key="Apps_LogInstalling">جاري تثبيت</sys:String>
     <sys:String x:Key="Apps_LogDone">تم التثبيت بنجاح</sys:String>
     <sys:String x:Key="Apps_LogFailed">فشل</sys:String>
     <sys:String x:Key="Apps_LogFailedSummary">برامج فشلت</sys:String>
     <sys:String x:Key="Log_Title">السجل المباشر</sys:String>
-    <sys:String x:Key="Search_Apps">ابحث عن برنامج...</sys:String>
-    <sys:String x:Key="Search_Tweaks">ابحث عن تحسين...</sys:String>
+    <sys:String x:Key="Search_Apps">دوّر عن برنامج…</sys:String>
+    <sys:String x:Key="Search_Tweaks">دوّر عن تحسين…</sys:String>
     <sys:String x:Key="Chip_RestartRequired">يحتاج ريستارت</sys:String>
     <sys:String x:Key="Chip_Advanced">متقدم</sys:String>
     <sys:String x:Key="Cat_browsers">المتصفحات</sys:String>
@@ -49,7 +73,8 @@
     <sys:String x:Key="Cat_utils">أدوات مساعدة</sys:String>
 
     <sys:String x:Key="Tweaks_Title">التحسينات</sys:String>
-    <sys:String x:Key="Tweaks_Subtitle">نظّف وسرّع الويندوز — كل مفتاح تقدر ترجّعه مثل ما كان</sys:String>
+    <sys:String x:Key="Tweaks_Subtitle">شيل الزحمة وخلّ الويندوز أسرع. كل مفتاح هنا ترجّعه مثل ما كان وقت ما تبي.</sys:String>
+    <sys:String x:Key="Tweaks_StateStatus">28 تحكم / الحالة الفعلية</sys:String>
     <sys:String x:Key="TweakCat_explorer">المستكشف وشريط المهام</sys:String>
     <sys:String x:Key="TweakCat_privacy">الخصوصية</sys:String>
     <sys:String x:Key="Tweaks_LogApplying">جاري تفعيل</sys:String>
@@ -62,22 +87,23 @@
     <sys:String x:Key="Tweaks_ConfirmIrreversible">⚠ هذا الإجراء لا يمكن التراجع عنه.</sys:String>
     <sys:String x:Key="Home_RestoreButton">إنشاء نقطة استعادة</sys:String>
     <sys:String x:Key="Restore_Title">إنشاء نقطة استعادة؟</sys:String>
-    <sys:String x:Key="Restore_Body">قبل تعديل إعدادات الويندوز، وين مايت يقدر ينشئ نقطة استعادة للنظام عشان ترجّع كل شي لو احتجت. ننصح فيها.</sys:String>
+    <sys:String x:Key="Restore_Body">وين مايت يقدر يحفظ نقطة استعادة للنظام أول، وإذا صار شي غلط ترجّع الويندوز مثل ما هو الحين. يستاهل تسويها.</sys:String>
     <sys:String x:Key="Restore_Yes">أنشئ نقطة استعادة</sys:String>
     <sys:String x:Key="Restore_No">تخطّي</sys:String>
-    <sys:String x:Key="Restore_Creating">جاري إنشاء نقطة استعادة النظام (تاخذ ~30 ثانية)...</sys:String>
+    <sys:String x:Key="Restore_Creating">جاري إنشاء نقطة استعادة النظام (تاخذ ~30 ثانية)…</sys:String>
     <sys:String x:Key="Restore_Done">✓ تم إنشاء نقطة الاستعادة</sys:String>
-    <sys:String x:Key="Restore_Skipped24h">ويندوز تخطّاها — فيه نقطة استعادة من آخر 24 ساعة موجودة أصلًا</sys:String>
+    <sys:String x:Key="Restore_Skipped24h">ويندوز تخطّى هذي. فيه نقطة استعادة من آخر 24 ساعة موجودة أصلًا.</sys:String>
 
     <sys:String x:Key="Gaming_Title">الألعاب</sys:String>
-    <sys:String x:Key="Gaming_Subtitle">حسّن الويندوز للقيمنق</sys:String>
+    <sys:String x:Key="Gaming_Subtitle">ضبّط الويندوز عشان الألعاب تشتغل أنعم</sys:String>
     <sys:String x:Key="Gaming_EnableAll">فعّل كل تحسينات الألعاب</sys:String>
+    <sys:String x:Key="Gaming_MissionStatus">07 تحكم / قابل للتراجع</sys:String>
     <sys:String x:Key="Tweaks_RestartNeeded">⟳ يحتاج إعادة تشغيل الجهاز عشان يطبق</sys:String>
 
     <sys:String x:Key="Nav_Manager">مدير البرامج</sys:String>
     <sys:String x:Key="Manager_Title">مدير البرامج</sys:String>
-    <sys:String x:Key="Manager_Loading">جاري قراءة البرامج المثبتة...</sys:String>
-    <sys:String x:Key="Manager_LoadFailed">تعذّر الوصول إلى winget — تأكّد من الاتصال واضغط تحديث.</sys:String>
+    <sys:String x:Key="Manager_Loading">جاري قراءة البرامج المثبتة…</sys:String>
+    <sys:String x:Key="Manager_LoadFailed">ما قدرنا نوصل winget. تأكّد من الاتصال واضغط تحديث.</sys:String>
     <sys:String x:Key="Manager_Installed">برنامج مثبّت</sys:String>
     <sys:String x:Key="Manager_UpdatesAvailable">لها تحديثات</sys:String>
     <sys:String x:Key="Manager_UpdateAll">حدّث الكل</sys:String>
@@ -85,18 +111,18 @@
     <sys:String x:Key="Manager_Update">تحديث</sys:String>
     <sys:String x:Key="Manager_Uninstall">إزالة</sys:String>
     <sys:String x:Key="Manager_UpdateChip">فيه تحديث</sys:String>
-    <sys:String x:Key="Manager_UninstallConfirm">راح ينحذف البرنامج من جهازك. تبي تكمل؟</sys:String>
+    <sys:String x:Key="Manager_UninstallConfirm">البرنامج بينحذف من جهازك. تبي تكمل؟</sys:String>
     <sys:String x:Key="Manager_LogUpdated">تحدّث</sys:String>
     <sys:String x:Key="Manager_LogUpdatedAll">خلصت كل التحديثات</sys:String>
-    <sys:String x:Key="Manager_LogUpdateAllPartial">خلص التحديث — بعض الحزم ما تحدّثت، راجع القائمة</sys:String>
+    <sys:String x:Key="Manager_LogUpdateAllPartial">خلصت التحديثات. كم حزمة ما تحدّثت، راجع القائمة</sys:String>
     <sys:String x:Key="Manager_LogUninstalled">تمت إزالته</sys:String>
-    <sys:String x:Key="Search_Manager">ابحث في البرامج المثبتة...</sys:String>
+    <sys:String x:Key="Search_Manager">دوّر في البرامج المثبتة…</sys:String>
 
     <sys:String x:Key="Manager_SystemChip">مكوّن نظام</sys:String>
-    <sys:String x:Key="Manager_SystemWarning">⚠ هذا مكوّن من ويندوز أو مكتبة تعتمد عليها برامج ثانية (فيجوال سي++، دوت نت، التعريفات، المتجر). حذفه ممكن يكسر برامج عندك. لا تكمل إلا إذا كنت متأكد.</sys:String>
+    <sys:String x:Key="Manager_SystemWarning">⚠ هذا مكوّن من ويندوز أو مكتبة تعتمد عليها برامج ثانية (فيجوال سي++، دوت نت، التعريفات، المتجر). لو حذفته ممكن تكسر برامج عندك. لا تكمل إلا إذا أنت متأكد إنك محتاجه.</sys:String>
     <sys:String x:Key="Manager_ProtectedChip">محمي من ويندوز</sys:String>
-    <sys:String x:Key="Manager_ProtectedTooltip">ويندوز نفسه يمنع حذف هذا المكوّن.</sys:String>
-    <sys:String x:Key="Manager_EdgeNote">مايكروسوفت تمنع حذف إيدج في نسخ ويندوز الحديثة. وين مايت راح يقفل إيدج، يفكّ قفل الحذف، ويشغّله — لكن لو نسخة ويندوزك مفعّلة المنع، ممكن ما ينحذف.</sys:String>
-    <sys:String x:Key="Explain_Tooltip">اشرح لي — وش يسوي وهل يفيد</sys:String>
+    <sys:String x:Key="Manager_ProtectedTooltip">ويندوز ما يخليك تحذف هذا المكوّن.</sys:String>
+    <sys:String x:Key="Manager_EdgeNote">مايكروسوفت تمنع حذف إيدج في نسخ ويندوز الحديثة. وين مايت بيقفل إيدج، ويفكّ قفل الحذف، ويشغّله. لكن لو نسختك مطبّقة المنع، يمكن إيدج يظل مكانه.</sys:String>
+    <sys:String x:Key="Explain_Tooltip">اشرح لي وش يسوي وهل يستاهل تشغيله</sys:String>
     <sys:String x:Key="Explain_Close">فهمت</sys:String>
 </ResourceDictionary>

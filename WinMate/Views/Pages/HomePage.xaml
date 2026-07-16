@@ -4,37 +4,209 @@
       xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       Background="{DynamicResource AppBackgroundBrush}"
       Title="Home">
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <StackPanel Margin="48,32,48,24">
-            <TextBlock Text="{DynamicResource Home_Title}" FontSize="36" FontWeight="Bold"
-                       Foreground="{DynamicResource TextPrimaryBrush}" />
-            <TextBlock Text="{DynamicResource Home_Subtitle}" FontSize="15"
-                       Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,8,0,0" />
+    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                  HorizontalScrollBarVisibility="Disabled">
+        <Grid Margin="40,28,40,28" MinHeight="620">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2.05*" MinWidth="410" />
+                <ColumnDefinition Width="1*" MinWidth="310" />
+            </Grid.ColumnDefinitions>
 
-            <StackPanel Orientation="Horizontal" Margin="0,24,0,0">
-                <ui:Button x:Name="RestoreButton"
-                           Height="44" Padding="18,0,18,0"
-                           Content="{DynamicResource Home_RestoreButton}"
-                           Foreground="{DynamicResource TextPrimaryBrush}"
-                           Click="RestoreButton_Click" />
-                <ui:Button x:Name="ResetButton"
-                           Height="44" Padding="18,0,18,0"
-                           Margin="12,0,0,0"
-                           Content="{DynamicResource Home_ResetButton}"
-                           Foreground="{DynamicResource TextPrimaryBrush}"
-                           Click="ResetButton_Click" />
-            </StackPanel>
+                <Grid Grid.Column="0" Margin="0,0,32,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-            <TextBlock Text="{DynamicResource Home_ProfilesTitle}"
-                       FontSize="22" FontWeight="SemiBold"
-                       Foreground="{DynamicResource TextPrimaryBrush}"
-                       Margin="0,36,0,6" />
-            <TextBlock Text="{DynamicResource Home_ProfilesSubtitle}"
-                       FontSize="14"
-                       Foreground="{DynamicResource TextSecondaryBrush}"
-                       Margin="0,0,0,18" />
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.25*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="{DynamicResource Context_Home}"
+                                   Style="{StaticResource OverdriveContextLabelStyle}" />
+                        <TextBlock Text="{DynamicResource Home_Title}"
+                                   Style="{StaticResource OverdriveDisplayTitleStyle}"
+                                   TextWrapping="Wrap"
+                                   Margin="0,8,0,0" />
+                    </StackPanel>
+                    <TextBlock Grid.Column="1"
+                               Text="{DynamicResource Home_Subtitle}"
+                               Style="{StaticResource OverdriveBodyStyle}"
+                               VerticalAlignment="Bottom"
+                                   Margin="24,0,0,8"
+                               MaxWidth="300" />
+                </Grid>
 
-            <ItemsControl x:Name="ProfilesPanel" />
-        </StackPanel>
+                <Border Grid.Row="1"
+                        Margin="0,24,0,0"
+                        BorderBrush="{DynamicResource CardBorderBrush}"
+                        BorderThickness="1"
+                        Background="{DynamicResource SurfaceBrush}"
+                        MinHeight="410">
+                    <Viewbox Stretch="Uniform" StretchDirection="DownOnly">
+                        <Grid Width="700" Height="430" FlowDirection="LeftToRight">
+                            <Rectangle Height="1"
+                                       Fill="{DynamicResource CardBorderBrush}"
+                                       VerticalAlignment="Center" />
+                            <Rectangle Width="1"
+                                       Fill="{DynamicResource CardBorderBrush}"
+                                       HorizontalAlignment="Center" />
+
+                            <Ellipse Width="400" Height="400"
+                                     Stroke="{DynamicResource CardBorderBrush}"
+                                     StrokeThickness="1" />
+                            <Ellipse Width="245" Height="245"
+                                     Stroke="{DynamicResource CardBorderBrush}"
+                                     StrokeThickness="1"
+                                     StrokeDashArray="3,4" />
+                            <Ellipse Width="170" Height="170"
+                                     Fill="{DynamicResource SurfaceRaisedBrush}"
+                                     Stroke="{DynamicResource AccentBrush}"
+                                     StrokeThickness="2" />
+
+                            <StackPanel HorizontalAlignment="Center"
+                                        VerticalAlignment="Center">
+                                <TextBlock Text="{DynamicResource Home_StateLink}"
+                                           Style="{StaticResource OverdriveMonoStyle}"
+                                           FontSize="10"
+                                           TextAlignment="Center" />
+                                <TextBlock Text="{DynamicResource Home_Live}"
+                                           FontFamily="{DynamicResource DisplayFont}"
+                                           FontSize="31"
+                                           FontWeight="ExtraBold"
+                                           Foreground="{DynamicResource TextPrimaryBrush}"
+                                           TextAlignment="Center"
+                                Margin="0,16,0,0" />
+                                <TextBlock Text="{DynamicResource Home_ActualState}"
+                                           Style="{StaticResource OverdriveMonoStyle}"
+                                           FontSize="10"
+                                           MaxWidth="146"
+                                           TextWrapping="Wrap"
+                                           LineHeight="13"
+                                           TextAlignment="Center"
+                                Margin="0,16,0,0" />
+                            </StackPanel>
+
+                            <Border Width="168" Height="64"
+                                    HorizontalAlignment="Left" VerticalAlignment="Top"
+                                    Margin="40,40,0,0" Padding="16,12"
+                                    BorderBrush="{DynamicResource CardBorderBrush}"
+                                    BorderThickness="1"
+                                    Background="{DynamicResource AppBackgroundBrush}">
+                                <StackPanel>
+                                    <TextBlock Text="{DynamicResource Home_NodeApps}"
+                                               FontWeight="Bold"
+                                               Foreground="{DynamicResource TextPrimaryBrush}" />
+                                    <TextBlock Text="{DynamicResource Home_NodeAppsStatus}"
+                                               Style="{StaticResource OverdriveMonoStyle}"
+                                           Margin="0,4,0,0" />
+                                </StackPanel>
+                            </Border>
+
+                            <Border Width="168" Height="64"
+                                    HorizontalAlignment="Right" VerticalAlignment="Top"
+                                    Margin="0,40,40,0" Padding="16,12"
+                                    BorderBrush="{DynamicResource CardBorderBrush}"
+                                    BorderThickness="1"
+                                    Background="{DynamicResource AppBackgroundBrush}">
+                                <StackPanel>
+                                    <TextBlock Text="{DynamicResource Home_NodeTweaks}"
+                                               FontWeight="Bold"
+                                               Foreground="{DynamicResource TextPrimaryBrush}" />
+                                    <TextBlock Text="{DynamicResource Home_NodeTweaksStatus}"
+                                               Style="{StaticResource OverdriveMonoStyle}"
+                                           Margin="0,4,0,0" />
+                                </StackPanel>
+                            </Border>
+
+                            <Border Width="168" Height="64"
+                                    HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                                    Margin="40,0,0,40" Padding="16,12"
+                                    BorderBrush="{DynamicResource CardBorderBrush}"
+                                    BorderThickness="1"
+                                    Background="{DynamicResource AppBackgroundBrush}">
+                                <StackPanel>
+                                    <TextBlock Text="{DynamicResource Home_NodeGaming}"
+                                               FontWeight="Bold"
+                                               Foreground="{DynamicResource TextPrimaryBrush}" />
+                                    <TextBlock Text="{DynamicResource Home_NodeGamingStatus}"
+                                               Style="{StaticResource OverdriveMonoStyle}"
+                                           Margin="0,4,0,0" />
+                                </StackPanel>
+                            </Border>
+
+                            <Border Width="168" Height="64"
+                                    HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                                    Margin="0,0,40,40" Padding="16,12"
+                                    BorderBrush="{DynamicResource CardBorderBrush}"
+                                    BorderThickness="1"
+                                    Background="{DynamicResource AppBackgroundBrush}">
+                                <StackPanel>
+                                    <TextBlock Text="{DynamicResource Home_NodeManager}"
+                                               FontWeight="Bold"
+                                               Foreground="{DynamicResource TextPrimaryBrush}" />
+                                    <TextBlock Text="{DynamicResource Home_NodeManagerStatus}"
+                                               Style="{StaticResource OverdriveMonoStyle}"
+                                           Margin="0,4,0,0" />
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </Viewbox>
+                </Border>
+            </Grid>
+
+            <Border Grid.Column="1"
+                    BorderBrush="{DynamicResource CardBorderBrush}"
+                    BorderThickness="1,0,0,0"
+                    Padding="24,0,0,0">
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="{DynamicResource Context_MissionQueue}"
+                                       Style="{StaticResource OverdriveContextLabelStyle}"
+                                       Foreground="{DynamicResource TextSecondaryBrush}" />
+                            <TextBlock Text="{DynamicResource Home_ProfilesTitle}"
+                                       Style="{StaticResource OverdriveSectionTitleStyle}"
+                               Margin="0,8,0,0" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                            <TextBlock Text="{DynamicResource Home_SafetyLabel}"
+                                       Style="{StaticResource OverdriveMonoStyle}"
+                                       FontSize="10"
+                                       VerticalAlignment="Center" />
+                            <Rectangle Width="16" Height="16"
+                                       Fill="{DynamicResource AccentBrush}"
+                               Margin="12,0,0,0" />
+                        </StackPanel>
+                    </Grid>
+
+                    <TextBlock Text="{DynamicResource Home_ProfilesSubtitle}"
+                               Style="{StaticResource OverdriveBodyStyle}"
+                               FontSize="13"
+                               Margin="0,12,0,0" />
+
+                    <WrapPanel Margin="0,20,0,4">
+                        <ui:Button x:Name="RestoreButton"
+                                   Style="{StaticResource OverdrivePrimaryButtonStyle}"
+                                   Content="{DynamicResource Home_RestoreButton}"
+                                   Margin="0,0,8,8"
+                                   Click="RestoreButton_Click" />
+                        <ui:Button x:Name="ResetButton"
+                                   Style="{StaticResource OverdriveSecondaryButtonStyle}"
+                                   Content="{DynamicResource Home_ResetButton}"
+                                   Margin="0,0,0,8"
+                                   Click="ResetButton_Click" />
+                    </WrapPanel>
+
+                    <ItemsControl x:Name="ProfilesPanel" Margin="0,4,0,0" />
+                </StackPanel>
+            </Border>
+        </Grid>
     </ScrollViewer>
 </Page>

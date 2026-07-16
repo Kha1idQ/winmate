@@ -5,25 +5,44 @@
       xmlns:controls="clr-namespace:WinMate.Views.Controls"
       Background="{DynamicResource AppBackgroundBrush}"
       Title="Tweaks">
-    <Grid Margin="48,32,48,24">
+        <Grid Margin="40,28,40,20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0">
-            <TextBlock Text="{DynamicResource Tweaks_Title}" FontSize="36" FontWeight="Bold"
-                       Foreground="{DynamicResource TextPrimaryBrush}" />
-            <TextBlock Text="{DynamicResource Tweaks_Subtitle}" FontSize="15"
-                       Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,8,0,0" />
-        </StackPanel>
+        <Grid Grid.Row="0" Margin="0,0,12,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="{DynamicResource Context_Tweaks}"
+                           Style="{StaticResource OverdriveContextLabelStyle}" />
+                <TextBlock Text="{DynamicResource Tweaks_Title}"
+                           Style="{StaticResource OverdrivePageTitleStyle}"
+                                       Margin="0,8,0,0" />
+                <TextBlock Text="{DynamicResource Tweaks_Subtitle}"
+                           Style="{StaticResource OverdriveBodyStyle}"
+                                       Margin="0,4,0,0" />
+            </StackPanel>
+            <Border Grid.Column="1"
+                    BorderBrush="{DynamicResource CardBorderBrush}"
+                    BorderThickness="1"
+                    Background="{DynamicResource SurfaceBrush}"
+                            Padding="16,12"
+                    VerticalAlignment="Bottom">
+                <TextBlock Text="{DynamicResource Tweaks_StateStatus}"
+                           Style="{StaticResource OverdriveMonoStyle}"
+                           FontSize="10.5" />
+            </Border>
+        </Grid>
 
         <ui:TextBox x:Name="SearchBox"
                     Grid.Row="1"
-                    Height="48"
-                    Margin="0,20,12,10"
-                    FontSize="14"
+                    Style="{StaticResource OverdriveTextBoxStyle}"
+                                 Margin="0,24,12,12"
                     PlaceholderText="{DynamicResource Search_Tweaks}"
                     TextChanged="SearchBox_TextChanged" />
 

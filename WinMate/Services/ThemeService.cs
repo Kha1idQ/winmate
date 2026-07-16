@@ -4,52 +4,47 @@ using Wpf.Ui.Appearance;
 
 namespace WinMate.Services;
 
-// Swaps the whole surface + accent palette at runtime by mutating the shared
-// brush resources (everything binds them with DynamicResource).
-// "blue" is the WinMate Dark palette from the design spec; "gold" is the same
-// system rebuilt in warm tones.
+// Keeps the chosen Overdrive system intact while offering two low-light
+// calibrations. Existing setting ids ("blue" / "gold") remain valid so this
+// redesign does not invalidate a user's saved preferences.
 public static class ThemeService
 {
     public record Palette(
         string Id,
         Color AppBackground, Color Sidebar, Color Surface, Color SurfaceRaised,
-        Color NavActive, Color Border,
-        Color TextPrimary, Color TextSecondary,
+        Color NavActive, Color Border, Color BorderStrong,
+        Color TextPrimary, Color TextSecondary, Color TextQuiet,
         Color Accent, Color AccentStrong, Color AccentAlt,
-        Color Success, Color Warning, Color Disabled,
-        Color GradientFrom, Color GradientTo, Color OnPrimary);
+        Color Success, Color Warning, Color Error, Color Focus, Color Disabled,
+        Color OnPrimary);
 
-    // Design-spec tokens (WinMate Dark). Sidebar matches the app background: one
-    // flat canvas, separated by a hairline rather than a shade change.
-    public static readonly Palette Blue = new(
+    public static readonly Palette Overdrive = new(
         "blue",
-        AppBackground: C("#061321"), Sidebar: C("#061321"), Surface: C("#0A1C2B"), SurfaceRaised: C("#0D2234"),
-        NavActive: C("#122A45"), Border: C("#29445B"),
-        TextPrimary: C("#F4F7FB"), TextSecondary: C("#9EADC1"),
-        Accent: C("#25BDF5"), AccentStrong: C("#117FEA"), AccentAlt: C("#7A4FE8"),
-        Success: C("#35D58A"), Warning: C("#F5A524"), Disabled: C("#667386"),
-        GradientFrom: C("#138CEB"), GradientTo: C("#086BDD"), OnPrimary: C("#FFFFFF"));
+        AppBackground: C("#0B0907"), Sidebar: C("#0A0806"), Surface: C("#120F0B"), SurfaceRaised: C("#17130D"),
+        NavActive: C("#211809"), Border: C("#3A3022"), BorderStrong: C("#685333"),
+        TextPrimary: C("#F2EEE5"), TextSecondary: C("#A39886"), TextQuiet: C("#756C5E"),
+        Accent: C("#F2A514"), AccentStrong: C("#D98E08"), AccentAlt: C("#D5B56A"),
+        Success: C("#78CF82"), Warning: C("#E7B95F"), Error: C("#E06A54"), Focus: C("#FFD166"),
+        Disabled: C("#625A4C"), OnPrimary: C("#211506"));
 
-    // Same structure, warm palette.
-    public static readonly Palette Gold = new(
+    public static readonly Palette LowLight = new(
         "gold",
-        AppBackground: C("#12100B"), Sidebar: C("#12100B"), Surface: C("#1C1812"), SurfaceRaised: C("#241F16"),
-        NavActive: C("#2E2718"), Border: C("#4E4327"),
-        TextPrimary: C("#F8F5EE"), TextSecondary: C("#BFB39C"),
-        Accent: C("#E6C566"), AccentStrong: C("#C99A2E"), AccentAlt: C("#C97B4A"),
-        Success: C("#35D58A"), Warning: C("#F5A524"), Disabled: C("#6E6553"),
-        GradientFrom: C("#E0B84A"), GradientTo: C("#C2952A"), OnPrimary: C("#12100B"));
+        AppBackground: C("#080705"), Sidebar: C("#080705"), Surface: C("#0E0C09"), SurfaceRaised: C("#151109"),
+        NavActive: C("#1A1308"), Border: C("#32291C"), BorderStrong: C("#5C482A"),
+        TextPrimary: C("#EDE8DE"), TextSecondary: C("#928775"), TextQuiet: C("#6B6255"),
+        Accent: C("#D8900A"), AccentStrong: C("#C27B05"), AccentAlt: C("#B79A58"),
+        Success: C("#6DBB75"), Warning: C("#D7AA54"), Error: C("#CB604F"), Focus: C("#EFB848"),
+        Disabled: C("#574F43"), OnPrimary: C("#1A1105"));
 
-    public static Palette Current { get; private set; } = Blue;
+    public static Palette Current { get; private set; } = Overdrive;
 
     public static void Apply(string id)
     {
-        var p = id == "gold" ? Gold : Blue;
+        var p = id == "gold" ? LowLight : Overdrive;
         Current = p;
 
         var r = Application.Current.Resources;
 
-        // Surfaces
         SetBrush(r, "AppBackgroundBrush", p.AppBackground);
         SetBrush(r, "ApplicationBackgroundBrush", p.AppBackground);
         SetBrush(r, "SidebarBrush", p.Sidebar);
@@ -57,36 +52,33 @@ public static class ThemeService
         SetBrush(r, "SurfaceRaisedBrush", p.SurfaceRaised);
         SetBrush(r, "NavActiveBrush", p.NavActive);
         SetBrush(r, "CardBorderBrush", p.Border);
+        SetBrush(r, "CardBorderStrongBrush", p.BorderStrong);
 
-        // Text
         SetBrush(r, "TextPrimaryBrush", p.TextPrimary);
         SetBrush(r, "TextSecondaryBrush", p.TextSecondary);
+        SetBrush(r, "TextQuietBrush", p.TextQuiet);
         SetBrush(r, "DisabledBrush", p.Disabled);
 
-        // Accents
         SetBrush(r, "AccentBrush", p.Accent);
         SetBrush(r, "AccentStrongBrush", p.AccentStrong);
         SetBrush(r, "AccentAltBrush", p.AccentAlt);
         SetBrush(r, "SuccessBrush", p.Success);
         SetBrush(r, "WarningBrush", p.Warning);
+        SetBrush(r, "ErrorBrush", p.Error);
+        SetBrush(r, "FocusBrush", p.Focus);
         SetBrush(r, "OnPrimaryBrush", p.OnPrimary);
+        SetBrush(r, "PrimaryButtonBrush", p.Accent);
 
-        // Tints for icon tiles and chips (accent over a dark surface).
-        SetBrush(r, "AccentTintBrush", WithAlpha(p.Accent, 0x33));
-        SetBrush(r, "AccentAltTintBrush", WithAlpha(p.AccentAlt, 0x33));
-        SetBrush(r, "SuccessTintBrush", WithAlpha(p.Success, 0x33));
-        SetBrush(r, "WarningTintBrush", WithAlpha(p.Warning, 0x33));
-        SetBrush(r, "AccentBorderBrush", WithAlpha(p.Accent, 0x88));
-        SetBrush(r, "AccentAltBorderBrush", WithAlpha(p.AccentAlt, 0x88));
-        SetBrush(r, "SuccessBorderBrush", WithAlpha(p.Success, 0x88));
-        SetBrush(r, "WarningBorderBrush", WithAlpha(p.Warning, 0x88));
+        SetBrush(r, "AccentTintBrush", WithAlpha(p.Accent, 0x24));
+        SetBrush(r, "AccentAltTintBrush", WithAlpha(p.AccentAlt, 0x20));
+        SetBrush(r, "SuccessTintBrush", WithAlpha(p.Success, 0x20));
+        SetBrush(r, "WarningTintBrush", WithAlpha(p.Warning, 0x24));
+        SetBrush(r, "AccentBorderBrush", WithAlpha(p.Accent, 0xA6));
+        SetBrush(r, "AccentAltBorderBrush", WithAlpha(p.AccentAlt, 0x80));
+        SetBrush(r, "SuccessBorderBrush", WithAlpha(p.Success, 0x80));
+        SetBrush(r, "WarningBorderBrush", WithAlpha(p.Warning, 0x8F));
 
-        // Primary action buttons use a restrained horizontal gradient.
-        SetGradient(r, "PrimaryButtonBrush", p.GradientFrom, p.GradientTo);
-
-        // WPF-UI's own theme keys, so its stock controls follow the palette.
-        // The navigation pane and content host paint from these dark-theme
-        // surface keys, not from ApplicationBackgroundBrush.
+        // WPF-UI stock templates follow the same paper/ink system.
         SetBrush(r, "ApplicationBackgroundColorDarkBrush", p.AppBackground);
         SetBrush(r, "ApplicationBackgroundColorLightBrush", p.AppBackground);
         SetBrush(r, "LayerFillColorDefaultBrush", p.Surface);
@@ -95,31 +87,32 @@ public static class ThemeService
         SetBrush(r, "CardBackgroundFillColorSecondaryBrush", p.SurfaceRaised);
         SetBrush(r, "TextFillColorPrimaryBrush", p.TextPrimary);
         SetBrush(r, "TextFillColorSecondaryBrush", p.TextSecondary);
-        SetBrush(r, "TextFillColorTertiaryBrush", p.TextSecondary);
+        SetBrush(r, "TextFillColorTertiaryBrush", p.TextQuiet);
         SetBrush(r, "TextFillColorDisabledBrush", p.Disabled);
         SetBrush(r, "ControlFillColorDefaultBrush", p.Surface);
         SetBrush(r, "ControlFillColorSecondaryBrush", p.SurfaceRaised);
+        SetBrush(r, "ControlFillColorTertiaryBrush", p.NavActive);
         SetBrush(r, "ControlStrokeColorDefaultBrush", p.Border);
+        SetBrush(r, "ControlStrokeColorSecondaryBrush", p.BorderStrong);
         SetBrush(r, "NavigationViewItemForeground", p.TextSecondary);
         SetBrush(r, "NavigationViewItemForegroundPointerOver", p.TextPrimary);
         SetBrush(r, "NavigationViewItemForegroundSelected", p.Accent);
-        SetBrush(r, "NavigationViewItemForegroundPressed", p.TextSecondary);
+        SetBrush(r, "NavigationViewItemForegroundPressed", p.TextPrimary);
         SetBrush(r, "NavigationViewItemBackgroundSelected", p.NavActive);
         SetBrush(r, "NavigationViewItemBackgroundSelectedPointerOver", p.NavActive);
-        // The content host paints its own dark plate by default — clear it so the
-        // window background shows through behind the pages.
         SetBrush(r, "NavigationViewContentBackground", Colors.Transparent);
         SetBrush(r, "NavigationViewContentGridBorderBrush", Colors.Transparent);
         SetBrush(r, "ButtonForeground", p.TextPrimary);
         SetBrush(r, "ButtonForegroundPointerOver", p.TextPrimary);
-        SetBrush(r, "ButtonForegroundPressed", p.TextSecondary);
+        SetBrush(r, "ButtonForegroundPressed", p.TextPrimary);
+        SetBrush(r, "ButtonForegroundDisabled", p.TextQuiet);
+        SetBrush(r, "ButtonBorderBrushDisabled", p.Border);
         SetBrush(r, "TextControlForeground", p.TextPrimary);
         SetBrush(r, "TextControlForegroundPointerOver", p.TextPrimary);
         SetBrush(r, "TextControlForegroundFocused", p.TextPrimary);
         SetBrush(r, "TextControlPlaceholderForeground", p.TextSecondary);
         SetBrush(r, "ExpanderHeaderForeground", p.TextPrimary);
 
-        // Toggles and selection highlights.
         ApplicationAccentColorManager.Apply(p.Accent, ApplicationTheme.Dark);
 
         SettingsService.Current.Theme = id;
@@ -128,30 +121,16 @@ public static class ThemeService
 
     public static void Toggle() => Apply(Current.Id == "gold" ? "blue" : "gold");
 
-    // Mutate in place when possible so every DynamicResource consumer updates live.
-    private static void SetBrush(ResourceDictionary r, string key, Color c)
+    private static void SetBrush(ResourceDictionary resources, string key, Color color)
     {
-        if (r[key] is SolidColorBrush { IsFrozen: false } brush)
-            brush.Color = c;
+        if (resources[key] is SolidColorBrush { IsFrozen: false } brush)
+            brush.Color = color;
         else
-            r[key] = new SolidColorBrush(c);
+            resources[key] = new SolidColorBrush(color);
     }
 
-    private static void SetGradient(ResourceDictionary r, string key, Color from, Color to)
-    {
-        if (r[key] is LinearGradientBrush { IsFrozen: false } g && g.GradientStops.Count == 2)
-        {
-            g.GradientStops[0].Color = from;
-            g.GradientStops[1].Color = to;
-            return;
-        }
-
-        r[key] = new LinearGradientBrush(
-            [new GradientStop(from, 0), new GradientStop(to, 1)],
-            new Point(0, 0), new Point(1, 0));
-    }
-
-    private static Color WithAlpha(Color c, byte alpha) => Color.FromArgb(alpha, c.R, c.G, c.B);
+    private static Color WithAlpha(Color color, byte alpha) =>
+        Color.FromArgb(alpha, color.R, color.G, color.B);
 
     private static Color C(string hex) => (Color)ColorConverter.ConvertFromString(hex);
 }

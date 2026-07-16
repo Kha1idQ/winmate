@@ -66,16 +66,26 @@ public partial class TweakListControl : UserControl
 
         foreach (var category in categories)
         {
+            // Control-bank header: condensed label over a warm hairline rule.
             var header = new TextBlock
             {
-                FontSize = 22,
-                FontWeight = FontWeights.SemiBold,
-                Margin = new Thickness(0, 12, 0, 14),
+                FontSize = 21,
+                FontWeight = FontWeights.Bold,
+                FontFamily = (System.Windows.Media.FontFamily)FindResource("DisplayFont"),
             };
             header.SetResourceReference(TextBlock.TextProperty, $"TweakCat_{category}");
-            header.SetResourceReference(TextBlock.ForegroundProperty, "TextPrimaryBrush");
-            _headers.Add((category, header));
-            ListPanel.Children.Add(header);
+            header.SetResourceReference(TextBlock.ForegroundProperty, "AccentBrush");
+
+            var headerWrap = new Border
+            {
+                BorderThickness = new Thickness(0, 0, 0, 1),
+                Padding = new Thickness(0, 0, 0, 12),
+                Margin = new Thickness(0, 16, 0, 12),
+                Child = header,
+            };
+            headerWrap.SetResourceReference(Border.BorderBrushProperty, "CardBorderBrush");
+            _headers.Add((category, headerWrap));
+            ListPanel.Children.Add(headerWrap);
 
             foreach (var tweak in _tweaks.Where(t => t.Category == category))
             {
@@ -163,10 +173,9 @@ public partial class TweakListControl : UserControl
         {
             Icon = UiFactory.IconElement("info", "AccentBrush", 18),
             VerticalAlignment = VerticalAlignment.Center,
-            Height = 40,
-            Margin = new Thickness(0, 0, 10, 0),
-            Padding = new Thickness(10, 0, 10, 0),
+            Margin = new Thickness(0, 0, 12, 0),
         };
+        button.SetResourceReference(FrameworkElement.StyleProperty, "OverdriveIconButtonStyle");
         button.SetResourceReference(ToolTipProperty, "Explain_Tooltip");
         button.Click += async (_, _) => await ShowExplanationAsync(tweak);
         return button;
@@ -229,6 +238,8 @@ public partial class TweakListControl : UserControl
             IsEnabled = false, // enabled once the real state is loaded
             VerticalAlignment = VerticalAlignment.Center,
             Margin = new Thickness(16, 0, 0, 0),
+            MinWidth = 48,
+            MinHeight = 44,
         };
         toggle.Checked += (_, _) => OnToggle(tweak, toggle, apply: true);
         toggle.Unchecked += (_, _) => OnToggle(tweak, toggle, apply: false);
@@ -240,11 +251,13 @@ public partial class TweakListControl : UserControl
     {
         var button = new Wpf.Ui.Controls.Button
         {
-            Icon = UiFactory.IconElement("warning", "TextPrimaryBrush"),
+            Icon = UiFactory.IconElement("warning", "WarningBrush"),
             VerticalAlignment = VerticalAlignment.Center,
             Margin = new Thickness(16, 0, 0, 0),
-            Height = 40,
         };
+        button.SetResourceReference(FrameworkElement.StyleProperty, "OverdriveSecondaryButtonStyle");
+        button.SetResourceReference(Control.BorderBrushProperty, "WarningBrush");
+        button.SetResourceReference(Control.ForegroundProperty, "WarningBrush");
         button.SetResourceReference(ContentControl.ContentProperty, "Tweaks_Run");
         button.Click += async (_, _) => await RunOneShotAsync(tweak, button);
         return button;

@@ -4,7 +4,7 @@ namespace WinMate.Data;
 
 // A safety net, not the primary source. SystemPackageIndex classifies packages
 // from Windows' own metadata; this list catches the well-known runtimes that
-// carry no distinguishing flag at all — Visual C++ redistributables are visible,
+// carry no distinguishing flag at all. Visual C++ redistributables are visible,
 // removable, and unmarked, yet removing one breaks half the software on the PC.
 public static class SystemPackages
 {

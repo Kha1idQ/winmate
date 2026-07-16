@@ -19,7 +19,7 @@ public partial class ManagerPage : Page
         UiHelpers.PreparePageHost(this);
         SearchBox.Icon = UiFactory.IconElement("search", "TextSecondaryBrush", 18);
         RefreshButton.Icon = UiFactory.IconElement("undo", "TextPrimaryBrush");
-        UpdateAllButton.Icon = UiFactory.IconElement("download", "OnPrimaryBrush");
+        UpdateAllButton.Icon = UiFactory.IconElement("download", "AccentBrush");
 
         _ = LoadAsync();
     }
@@ -77,7 +77,7 @@ public partial class ManagerPage : Page
         if (app.HasUpdate)
         {
             var chip = UiFactory.Chip("Manager_UpdateChip");
-            chip.Margin = new Thickness(10, 0, 0, 0);
+            chip.Margin = new Thickness(12, 0, 0, 0);
             titleRow.Children.Add(chip);
         }
         if (kind != PackageClass.Normal)
@@ -87,7 +87,7 @@ public partial class ManagerPage : Page
             var chip = UiFactory.Chip(
                 kind == PackageClass.Protected ? "Manager_ProtectedChip" : "Manager_SystemChip",
                 "Warning");
-            chip.Margin = new Thickness(10, 0, 0, 0);
+            chip.Margin = new Thickness(12, 0, 0, 0);
             titleRow.Children.Add(chip);
         }
 
@@ -96,9 +96,15 @@ public partial class ManagerPage : Page
             ? $"{app.Id} · {app.Version} → {app.Available}"
             : $"{app.Id} · {app.Version}";
 
+        // Package id + versions are Latin/numeric — render mono and left-to-right
+        // so the "→" reads correctly even in the RTL layout.
+        var detailBlock = UiFactory.Description(detail, 13);
+        detailBlock.SetResourceReference(TextBlock.FontFamilyProperty, "MonoFont");
+        detailBlock.FlowDirection = FlowDirection.LeftToRight;
+
         var textPanel = new StackPanel { VerticalAlignment = VerticalAlignment.Center };
         textPanel.Children.Add(titleRow);
-        textPanel.Children.Add(UiFactory.Description(detail, 13));
+        textPanel.Children.Add(detailBlock);
 
         var actions = new StackPanel
         {
@@ -120,8 +126,9 @@ public partial class ManagerPage : Page
         {
             Icon = UiFactory.IconElement("close", "TextPrimaryBrush", 18),
             Height = 40,
-            Margin = new Thickness(app.HasUpdate ? 10 : 0, 0, 0, 0),
+            Margin = new Thickness(app.HasUpdate ? 12 : 0, 0, 0, 0),
         };
+        uninstall.SetResourceReference(FrameworkElement.StyleProperty, "OverdriveSecondaryButtonStyle");
         uninstall.SetResourceReference(Control.ForegroundProperty,
             kind == PackageClass.Normal ? "TextPrimaryBrush" : "WarningBrush");
         uninstall.SetResourceReference(ContentControl.ContentProperty, "Manager_Uninstall");
